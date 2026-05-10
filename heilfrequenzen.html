@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Heilfrequenzen – Übersicht & Wirkung</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0c0d0f;
+    --surface: #14151a;
+    --surface2: #1c1d24;
+    --border: rgba(255,255,255,0.07);
+    --border-hover: rgba(255,255,255,0.14);
+    --text: #e8e6e0;
+    --muted: #7a7870;
+    --accent-solfeggio: #5dcaa5;
+    --accent-solfeggio-dim: rgba(93,202,165,0.1);
+    --accent-brain: #7f77dd;
+    --accent-brain-dim: rgba(127,119,221,0.1);
+    --accent-schumann: #ef9f27;
+    --accent-schumann-dim: rgba(239,159,39,0.1);
+    --accent-sonder: #d85a30;
+    --accent-sonder-dim: rgba(216,90,48,0.1);
+    --accent-binaural: #378add;
+    --accent-binaural-dim: rgba(55,138,221,0.1);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* === NAV === */
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 32px;
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 15px;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+  }
+  .nav-logo span { color: var(--accent-solfeggio); }
+  .nav-back {
+    font-size: 12px;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.2s;
+  }
+  .nav-back:hover { color: var(--text); }
+
+  /* === HEADER === */
+  header {
+    position: relative;
+    padding: 72px 0 56px;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .header-glow {
+    position: absolute;
+    top: -80px; left: 50%;
+    transform: translateX(-50%);
+    width: 600px; height: 300px;
+    background: radial-gradient(ellipse, rgba(93,202,165,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    color: var(--text);
+    position: relative;
+  }
+
+  header h1 em {
+    font-style: italic;
+    color: var(--accent-solfeggio);
+  }
+
+  header p {
+    margin-top: 14px;
+    color: var(--muted);
+    font-size: 14px;
+    font-weight: 300;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    position: relative;
+  }
+
+  .header-line {
+    width: 40px; height: 1px;
+    background: var(--accent-solfeggio);
+    margin: 20px auto 0;
+    opacity: 0.5;
+    position: relative;
+  }
+
+  /* === FILTERS === */
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    padding: 0 24px 40px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .filter-btn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 100px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .filter-btn:hover { border-color: var(--border-hover); color: var(--text); }
+  .filter-btn.active { color: var(--bg); font-weight: 500; }
+  .filter-btn[data-cat="alle"].active { background: var(--text); border-color: var(--text); }
+  .filter-btn[data-cat="Solfeggio"].active { background: var(--accent-solfeggio); border-color: var(--accent-solfeggio); }
+  .filter-btn[data-cat="Gehirnwellen"].active { background: var(--accent-brain); border-color: var(--accent-brain); }
+  .filter-btn[data-cat="Schumann"].active { background: var(--accent-schumann); border-color: var(--accent-schumann); }
+  .filter-btn[data-cat="Sonderfrequenz"].active { background: var(--accent-sonder); border-color: var(--accent-sonder); }
+  .filter-btn[data-cat="Binaural"].active { background: var(--accent-binaural); border-color: var(--accent-binaural); }
+
+  /* === LIST === */
+  .list {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 20px 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .item {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--surface);
+    overflow: hidden;
+    transition: border-color 0.2s, opacity 0.3s, transform 0.3s;
+  }
+
+  .item.hidden {
+    display: none;
+  }
+
+  .item:hover { border-color: var(--border-hover); }
+
+  .item-header {
+    display: grid;
+    grid-template-columns: 100px 1fr auto auto auto;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 20px;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .play-btn {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+    flex-shrink: 0;
+    padding: 0;
+  }
+
+  .play-btn:hover { border-color: var(--border-hover); color: var(--text); background: var(--surface2); }
+  .play-btn.playing { color: var(--accent-solfeggio); border-color: var(--accent-solfeggio); background: var(--accent-solfeggio-dim); }
+  .play-btn svg { display: block; }
+
+  .item[data-cat="Gehirnwellen"] .play-btn.playing { color: var(--accent-brain); border-color: var(--accent-brain); background: var(--accent-brain-dim); }
+  .item[data-cat="Schumann"] .play-btn.playing { color: var(--accent-schumann); border-color: var(--accent-schumann); background: var(--accent-schumann-dim); }
+  .item[data-cat="Sonderfrequenz"] .play-btn.playing { color: var(--accent-sonder); border-color: var(--accent-sonder); background: var(--accent-sonder-dim); }
+  .item[data-cat="Binaural"] .play-btn.playing { color: var(--accent-binaural); border-color: var(--accent-binaural); background: var(--accent-binaural-dim); }
+
+  /* pulse ring when playing */
+  .play-btn.playing::after {
+    content: '';
+    position: absolute;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    border: 1px solid currentColor;
+    animation: pulse-ring 1.4s ease-out infinite;
+    pointer-events: none;
+  }
+
+  @keyframes pulse-ring {
+    0% { transform: scale(1); opacity: 0.6; }
+    100% { transform: scale(1.9); opacity: 0; }
+  }
+
+  .play-btn { position: relative; }
+
+  .item-hz {
+    font-family: 'DM Serif Display', serif;
+    font-size: 17px;
+    color: var(--text);
+    white-space: nowrap;
+  }
+
+  .item-title {
+    font-size: 14px;
+    color: var(--text);
+    font-weight: 400;
+  }
+
+  .item-tag {
+    font-size: 10px;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    font-weight: 500;
+    padding: 4px 10px;
+    border-radius: 100px;
+    white-space: nowrap;
+  }
+
+  .tag-Solfeggio { background: var(--accent-solfeggio-dim); color: var(--accent-solfeggio); }
+  .tag-Gehirnwellen { background: var(--accent-brain-dim); color: var(--accent-brain); }
+  .tag-Schumann { background: var(--accent-schumann-dim); color: var(--accent-schumann); }
+  .tag-Sonderfrequenz { background: var(--accent-sonder-dim); color: var(--accent-sonder); }
+  .tag-Binaural { background: var(--accent-binaural-dim); color: var(--accent-binaural); }
+
+  .item-chevron {
+    width: 18px; height: 18px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--muted);
+    transition: transform 0.25s, color 0.2s;
+    flex-shrink: 0;
+  }
+
+  .item-chevron svg { display: block; }
+  .item.open .item-chevron { transform: rotate(180deg); color: var(--text); }
+
+  /* === BODY === */
+  .item-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  .item.open .item-body { max-height: 400px; }
+
+  .item-body-inner {
+    border-top: 1px solid var(--border);
+    padding: 20px 20px 22px;
+    background: var(--surface2);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .item-body-inner p {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.75;
+  }
+
+  .item-body-inner p strong {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  /* Accent left border per category */
+  .item[data-cat="Solfeggio"] .item-body-inner { border-left: 2px solid var(--accent-solfeggio); padding-left: 18px; }
+  .item[data-cat="Gehirnwellen"] .item-body-inner { border-left: 2px solid var(--accent-brain); padding-left: 18px; }
+  .item[data-cat="Schumann"] .item-body-inner { border-left: 2px solid var(--accent-schumann); padding-left: 18px; }
+  .item[data-cat="Sonderfrequenz"] .item-body-inner { border-left: 2px solid var(--accent-sonder); padding-left: 18px; }
+  .item[data-cat="Binaural"] .item-body-inner { border-left: 2px solid var(--accent-binaural); padding-left: 18px; }
+
+  /* === FOOTER === */
+  footer {
+    text-align: center;
+    padding: 32px 24px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    max-width: 760px;
+    margin: 0 auto;
+  }
+
+  /* === ANIMATIONS === */
+  @keyframes fadeUp {
+    from { opacity:0; transform:translateY(12px); }
+    to { opacity:1; transform:translateY(0); }
+  }
+
+  .item { animation: fadeUp 0.4s ease both; }
+
+  /* === RESPONSIVE === */
+  @media (max-width: 560px) {
+    .item-header { grid-template-columns: 80px 1fr auto; gap: 10px; }
+    .item-tag { display: none; }
+    .item-hz { font-size: 15px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="wissensdatenbank.html" class="nav-logo">Heil<span>wissen</span></a>
+  <a href="wissensdatenbank.html" class="nav-back">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 2L3 7L9 12" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Zurück
+  </a>
+</nav>
+
+<header>
+  <div class="header-glow"></div>
+  <h1>Heil<em>frequenzen</em></h1>
+  <p>Übersicht · Wirkung · Einordnung</p>
+  <div class="header-line"></div>
+</header>
+
+<div class="filters">
+  <button class="filter-btn active" data-cat="alle">Alle</button>
+  <button class="filter-btn" data-cat="Gehirnwellen">Gehirnwellen</button>
+  <button class="filter-btn" data-cat="Solfeggio">Solfeggio</button>
+  <button class="filter-btn" data-cat="Schumann">Schumann</button>
+  <button class="filter-btn" data-cat="Sonderfrequenz">Sonderfrequenz</button>
+  <button class="filter-btn" data-cat="Binaural">Binaural Beats</button>
+</div>
+
+<div class="list" id="list"></div>
+
+<footer>
+  Alle Angaben zur spirituellen und alternativen Klangtherapie dienen der Information.<br>
+  Kein Ersatz für medizinische Beratung. Wissenschaftliche Evidenz ist je nach Frequenz unterschiedlich belegt.
+</footer>
+
+<script>
+// ── Audio Engine ────────────────────────────────────────────────
+let audioCtx = null;
+let currentNodes = [];
+let currentBtn = null;
+
+function getCtx() {
+  if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  return audioCtx;
+}
+
+function stopCurrent() {
+  currentNodes.forEach(n => { try { n.stop(); } catch(e){} });
+  currentNodes = [];
+  if (currentBtn) { currentBtn.classList.remove('playing'); currentBtn.innerHTML = noteIcon(); currentBtn = null; }
+}
+
+function noteIcon() {
+  return `<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M5 10.5V3.5L12 2V9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="3.5" cy="10.5" r="1.5" fill="currentColor"/>
+    <circle cx="10.5" cy="9" r="1.5" fill="currentColor"/>
+  </svg>`;
+}
+
+function stopIcon() {
+  return `<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="2" y="2" width="8" height="8" rx="1.5" fill="currentColor"/>
+  </svg>`;
+}
+
+function playTone(freqData, btn) {
+  const ctx = getCtx();
+  if (ctx.state === 'suspended') ctx.resume();
+
+  stopCurrent();
+  currentBtn = btn;
+  btn.classList.add('playing');
+  btn.innerHTML = stopIcon();
+
+  const { freq, type, binaural } = freqData;
+  const gain = ctx.createGain();
+  gain.gain.setValueAtTime(0, ctx.currentTime);
+  gain.gain.linearRampToValueAtTime(0.18, ctx.currentTime + 0.3);
+  gain.connect(ctx.destination);
+
+  if (binaural) {
+    // True binaural: left ear base, right ear base+diff
+    const merger = ctx.createChannelMerger(2);
+    merger.connect(gain);
+    const oscL = ctx.createOscillator();
+    const oscR = ctx.createOscillator();
+    const gainL = ctx.createGain(); gainL.gain.value = 1;
+    const gainR = ctx.createGain(); gainR.gain.value = 1;
+    oscL.frequency.value = binaural.left;
+    oscR.frequency.value = binaural.right;
+    oscL.type = 'sine'; oscR.type = 'sine';
+    oscL.connect(gainL); gainL.connect(merger, 0, 0);
+    oscR.connect(gainR); gainR.connect(merger, 0, 1);
+    oscL.start(); oscR.start();
+    currentNodes = [oscL, oscR];
+  } else if (type === 'range') {
+    // Range: play midpoint as sine
+    const osc = ctx.createOscillator();
+    osc.type = 'sine';
+    osc.frequency.value = freq;
+    osc.connect(gain);
+    osc.start();
+    currentNodes = [osc];
+  } else {
+    const osc = ctx.createOscillator();
+    osc.type = 'sine';
+    osc.frequency.value = freq;
+    osc.connect(gain);
+    osc.start();
+    currentNodes = [osc];
+  }
+
+  // Auto-stop after 30s
+  const timer = setTimeout(() => stopCurrent(), 30000);
+  currentNodes._timer = timer;
+}
+
+// ── Data ─────────────────────────────────────────────────────────
+const data = [
+  { hz: "0,5–3 Hz", title: "Delta-Wellen", cat: "Gehirnwellen", play: { freq: 1.5, type: 'range' }, body: [
+    "<strong>Vorkommen:</strong> Tiefschlaf; langsamste messbare Gehirnwellen.",
+    "<strong>Wirkung:</strong> Fördern tiefe Erholung und Regeneration, stärken das Immunsystem, unterstützen die Ausschüttung von Wachstumshormonen. Essenziell für körperliche und neuronale Reparaturprozesse.",
+    "<strong>Anwendung:</strong> Tiefschlaf-Optimierung, Trauma-Verarbeitung, tiefe Meditationszustände."
+  ]},
+  { hz: "4–8 Hz", title: "Theta-Wellen", cat: "Gehirnwellen", play: { freq: 6, type: 'range' }, body: [
+    "<strong>Vorkommen:</strong> Halbschlaf, tiefe Meditation, Tagträume, REM-Schlaf.",
+    "<strong>Wirkung:</strong> Fördern Kreativität, emotionale Integration, intuitives Denken und Zugang zu tieferen Gedächtnisschichten. Verbunden mit hypnotischen und tiefen Entspannungszuständen.",
+    "<strong>Anwendung:</strong> Kreativitätsförderung, Stressabbau, emotionale Heilung, Lernen unter Entspannung."
+  ]},
+  { hz: "7,83 Hz", title: "Schumann-Resonanz", cat: "Schumann", play: { freq: 7.83, type: 'sine' }, body: [
+    "<strong>Hintergrund:</strong> Eigenfrequenz des Hohlraums zwischen Erdoberfläche und Ionosphäre; 1952 von Winfried Otto Schumann beschrieben.",
+    "<strong>Wirkung:</strong> Wird als 'Basisfrequenz des Lebens' bezeichnet. Soll das vegetative Nervensystem stabilisieren, Schlaf verbessern, Stress reduzieren und den menschlichen bioelektrischen Rhythmus mit dem Erdfeld synchronisieren.",
+    "<strong>Anwendung:</strong> Erdung, Jet-Lag-Ausgleich, Regeneration, Bioresonanztherapie."
+  ]},
+  { hz: "8–12 Hz", title: "Alpha-Wellen", cat: "Gehirnwellen", play: { freq: 10, type: 'range' }, body: [
+    "<strong>Vorkommen:</strong> Ruhiges Wachsein, Entspannung mit geschlossenen Augen, leichte Meditation.",
+    "<strong>Wirkung:</strong> Reduzieren Stress und Angst, fördern entspannten Fokus, verbessern Lernfähigkeit und Kreativität. Gelten als Brücke zwischen Bewusstsein und Unterbewusstsein.",
+    "<strong>Anwendung:</strong> Stressabbau, Lernunterstützung, Einstieg in Meditation."
+  ]},
+  { hz: "12–30 Hz", title: "Beta-Wellen", cat: "Gehirnwellen", play: { freq: 20, type: 'range' }, body: [
+    "<strong>Vorkommen:</strong> Normales waches Bewusstsein, aktive Konzentration, analytisches Denken.",
+    "<strong>Wirkung:</strong> Unterstützen Aufmerksamkeit, logisches Denken, Problemlösung und aktive Kommunikation. Hohe Beta-Aktivität ist mit Stress und Angst assoziiert.",
+    "<strong>Anwendung:</strong> Fokusunterstützung, mentale Leistung, Konzentrationsübungen."
+  ]},
+  { hz: "30–100 Hz", title: "Gamma-Wellen", cat: "Gehirnwellen", play: { freq: 60, type: 'range' }, body: [
+    "<strong>Vorkommen:</strong> Intensive kognitive Verarbeitung, Aha-Momente, tiefe Meditation.",
+    "<strong>Wirkung:</strong> Verbunden mit höherer kognitiver Funktion, Informationsintegration über Gehirnareale, Mitgefühl und erweitertem Bewusstsein. Tibetische Mönche zeigen erhöhte Gamma-Aktivität bei Mitgefühlsmeditation.",
+    "<strong>Anwendung:</strong> Kognitive Leistungssteigerung, Bewusstseinsforschung, tiefe Kontemplation."
+  ]},
+  { hz: "40 Hz", title: "40-Hz-Gamma (ARAS)", cat: "Gehirnwellen", play: { freq: 40, type: 'sine' }, body: [
+    "<strong>Hintergrund:</strong> Spezifische Gamma-Frequenz; besonders in der Alzheimer-Forschung untersucht.",
+    "<strong>Wirkung:</strong> MIT-Studien (2016) zeigten bei Mäusen eine Reduktion von Amyloid-Plaques durch Licht- und Tonstimulation mit 40 Hz. Klinische Studien beim Menschen laufen.",
+    "<strong>Anwendung:</strong> Neurorehabilitation, kognitive Gesundheit, Forschungsanwendungen."
+  ]},
+  { hz: "174 Hz", title: "174 Hz – Schmerzlinderung", cat: "Solfeggio", play: { freq: 174, type: 'sine' }, body: [
+    "<strong>Herkunft:</strong> Tiefste Frequenz der erweiterten Solfeggio-Skala.",
+    "<strong>Wirkung:</strong> Soll als natürliches Anästhetikum wirken – physischen und emotionalen Schmerz lindern, das Sicherheitsgefühl stärken und Organfunktionen unterstützen.",
+    "<strong>Hinweis:</strong> Keine klinisch bewiesene Wirkung; basiert auf Klangtherapie-Tradition und subjektiven Berichten."
+  ]},
+  { hz: "285 Hz", title: "285 Hz – Geweberegeneration", cat: "Solfeggio", play: { freq: 285, type: 'sine' }, body: [
+    "<strong>Herkunft:</strong> Erweiterte Solfeggio-Skala.",
+    "<strong>Wirkung:</strong> Soll das Energiefeld des Körpers beeinflussen, beschädigtes Gewebe regenerieren und Heilungsprozesse bei Wunden und Verletzungen unterstützen.",
+    "<strong>Hinweis:</strong> Empirische Belege fehlen; Einsatz in der Klangmeditation."
+  ]},
+  { hz: "396 Hz", title: "396 Hz – Angst & Schuld", cat: "Solfeggio", play: { freq: 396, type: 'sine' }, body: [
+    "<strong>Herkunft:</strong> Erste Frequenz der klassischen Solfeggio-Skala (Ut / Do).",
+    "<strong>Wirkung:</strong> Soll Schuldgefühle und Ängste auflösen, negative emotionale Muster transformieren und das Unterbewusstsein von blockierenden Überzeugungen befreien.",
+    "<strong>Anwendung:</strong> Traumaarbeit, emotionale Reinigung, Angstbewältigung (komplementär)."
+  ]},
+  { hz: "417 Hz", title: "417 Hz – Veränderung & Trauma", cat: "Solfeggio", play: { freq: 417, type: 'sine' }, body: [
+    "<strong>Herkunft:</strong> Zweite Frequenz der Solfeggio-Skala (Re).",
+    "<strong>Wirkung:</strong> Soll belastende Erinnerungen und traumatische Erfahrungen auflösen, Veränderungsprozesse einleiten und negative Energie aus Räumen und dem Körper entfernen.",
+    "<strong>Anwendung:</strong> Energetische Raumreinigung, emotionale Neuausrichtung."
+  ]},
+  { hz: "432 Hz", title: "432 Hz – Naturstimmung", cat: "Sonderfrequenz", play: { freq: 432, type: 'sine' }, body: [
+    "<strong>Hintergrund:</strong> Alternative Stimmfrequenz zum modernen Standard 440 Hz (ISO 16:1975).",
+    "<strong>Wirkung:</strong> Befürworter beschreiben einen wärmeren Klang, der in Resonanz mit der Natur stehe und entspannend wirke.",
+    "<strong>Wissenschaft:</strong> Doppelblindstudien zeigen keine signifikanten physiologischen Unterschiede zu 440 Hz. Die Wirkung scheint primär psychologisch-ästhetisch zu sein."
+  ]},
+  { hz: "440 Hz", title: "440 Hz – Kammerton", cat: "Sonderfrequenz", play: { freq: 440, type: 'sine' }, body: [
+    "<strong>Hintergrund:</strong> Seit 1939 international standardisierter Kammerton a¹ (ISO 16); Referenz für westliche Musik.",
+    "<strong>Debatte:</strong> Manche Kritiker behaupten eine unbewusst aktivierende Wirkung – wissenschaftlich nicht belegt. Die Debatte ist überwiegend musiktheoretischer und kultureller Natur.",
+    "<strong>Fazit:</strong> Neutrale Referenzfrequenz ohne nachgewiesene negative Auswirkungen."
+  ]},
+  { hz: "528 Hz", title: "528 Hz – DNA-Reparatur / Liebe", cat: "Solfeggio", play: { freq: 528, type: 'sine' }, body: [
+    "<strong>Herkunft:</strong> Solfeggio-Skala (Mi); als 'Love Frequency' oder 'Miracle Tone' bezeichnet.",
+    "<strong>Wirkung:</strong> Soll DNA-Reparaturprozesse unterstützen, Stress reduzieren und das Herzchakra öffnen. Eine Studie (2018, Journal of Addiction Research) zeigte reduziertes Cortisol und gesteigerte positive Emotionen nach 5 Minuten.",
+    "<strong>Anwendung:</strong> Meditation, Stressabbau, Klangheilung."
+  ]},
+  { hz: "639 Hz", title: "639 Hz – Beziehungen & Verbindung", cat: "Solfeggio", play: { freq: 639, type: 'sine' }, body: [
+    "<strong>Herkunft:</strong> Solfeggio-Skala (Fa).",
+    "<strong>Wirkung:</strong> Soll zwischenmenschliche Kommunikation verbessern, Empathie fördern, Konflikte lösen und Beziehungen harmonisieren.",
+    "<strong>Anwendung:</strong> Begleitend zur Paartherapie, Gruppenmeditation, Kommunikationstraining."
+  ]},
+  { hz: "741 Hz", title: "741 Hz – Intuition & Reinigung", cat: "Solfeggio", play: { freq: 741, type: 'sine' }, body: [
+    "<strong>Herkunft:</strong> Solfeggio-Skala (Sol).",
+    "<strong>Wirkung:</strong> Soll Zellen von Toxinen und elektromagnetischen Belastungen reinigen, Problemlösung fördern, Ausdrucksfähigkeit stärken und Intuition schärfen.",
+    "<strong>Anwendung:</strong> Kreativitätsförderung, emotionale Klarheit, energetische Reinigung."
+  ]},
+  { hz: "852 Hz", title: "852 Hz – Bewusstsein & Wahrnehmung", cat: "Solfeggio", play: { freq: 852, type: 'sine' }, body: [
+    "<strong>Herkunft:</strong> Solfeggio-Skala (La).",
+    "<strong>Wirkung:</strong> Soll Zugang zu höheren Bewusstseinszuständen ermöglichen, Intuition stärken, das dritte Auge aktivieren und negative Gedankenmuster transformieren.",
+    "<strong>Anwendung:</strong> Spirituelle Praxis, tiefe Meditation, Selbstwahrnehmung."
+  ]},
+  { hz: "963 Hz", title: "963 Hz – Erleuchtung / Einheit", cat: "Solfeggio", play: { freq: 963, type: 'sine' }, body: [
+    "<strong>Herkunft:</strong> Höchste Frequenz der klassischen Solfeggio-Skala (Si / Ti).",
+    "<strong>Wirkung:</strong> Wird als 'Frequenz der Götter' bezeichnet. Soll Verbindung mit dem höheren Selbst herstellen, die Zirbeldrüse aktivieren und spirituelle Entwicklung fördern.",
+    "<strong>Anwendung:</strong> Spirituelle Praxis, Bewusstseinsarbeit, erweiterte Meditationen."
+  ]},
+  { hz: "Binaural Beats", title: "Binaural Beats – Differenzfrequenz", cat: "Binaural", play: { binaural: { left: 200, right: 210 } }, body: [
+    "<strong>Prinzip:</strong> Beiden Ohren werden über Kopfhörer leicht unterschiedliche Frequenzen präsentiert. Das Gehirn berechnet die Differenz und erzeugt intern einen dritten Ton – z.B. 200 Hz + 210 Hz → 10 Hz (Alpha).",
+    "<strong>Wirkung:</strong> Meta-Analysen zeigen moderate Effekte auf Angstreduktion, Schlaf und Stimmung. Die Wirkung hängt von der erzeugten Zielfrequenz ab (Delta/Theta/Alpha/Beta/Gamma).",
+    "<strong>Hinweis:</strong> Erfordern Kopfhörer. Nicht geeignet für Menschen mit Epilepsie ohne ärztliche Rücksprache."
+  ]},
+];
+
+const list = document.getElementById('list');
+let activeFilter = 'alle';
+
+function render() {
+  list.innerHTML = '';
+  data.forEach((d, i) => {
+    if (activeFilter !== 'alle' && d.cat !== activeFilter) return;
+    const div = document.createElement('div');
+    div.className = 'item';
+    div.dataset.cat = d.cat;
+    div.style.animationDelay = (i * 0.03) + 's';
+    div.innerHTML = `
+      <div class="item-header" role="button" aria-expanded="false" tabindex="0">
+        <span class="item-hz">${d.hz}</span>
+        <span class="item-title">${d.title}</span>
+        <span class="item-tag tag-${d.cat}">${d.cat}</span>
+        <button class="play-btn" aria-label="Hörprobe abspielen" title="Hörprobe">${noteIcon()}</button>
+        <span class="item-chevron" aria-hidden="true">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M2 4.5L7 9.5L12 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </div>
+      <div class="item-body">
+        <div class="item-body-inner">
+          ${d.body.map(t => `<p>${t}</p>`).join('')}
+        </div>
+      </div>`;
+
+    const header = div.querySelector('.item-header');
+    const playBtn = div.querySelector('.play-btn');
+
+    playBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (playBtn.classList.contains('playing')) {
+        stopCurrent();
+      } else {
+        playTone(d.play, playBtn);
+      }
+    });
+
+    header.addEventListener('click', (e) => {
+      if (e.target.closest('.play-btn')) return;
+      const open = div.classList.toggle('open');
+      header.setAttribute('aria-expanded', open);
+    });
+    header.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); header.click(); }
+    });
+
+    list.appendChild(div);
+  });
+}
+
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    activeFilter = btn.dataset.cat;
+    render();
+  });
+});
+
+render();
+</script>
+</body>
+</html>

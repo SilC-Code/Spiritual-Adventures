@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hawkins-Skala – Map of Consciousness</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#0c0d0f;--surface:#14151a;--surface2:#1c1d24;
+    --border:rgba(255,255,255,0.07);--border-hover:rgba(255,255,255,0.14);
+    --text:#e8e6e0;--muted:#7a7870;--gold:#c9a84c;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:15px;line-height:1.6;}
+
+  nav{display:flex;align-items:center;justify-content:space-between;padding:18px 32px;border-bottom:1px solid var(--border);}
+  .nav-logo{font-family:'DM Serif Display',serif;font-size:15px;color:var(--muted);text-decoration:none;}
+  .nav-logo span{color:var(--gold);}
+  .nav-back{font-size:12px;color:var(--muted);text-decoration:none;letter-spacing:0.05em;text-transform:uppercase;display:flex;align-items:center;gap:6px;transition:color 0.2s;}
+  .nav-back:hover{color:var(--text);}
+
+  header{position:relative;padding:72px 0 48px;text-align:center;overflow:hidden;}
+  .header-glow{position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:600px;height:300px;background:radial-gradient(ellipse,rgba(201,168,76,0.11) 0%,transparent 70%);pointer-events:none;}
+  header h1{font-family:'DM Serif Display',serif;font-size:clamp(2.2rem,5vw,3.8rem);font-weight:400;letter-spacing:-0.01em;color:var(--text);position:relative;}
+  header h1 em{font-style:italic;color:var(--gold);}
+  header p{margin-top:14px;color:var(--muted);font-size:14px;font-weight:300;letter-spacing:0.04em;text-transform:uppercase;position:relative;}
+  .header-line{width:40px;height:1px;background:var(--gold);margin:20px auto 0;opacity:0.5;}
+
+  /* ── SELBSTTEST ── */
+  .test-section{max-width:760px;margin:0 auto;padding:0 20px 56px;}
+  .test-box{border:1px solid rgba(201,168,76,0.25);border-radius:16px;background:var(--surface);padding:32px;position:relative;overflow:hidden;}
+  .test-glow{position:absolute;top:-40px;right:-40px;width:200px;height:200px;background:radial-gradient(circle,rgba(201,168,76,0.08),transparent 70%);pointer-events:none;}
+  .test-label{font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;font-weight:500;}
+  .test-title{font-family:'DM Serif Display',serif;font-size:1.5rem;color:var(--text);margin-bottom:8px;}
+  .test-sub{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:28px;}
+  .test-questions{display:flex;flex-direction:column;gap:20px;margin-bottom:28px;}
+  .test-q{display:flex;flex-direction:column;gap:10px;}
+  .test-q-text{font-size:13px;color:var(--text);line-height:1.6;font-weight:500;}
+  .test-options{display:flex;gap:8px;flex-wrap:wrap;}
+  .test-opt{font-size:12px;padding:6px 14px;border-radius:100px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;transition:all 0.18s;font-family:'DM Sans',sans-serif;}
+  .test-opt:hover{border-color:var(--border-hover);color:var(--text);}
+  .test-opt.selected{background:rgba(201,168,76,0.12);border-color:rgba(201,168,76,0.5);color:var(--gold);}
+  .test-btn{font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;padding:12px 28px;border-radius:100px;background:linear-gradient(135deg,var(--gold),#f0d48a);color:#0c0d0f;border:none;cursor:pointer;transition:transform 0.2s,box-shadow 0.2s;box-shadow:0 4px 20px rgba(201,168,76,0.2);}
+  .test-btn:hover{transform:translateY(-1px);box-shadow:0 6px 24px rgba(201,168,76,0.32);}
+  .test-result{display:none;margin-top:24px;border-top:1px solid var(--border);padding-top:24px;}
+  .test-result.show{display:block;}
+  .result-level{font-family:'DM Serif Display',serif;font-size:2.8rem;margin-bottom:4px;}
+  .result-name{font-family:'DM Serif Display',serif;font-size:1.3rem;color:var(--text);margin-bottom:10px;}
+  .result-text{font-size:13px;color:var(--muted);line-height:1.8;margin-bottom:14px;}
+  .result-tip{font-size:12px;padding:12px 16px;border-radius:10px;border-left:2px solid var(--gold);background:rgba(201,168,76,0.06);color:var(--muted);line-height:1.7;}
+  .result-tip strong{color:var(--text);}
+  .test-reset{margin-top:16px;font-size:12px;color:var(--muted);background:none;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;letter-spacing:0.04em;text-decoration:underline;text-underline-offset:3px;}
+  .test-reset:hover{color:var(--text);}
+
+  /* ── VISUELLE SKALA ── */
+  .scale-section{max-width:760px;margin:0 auto;padding:0 20px 80px;}
+  .scale-header{margin-bottom:32px;}
+  .scale-label{font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;font-weight:500;display:flex;align-items:center;gap:12px;}
+  .scale-label::after{content:'';flex:1;height:1px;background:linear-gradient(to right,rgba(201,168,76,0.3),transparent);}
+  .scale-title{font-family:'DM Serif Display',serif;font-size:clamp(1.6rem,3.5vw,2.4rem);color:var(--text);margin-bottom:8px;}
+  .scale-title em{font-style:italic;color:var(--gold);}
+  .scale-sub{font-size:13px;color:var(--muted);line-height:1.7;max-width:580px;}
+
+  .scale-track{display:flex;flex-direction:column;gap:5px;margin-top:32px;}
+
+  .scale-item{
+    border:1px solid var(--border);border-radius:10px;background:var(--surface);
+    overflow:hidden;transition:border-color 0.2s;cursor:pointer;
+    animation:fadeUp 0.4s ease both;
+  }
+  .scale-item:hover{border-color:var(--border-hover);}
+  .scale-item.open{border-color:var(--border-hover);}
+
+  .scale-row{
+    display:grid;grid-template-columns:60px 28px 1fr auto;
+    align-items:center;gap:14px;padding:12px 16px;
+  }
+
+  .scale-num{
+    font-family:'DM Serif Display',serif;font-size:1.1rem;
+    color:var(--text);text-align:right;
+  }
+
+  .scale-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+
+  .scale-name{font-size:14px;color:var(--text);}
+  .scale-name span{font-size:11px;color:var(--muted);display:block;margin-top:1px;letter-spacing:0.03em;}
+
+  .scale-zone{font-size:10px;letter-spacing:0.07em;text-transform:uppercase;padding:3px 10px;border-radius:100px;white-space:nowrap;font-weight:500;}
+
+  .scale-chevron{width:16px;height:16px;display:flex;align-items:center;justify-content:center;color:var(--muted);transition:transform 0.22s;flex-shrink:0;}
+  .scale-item.open .scale-chevron{transform:rotate(180deg);}
+
+  .scale-body{max-height:0;overflow:hidden;transition:max-height 0.35s cubic-bezier(0.4,0,0.2,1);}
+  .scale-item.open .scale-body{max-height:300px;}
+
+  .scale-body-inner{padding:14px 16px 16px 102px;border-top:1px solid var(--border);background:var(--surface2);display:flex;flex-direction:column;gap:10px;}
+
+  .body-row{display:flex;flex-direction:column;gap:3px;}
+  .body-lbl{font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);font-weight:500;}
+  .body-val{font-size:13px;color:var(--muted);line-height:1.7;}
+  .body-val strong{color:var(--text);}
+
+  .affirmation-box{font-family:'DM Serif Display',serif;font-style:italic;font-size:14px;padding:10px 14px;border-radius:8px;color:var(--text);margin-top:4px;}
+
+  /* ── TRENNLINIE ── */
+  .divider{max-width:760px;margin:0 auto 48px;padding:0 20px;display:flex;align-items:center;gap:16px;}
+  .divider-line{flex:1;height:1px;background:var(--border);}
+  .divider-text{font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);white-space:nowrap;}
+
+  footer{text-align:center;padding:32px 24px;border-top:1px solid var(--border);color:var(--muted);font-size:12px;letter-spacing:0.04em;max-width:760px;margin:0 auto;}
+
+  @keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+  @media(max-width:560px){
+    .scale-row{grid-template-columns:48px 20px 1fr auto;gap:10px;}
+    .scale-body-inner{padding:14px 16px 16px 16px;}
+    nav{padding:14px 20px;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="wissensdatenbank.html" class="nav-logo">Heil<span>wissen</span></a>
+  <a href="wissensdatenbank.html" class="nav-back">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 2L3 7L9 12" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Zurück
+  </a>
+</nav>
+
+<header>
+  <div class="header-glow"></div>
+  <h1>Hawkins-<em>Skala</em></h1>
+  <p>Map of Consciousness · Bewusstseinszustände · Selbsttest</p>
+  <div class="header-line"></div>
+</header>
+
+<!-- SELBSTTEST -->
+<div class="test-section">
+  <div class="test-box">
+    <div class="test-glow"></div>
+    <div class="test-label">Interaktiver Selbsttest</div>
+    <div class="test-title">Wo stehst du gerade?</div>
+    <div class="test-sub">Beantworte die folgenden 8 Fragen ehrlich – nicht wie du sein möchtest, sondern wie du dich momentan meistens fühlst. Das Ergebnis zeigt deinen aktuellen Bewusstseinsschwerpunkt auf der Hawkins-Skala.</div>
+
+    <div class="test-questions" id="testQuestions"></div>
+
+    <button class="test-btn" onclick="auswerten()">Auswerten</button>
+
+    <div class="test-result" id="testResult">
+      <div class="result-level" id="resultLevel"></div>
+      <div class="result-name" id="resultName"></div>
+      <div class="result-text" id="resultText"></div>
+      <div class="result-tip" id="resultTip"></div>
+      <button class="test-reset" onclick="resetTest()">Test wiederholen</button>
+    </div>
+  </div>
+</div>
+
+<div class="divider">
+  <div class="divider-line"></div>
+  <div class="divider-text">Die vollständige Skala</div>
+  <div class="divider-line"></div>
+</div>
+
+<!-- VISUELLE SKALA -->
+<div class="scale-section">
+  <div class="scale-header">
+    <div class="scale-label">Dr. David R. Hawkins · Power vs. Force (1995)</div>
+    <h2 class="scale-title">Die <em>Map of Consciousness</em></h2>
+    <p class="scale-sub">17 Bewusstseinszustände von 20 bis 1000. Jede Ebene beschreibt ein Muster aus Emotion, Wahrnehmung, Körpergefühl und Lebensenergie. Klicke auf eine Ebene um alles zu erfahren.</p>
+  </div>
+  <div class="scale-track" id="scaleTrack"></div>
+</div>
+
+<footer>
+  Basiert auf Dr. David R. Hawkins, "Power vs. Force" (1995).<br>
+  Kein diagnostisches Instrument – dient der Selbstreflexion und persönlichen Entwicklung.
+</footer>
+
+<script>
+// ── DATEN ────────────────────────────────────────────────────────
+const levels = [
+  {
+    val:20, name:"Scham", en:"Shame", zone:"Destruktiv", zoneColor:"#c0392b", dotColor:"#c0392b",
+    emotion:"Demütigung, Selbstverachtung, Scham", wahrnehmung:"Die Welt erscheint miserable, man fühlt sich wertlos und unwürdig.",
+    koerper:"Chronische Erschöpfung, Rückzug, psychosomatische Beschwerden.",
+    aufstieg:"Selbstmitgefühl entwickeln. Professionelle Unterstützung suchen. Kleine Akte der Selbstfürsorge.",
+    affirmation:"Ich darf sein wer ich bin. Ich bin mehr als meine Fehler."
+  },
+  {
+    val:30, name:"Schuld", en:"Guilt", zone:"Destruktiv", zoneColor:"#c0392b", dotColor:"#c0392b",
+    emotion:"Vorwurf, Reue, Selbstbestrafung", wahrnehmung:"Ständiges Grübeln über vergangene Fehler. Das Leben fühlt sich wie eine Strafe an.",
+    koerper:"Anspannung im Bauch, Schlafstörungen, innerer Richter immer aktiv.",
+    aufstieg:"Vergebung – zuerst sich selbst. Verstehen dass Fehler menschlich sind.",
+    affirmation:"Ich vergebe mir. Ich habe getan was ich konnte mit dem was ich wusste."
+  },
+  {
+    val:50, name:"Apathie", en:"Apathy", zone:"Destruktiv", zoneColor:"#c0392b", dotColor:"#7f8c8d",
+    emotion:"Hoffnungslosigkeit, Resignation, Gleichgültigkeit", wahrnehmung:"Nichts scheint wichtig oder möglich. Tiefer Pessimismus. Motivation fehlt völlig.",
+    koerper:"Bleischwere, Antriebslosigkeit, sozialer Rückzug.",
+    aufstieg:"Kleinste Handlungen. Eine Sache pro Tag. Unterstützung annehmen.",
+    affirmation:"Dieser Zustand ist nicht permanent. Ich mache einen kleinen Schritt."
+  },
+  {
+    val:75, name:"Trauer", en:"Grief", zone:"Destruktiv", zoneColor:"#c0392b", dotColor:"#8e44ad",
+    emotion:"Verlust, Traurigkeit, tiefe Sehnsucht", wahrnehmung:"Die Welt erscheint trist und leer. Vergangenes wird betrauert.",
+    koerper:"Schwere in der Brust, Weinen, körperlicher Schmerz durch emotionalen Verlust.",
+    aufstieg:"Trauer zulassen statt unterdrücken. Zeit. Mitgefühl von anderen annehmen.",
+    affirmation:"Meine Trauer ist real. Ich lasse sie durch mich fliessen."
+  },
+  {
+    val:100, name:"Angst", en:"Fear", zone:"Destruktiv", zoneColor:"#c0392b", dotColor:"#e67e22",
+    emotion:"Furcht, Sorge, Nervosität, Paranoia", wahrnehmung:"Die Welt erscheint gefährlich. Überall lauern Bedrohungen. Kontrollbedürfnis steigt.",
+    koerper:"Anspannung, Herzrasen, flache Atmung, Schlafstörungen.",
+    aufstieg:"Atemtechniken, körperliche Bewegung, schrittweise Konfrontation mit Ängsten.",
+    affirmation:"Ich bin sicher in diesem Moment. Ich atme und lasse los."
+  },
+  {
+    val:125, name:"Begierde", en:"Desire", zone:"Destruktiv", zoneColor:"#c0392b", dotColor:"#e67e22",
+    emotion:"Verlangen, Gier, Sucht, Sehnsucht", wahrnehmung:"Immer mehr wollen. Besitz, Anerkennung, Genuss. Befriedigung hält nie lange an.",
+    koerper:"Unruhe, Getriebensein, Suchtverhalten möglich.",
+    aufstieg:"Dankbarkeit für das Vorhandene. Unterschied zwischen Bedürfnis und Gier erkennen.",
+    affirmation:"Ich habe genug. Ich bin genug. Ich bin dankbar."
+  },
+  {
+    val:150, name:"Wut", en:"Anger", zone:"Destruktiv", zoneColor:"#c0392b", dotColor:"#e74c3c",
+    emotion:"Hass, Aggressivität, Ressentiment, Frustration", wahrnehmung:"Die Welt erscheint ungerecht. Andere sind schuld. Wut kann aber auch erster Antrieb zur Veränderung sein.",
+    koerper:"Muskelspannung, erhöhter Blutdruck, Hitze im Körper.",
+    aufstieg:"Wut als Signal nutzen, nicht als Waffe. Kausalabhati-Atmung. Sport.",
+    affirmation:"Meine Wut zeigt mir was mir wichtig ist. Ich nutze sie konstruktiv."
+  },
+  {
+    val:175, name:"Stolz", en:"Pride", zone:"Grenze", zoneColor:"#f39c12", dotColor:"#f39c12",
+    emotion:"Verachtung, Arroganz, Überheblichkeit", wahrnehmung:"Man fühlt sich besser als andere. Lob und Status sind wichtig. Fragiles Ego.",
+    koerper:"Aufgeblasenes Ego, Anfälligkeit für Kritik, oberflächliche Stärke.",
+    aufstieg:"Demut entwickeln. Bereitschaft, von anderen zu lernen. Fehler eingestehen.",
+    affirmation:"Ich bin lernbereit. Andere haben wertvolles Wissen das ich noch nicht habe."
+  },
+  {
+    val:200, name:"Mut", en:"Courage", zone:"Konstruktiv", zoneColor:"#27ae60", dotColor:"#27ae60",
+    emotion:"Affirmation des Lebens, Entschlossenheit, Stärke", wahrnehmung:"Kritischer Wendepunkt. Hier beginnt konstruktives Leben. Die Welt erscheint herausfordernd aber machbar.",
+    koerper:"Energie, Handlungsbereitschaft, Ausdauer.",
+    aufstieg:"Handeln trotz Unsicherheit. Ziele setzen. Verantwortung übernehmen.",
+    affirmation:"Ich handle auch wenn ich Angst habe. Mut ist nicht die Abwesenheit von Angst."
+  },
+  {
+    val:250, name:"Neutralität", en:"Neutrality", zone:"Konstruktiv", zoneColor:"#27ae60", dotColor:"#2ecc71",
+    emotion:"Vertrauen, Entspanntheit, Loslassen", wahrnehmung:"Dinge werden akzeptiert wie sie sind. Innere Ruhe ohne Gleichgültigkeit.",
+    koerper:"Entspannung, Gelassenheit, niedriger Cortisolspiegel.",
+    aufstieg:"Loslassen üben. Nicht alles kontrollieren müssen. Meditation.",
+    affirmation:"Ich vertraue dem Fluss des Lebens. Nicht alles muss nach meinem Willen sein."
+  },
+  {
+    val:310, name:"Bereitschaft", en:"Willingness", zone:"Konstruktiv", zoneColor:"#27ae60", dotColor:"#1abc9c",
+    emotion:"Optimismus, Absicht, Offenheit", wahrnehmung:"Das Leben erscheint freundlich. Man ist bereit zu lernen und zu wachsen.",
+    koerper:"Leichtigkeit, Energie, Begeisterungsfähigkeit.",
+    aufstieg:"Neues ausprobieren. Offen für Feedback. Wachstum aktiv suchen.",
+    affirmation:"Ich bin bereit zu wachsen. Jede Erfahrung ist eine Lehrerin."
+  },
+  {
+    val:350, name:"Akzeptanz", en:"Acceptance", zone:"Konstruktiv", zoneColor:"#27ae60", dotColor:"#16a085",
+    emotion:"Vergebung, Harmonie, Eigenverantwortung", wahrnehmung:"Man übernimmt Verantwortung für das eigene Leben. Andere werden nicht mehr als Ursache des eigenen Leids gesehen.",
+    koerper:"Ausgeglichenheit, Gesundheit, emotionale Reife.",
+    aufstieg:"Selbstverantwortung tiefer verankern. Reaktivität weiter reduzieren.",
+    affirmation:"Ich bin verantwortlich fuer mein Leben. Ich habe die Wahl wie ich reagiere."
+  },
+  {
+    val:400, name:"Vernunft", en:"Reason", zone:"Konstruktiv", zoneColor:"#27ae60", dotColor:"#2980b9",
+    emotion:"Verständnis, Logik, Sinnhaftigkeit", wahrnehmung:"Wissenschaftliches Denken, analytische Fähigkeit, Weisheit. Aber noch begrenzt durch reines Intellekt.",
+    koerper:"Klarheit im Kopf, mentale Schärfe.",
+    aufstieg:"Intellekt mit Herz verbinden. Erkennen dass Vernunft alleine nicht genug ist.",
+    affirmation:"Ich denke klar und handle weise. Ich verbinde Verstand mit Gefühl."
+  },
+  {
+    val:500, name:"Liebe", en:"Love", zone:"Transzendent", zoneColor:"#9b59b6", dotColor:"#e91e8c",
+    emotion:"Ehrerbietung, Dankbarkeit, bedingungslose Liebe", wahrnehmung:"Liebe als Zustand des Seins – nicht als Emotion. Alle Wesen werden als verbunden wahrgenommen.",
+    koerper:"Weite im Herzen, tiefe Ruhe, körperliche Gesundheit.",
+    aufstieg:"Mitgefühl kultivieren. Dienst an anderen. Herzchakra-Arbeit.",
+    affirmation:"Ich liebe ohne Bedingungen. Mein Herz ist offen fuer alles was ist."
+  },
+  {
+    val:540, name:"Freude", en:"Joy", zone:"Transzendent", zoneColor:"#9b59b6", dotColor:"#f1c40f",
+    emotion:"Gelassenheit, Verklärung, vollständige Dankbarkeit", wahrnehmung:"Jeder Moment ist vollkommen. Synchronizitäten häufen sich. Innere Stille als Grundzustand.",
+    koerper:"Strahlende Gesundheit, Leichtigkeit, tiefes Wohlbefinden.",
+    aufstieg:"Tiefe Meditationspraxis. Stille. Hingabe.",
+    affirmation:"Das Leben ist ein Geschenk. Jeder Moment ist vollkommen wie er ist."
+  },
+  {
+    val:600, name:"Frieden", en:"Peace", zone:"Transzendent", zoneColor:"#9b59b6", dotColor:"#9b59b6",
+    emotion:"Vollkommenheit, Seligkeit, Transzendenz", wahrnehmung:"Ego tritt in den Hintergrund. Zeit verliert ihre Bedeutung. Non-duales Erleben beginnt.",
+    koerper:"Koerper wird als Fahrzeug wahrgenommen, nicht als Identität.",
+    aufstieg:"Sehr wenige Menschen erreichen diese Ebene dauerhaft durch intensive spirituelle Praxis.",
+    affirmation:"Ich bin Stille. Ich bin Frieden. Jenseits von Worten."
+  },
+  {
+    val:"700–1000", name:"Erleuchtung", en:"Enlightenment", zone:"Transzendent", zoneColor:"#9b59b6", dotColor:"#c9a84c",
+    emotion:"Unaussprechlich, reine Existenz", wahrnehmung:"Non-duales Bewusstsein. Trennung zwischen Selbst und Welt aufgelöst. Krishna, Buddha, Jesus – Hawkins kalibriert diese auf 1000.",
+    koerper:"Koerper als reines Instrument des Bewusstseins.",
+    aufstieg:"Nicht erreichbar durch Wollen – entsteht durch Gnade und vollstaendige Hingabe.",
+    affirmation:"Ich bin das Bewusstsein selbst. Alles ist."
+  }
+];
+
+// Farbe je Zone
+function zoneTag(z, c) {
+  return `<span class="scale-zone" style="background:${c}22;color:${c}">${z}</span>`;
+}
+
+// ── SKALA RENDERN ────────────────────────────────────────────────
+const track = document.getElementById('scaleTrack');
+
+levels.slice().reverse().forEach((l, ri) => {
+  const i = levels.length - 1 - ri;
+  const div = document.createElement('div');
+  div.className = 'scale-item';
+  div.style.animationDelay = (ri * 0.025) + 's';
+
+  div.innerHTML = `
+    <div class="scale-row">
+      <div class="scale-num">${l.val}</div>
+      <div class="scale-dot" style="background:${l.dotColor};box-shadow:0 0 8px ${l.dotColor}55"></div>
+      <div class="scale-name">${l.name} <span>${l.en}</span></div>
+      ${zoneTag(l.zone, l.zoneColor)}
+      <div class="scale-chevron">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 4.5L7 9.5L12 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+    </div>
+    <div class="scale-body">
+      <div class="scale-body-inner" style="border-left:2px solid ${l.dotColor}">
+        <div class="body-row">
+          <div class="body-lbl">Emotion &amp; Gefühlston</div>
+          <div class="body-val">${l.emotion}</div>
+        </div>
+        <div class="body-row">
+          <div class="body-lbl">Wahrnehmung der Welt</div>
+          <div class="body-val">${l.wahrnehmung}</div>
+        </div>
+        <div class="body-row">
+          <div class="body-lbl">Körper &amp; Energie</div>
+          <div class="body-val">${l.koerper}</div>
+        </div>
+        <div class="body-row">
+          <div class="body-lbl">Aufstieg zur nächsten Ebene</div>
+          <div class="body-val">${l.aufstieg}</div>
+        </div>
+        <div class="affirmation-box" style="background:${l.dotColor}12;border-left:2px solid ${l.dotColor}">
+          "${l.affirmation}"
+        </div>
+      </div>
+    </div>`;
+
+  div.querySelector('.scale-row').addEventListener('click', () => {
+    const isOpen = div.classList.toggle('open');
+    div.style.borderColor = isOpen ? `${l.dotColor}66` : '';
+  });
+
+  track.appendChild(div);
+});
+
+// ── SELBSTTEST DATEN ─────────────────────────────────────────────
+const questions = [
+  {
+    text: "Wie fühlst du dich meistens wenn du morgens aufwachst?",
+    options: [
+      { label: "Erschöpft / leer", score: 50 },
+      { label: "Ängstlich / angespannt", score: 100 },
+      { label: "Motiviert / bereit", score: 250 },
+      { label: "Dankbar / freudig", score: 500 }
+    ]
+  },
+  {
+    text: "Wie gehst du mit Rückschlägen um?",
+    options: [
+      { label: "Ich gebe auf oder resigniere", score: 50 },
+      { label: "Ich mache andere verantwortlich", score: 150 },
+      { label: "Ich lerne daraus und mache weiter", score: 310 },
+      { label: "Ich sehe sie als Wachstumschance", score: 400 }
+    ]
+  },
+  {
+    text: "Wie siehst du andere Menschen meistens?",
+    options: [
+      { label: "Als Bedrohung oder Konkurrenz", score: 100 },
+      { label: "Als unwichtig oder gleichgültig", score: 175 },
+      { label: "Als gleichwertig und interessant", score: 350 },
+      { label: "Als Teil von mir / mit Mitgefühl", score: 500 }
+    ]
+  },
+  {
+    text: "Was beschreibt dein inneres Gespräch am besten?",
+    options: [
+      { label: "Selbstkritisch und streng", score: 30 },
+      { label: "Grübelnd und sorgenvoll", score: 100 },
+      { label: "Analytisch und lösungsorientiert", score: 400 },
+      { label: "Ruhig und beobachtend", score: 540 }
+    ]
+  },
+  {
+    text: "Wie gehst du mit deinen Emotionen um?",
+    options: [
+      { label: "Ich unterdrücke sie meist", score: 75 },
+      { label: "Sie überwältigen mich oft", score: 150 },
+      { label: "Ich nehme sie wahr und handle trotzdem", score: 200 },
+      { label: "Ich beobachte sie ohne mich zu verlieren", score: 500 }
+    ]
+  },
+  {
+    text: "Wie fühlst du dich in deinem Leben insgesamt?",
+    options: [
+      { label: "Fehl am Platz / sinnlos", score: 50 },
+      { label: "Getrieben / unruhig", score: 125 },
+      { label: "Auf dem richtigen Weg", score: 310 },
+      { label: "Tief erfüllt und dankbar", score: 540 }
+    ]
+  },
+  {
+    text: "Was treibt dein Handeln am meisten an?",
+    options: [
+      { label: "Angst vor Konsequenzen", score: 100 },
+      { label: "Wunsch nach Anerkennung", score: 175 },
+      { label: "Eigene Werte und Ziele", score: 350 },
+      { label: "Dienst an anderen / tieferer Sinn", score: 500 }
+    ]
+  },
+  {
+    text: "Wie erlebst du Stille und Alleinsein?",
+    options: [
+      { label: "Als beunruhigend / bedrohlich", score: 100 },
+      { label: "Als Langeweile / Leere", score: 50 },
+      { label: "Als angenehme Erholung", score: 250 },
+      { label: "Als tiefen Frieden", score: 600 }
+    ]
+  }
+];
+
+// Test rendern
+const qContainer = document.getElementById('testQuestions');
+const answers = {};
+
+questions.forEach((q, qi) => {
+  const div = document.createElement('div');
+  div.className = 'test-q';
+  div.innerHTML = `<div class="test-q-text">${qi+1}. ${q.text}</div><div class="test-options" id="opts-${qi}"></div>`;
+  q.options.forEach((opt, oi) => {
+    const btn = document.createElement('button');
+    btn.className = 'test-opt';
+    btn.textContent = opt.label;
+    btn.addEventListener('click', () => {
+      document.querySelectorAll(`#opts-${qi} .test-opt`).forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      answers[qi] = opt.score;
+    });
+    div.querySelector('.test-options').appendChild(btn);
+  });
+  qContainer.appendChild(div);
+});
+
+// Auswerten
+function auswerten() {
+  const vals = Object.values(answers);
+  if (vals.length < questions.length) {
+    alert('Bitte beantworte alle ' + questions.length + ' Fragen.');
+    return;
+  }
+  const avg = Math.round(vals.reduce((a,b) => a+b, 0) / vals.length);
+
+  // Nächste Ebene finden
+  let found = levels[0];
+  for (let i = 0; i < levels.length; i++) {
+    const v = parseInt(levels[i].val);
+    if (!isNaN(v) && v <= avg) found = levels[i];
+  }
+
+  const resultEl = document.getElementById('testResult');
+  document.getElementById('resultLevel').textContent = avg;
+  document.getElementById('resultLevel').style.color = found.dotColor;
+  document.getElementById('resultName').textContent = found.name + ' · ' + found.en;
+
+  const texts = {
+    Destruktiv: `Du befindest dich aktuell in einem herausfordernden Bewusstseinszustand. Das ist kein Urteil – es ist ein Ausgangspunkt. Viele Menschen verbringen einen Großteil ihres Lebens unter der Schwelle von 200. Das Wichtigste ist: Du bist hier und schaust hin.`,
+    Grenze: `Du stehst an der Schwelle. Stolz kann sich wie Stärke anfühlen, ist aber noch vom Ego getragen. Die Bereitschaft Demut zu entwickeln ist der nächste große Schritt.`,
+    Konstruktiv: `Du bist oberhalb der kritischen Grenze von 200. Dein Bewusstsein stärkt dich und andere. Weiter gehen – du bist auf dem richtigen Weg.`,
+    Transzendent: `Du bewegst dich in Bewusstseinszuständen die wenige Menschen dauerhaft erleben. Deine Präsenz hat eine positive Wirkung auf dein Umfeld. Vertiefe deine Praxis.`
+  };
+
+  document.getElementById('resultText').textContent = texts[found.zone] || '';
+  document.getElementById('resultTip').innerHTML = `<strong>Nächster Schritt:</strong> ${found.aufstieg}`;
+
+  resultEl.classList.add('show');
+  resultEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function resetTest() {
+  Object.keys(answers).forEach(k => delete answers[k]);
+  document.querySelectorAll('.test-opt').forEach(b => b.classList.remove('selected'));
+  document.getElementById('testResult').classList.remove('show');
+}
+</script>
+</body>
+</html>

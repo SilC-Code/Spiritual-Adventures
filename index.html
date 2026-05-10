@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spiritual Adventures – Deine Reise beginnt hier</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0c0d0f;
+    --surface: #14151a;
+    --surface2: #1c1d24;
+    --border: rgba(255,255,255,0.07);
+    --border-hover: rgba(255,255,255,0.16);
+    --text: #e8e6e0;
+    --muted: #7a7870;
+    --gold: #c9a84c;
+    --gold-dim: rgba(201,168,76,0.10);
+    --green: #5dcaa5;
+    --purple: #7f77dd;
+    --violet: #9b59b6;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    font-size: 15px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* STARS */
+  .stars { position: fixed; top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden; }
+  .star { position:absolute;border-radius:50%;background:#fff;animation:twinkle var(--d) ease-in-out infinite;opacity:0; }
+  @keyframes twinkle { 0%,100%{opacity:0}50%{opacity:var(--o)} }
+
+  /* NAV */
+  nav {
+    position: fixed; top:0;left:0;right:0;z-index:100;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:20px 40px;
+    background:rgba(12,13,15,0.75);
+    backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--border);
+  }
+  .nav-logo { font-family:'DM Serif Display',serif;font-size:17px;color:var(--text);text-decoration:none; }
+  .nav-logo em { font-style:italic;color:var(--gold); }
+  .nav-links { display:flex;align-items:center;gap:28px; }
+  .nav-links a { font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.2s; }
+  .nav-links a:hover { color:var(--text); }
+  .nav-cta { font-size:12px;letter-spacing:0.06em;text-transform:uppercase;font-weight:500;padding:8px 20px;border-radius:100px;border:1px solid var(--gold);color:var(--gold);text-decoration:none;transition:all 0.2s; }
+  .nav-cta:hover { background:var(--gold);color:var(--bg); }
+
+  /* HERO */
+  .hero {
+    position:relative;min-height:100vh;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;text-align:center;
+    padding:120px 24px 80px;z-index:1;
+  }
+  .hero-glow {
+    position:absolute;top:15%;left:50%;transform:translateX(-50%);
+    width:700px;height:500px;
+    background:radial-gradient(ellipse,rgba(201,168,76,0.09) 0%,rgba(155,89,182,0.06) 40%,transparent 70%);
+    pointer-events:none;animation:glowPulse 7s ease-in-out infinite;
+  }
+  @keyframes glowPulse { 0%,100%{opacity:0.6;transform:translateX(-50%) scale(1)}50%{opacity:1;transform:translateX(-50%) scale(1.07)} }
+
+  .hero-badge {
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);
+    border:1px solid rgba(201,168,76,0.3);border-radius:100px;padding:6px 18px;
+    margin-bottom:32px;position:relative;animation:fadeUp 0.8s ease both;
+  }
+  .hero-badge::before { content:'';width:6px;height:6px;border-radius:50%;background:var(--gold);animation:dot 2s ease-in-out infinite; }
+  @keyframes dot { 0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.3;transform:scale(0.6)} }
+
+  .hero h1 {
+    font-family:'DM Serif Display',serif;
+    font-size:clamp(3.2rem,9vw,7.5rem);
+    font-weight:400;line-height:1.0;letter-spacing:-0.02em;
+    color:var(--text);margin-bottom:14px;
+    animation:fadeUp 0.8s ease 0.1s both;
+  }
+  .hero h1 em {
+    font-style:italic;
+    background:linear-gradient(135deg,var(--gold) 0%,#f0d48a 50%,var(--gold) 100%);
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  }
+  .hero-tagline {
+    font-family:'DM Serif Display',serif;font-style:italic;
+    font-size:clamp(1rem,2.5vw,1.5rem);color:var(--muted);
+    margin-bottom:28px;animation:fadeUp 0.8s ease 0.2s both;
+  }
+  .hero-sub {
+    font-size:15px;color:var(--muted);font-weight:300;max-width:520px;
+    margin:0 auto 52px;line-height:1.85;animation:fadeUp 0.8s ease 0.3s both;
+  }
+  .hero-buttons { display:flex;gap:14px;justify-content:center;flex-wrap:wrap;animation:fadeUp 0.8s ease 0.4s both; }
+
+  .btn-primary {
+    font-size:13px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;
+    padding:14px 34px;border-radius:100px;
+    background:linear-gradient(135deg,var(--gold),#f0d48a);
+    color:#0c0d0f;text-decoration:none;border:none;cursor:pointer;
+    transition:transform 0.2s,box-shadow 0.2s;
+    box-shadow:0 4px 24px rgba(201,168,76,0.25);
+  }
+  .btn-primary:hover { transform:translateY(-2px);box-shadow:0 8px 32px rgba(201,168,76,0.38); }
+
+  .btn-secondary {
+    font-size:13px;font-weight:400;letter-spacing:0.06em;text-transform:uppercase;
+    padding:14px 34px;border-radius:100px;background:transparent;
+    color:var(--muted);text-decoration:none;border:1px solid var(--border);transition:all 0.2s;
+  }
+  .btn-secondary:hover { border-color:var(--border-hover);color:var(--text); }
+
+  .hero-scroll {
+    position:absolute;bottom:36px;left:50%;transform:translateX(-50%);
+    display:flex;flex-direction:column;align-items:center;gap:8px;
+    color:var(--muted);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;
+    animation:fadeUp 1s ease 0.9s both;
+  }
+  .scroll-line { width:1px;height:40px;background:linear-gradient(to bottom,var(--muted),transparent);animation:sline 2s ease-in-out infinite; }
+  @keyframes sline { 0%,100%{opacity:0.3}50%{opacity:1} }
+
+  /* SECTIONS */
+  .section { position:relative;z-index:1;max-width:900px;margin:0 auto;padding:80px 24px; }
+
+  .section-label {
+    font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);
+    margin-bottom:16px;display:flex;align-items:center;gap:12px;
+  }
+  .section-label::after { content:'';flex:1;height:1px;background:linear-gradient(to right,rgba(201,168,76,0.3),transparent); }
+
+  .section-title { font-family:'DM Serif Display',serif;font-size:clamp(1.8rem,4vw,3rem);font-weight:400;color:var(--text);line-height:1.2;margin-bottom:20px; }
+  .section-title em { font-style:italic;color:var(--gold); }
+  .section-text { font-size:15px;color:var(--muted);line-height:1.9;max-width:620px; }
+
+  /* JOURNEY */
+  .journey { position:relative;z-index:1;max-width:900px;margin:0 auto;padding:0 24px 80px; }
+  .journey-steps { display:flex;flex-direction:column;gap:0;margin-top:48px;position:relative; }
+  .journey-steps::before { content:'';position:absolute;left:23px;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,var(--green),var(--purple),var(--gold),transparent);opacity:0.25; }
+
+  .journey-step { display:flex;gap:24px;padding:28px 0;border-bottom:1px solid var(--border); }
+  .journey-step:last-child { border-bottom:none; }
+
+  .step-dot { width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'DM Serif Display',serif;font-size:16px;flex-shrink:0;position:relative;z-index:1; }
+  .step-content { flex:1;padding-top:8px; }
+  .step-range { font-size:10px;letter-spacing:0.1em;text-transform:uppercase;font-weight:500;margin-bottom:6px; }
+  .step-title { font-family:'DM Serif Display',serif;font-size:1.3rem;color:var(--text);margin-bottom:8px; }
+  .step-text { font-size:13px;color:var(--muted);line-height:1.75; }
+  .step-tag { display:inline-block;font-size:10px;letter-spacing:0.06em;text-transform:uppercase;padding:3px 10px;border-radius:100px;margin-top:10px; }
+
+  /* MODULES */
+  .modules-section { position:relative;z-index:1;max-width:900px;margin:0 auto;padding:0 24px 80px; }
+  .modules-grid { display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:48px; }
+
+  .module-card {
+    border:1px solid var(--border);border-radius:14px;background:var(--surface);
+    padding:24px;text-decoration:none;display:block;position:relative;overflow:hidden;
+    transition:transform 0.2s,border-color 0.2s;animation:fadeUp 0.5s ease both;
+  }
+  .module-card:nth-child(2){animation-delay:0.07s}
+  .module-card:nth-child(3){animation-delay:0.14s}
+  .module-card:nth-child(4){animation-delay:0.21s}
+  .module-card:hover { transform:translateY(-3px); }
+
+  .module-glow { position:absolute;top:-30px;right:-30px;width:140px;height:140px;border-radius:50%;pointer-events:none; }
+
+  .free-badge { display:inline-flex;align-items:center;gap:5px;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;font-weight:500;padding:3px 10px;border-radius:100px;background:rgba(93,202,165,0.12);color:var(--green);margin-bottom:16px; }
+  .lock-badge { display:inline-flex;align-items:center;gap:5px;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;font-weight:500;padding:3px 10px;border-radius:100px;background:rgba(255,255,255,0.05);color:var(--muted);margin-bottom:16px; }
+
+  .module-num { font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;font-weight:500; }
+  .module-name { font-family:'DM Serif Display',serif;font-size:1.4rem;color:var(--text);margin-bottom:10px;line-height:1.2; }
+  .module-desc { font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:20px; }
+  .module-link { display:inline-flex;align-items:center;gap:6px;font-size:11px;letter-spacing:0.07em;text-transform:uppercase;font-weight:500;transition:gap 0.2s; }
+  .module-card:hover .module-link { gap:10px; }
+
+  .module-card.locked { opacity:0.5;cursor:default;pointer-events:none; }
+  .module-card.locked:hover { transform:none; }
+
+  /* NEWSLETTER */
+  .newsletter-section { position:relative;z-index:1;max-width:580px;margin:0 auto;padding:0 24px 100px;text-align:center; }
+  .newsletter-box { border:1px solid rgba(201,168,76,0.2);border-radius:20px;background:var(--surface);padding:48px 40px;position:relative;overflow:hidden; }
+  .newsletter-glow { position:absolute;top:-60px;left:50%;transform:translateX(-50%);width:300px;height:200px;background:radial-gradient(ellipse,rgba(201,168,76,0.08),transparent 70%);pointer-events:none; }
+  .newsletter-icon { font-size:32px;margin-bottom:16px; }
+  .newsletter-title { font-family:'DM Serif Display',serif;font-size:1.8rem;color:var(--text);margin-bottom:10px; }
+  .newsletter-sub { font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:28px; }
+  .newsletter-form { display:flex;gap:10px;flex-wrap:wrap;justify-content:center; }
+  .newsletter-input { font-family:'DM Sans',sans-serif;font-size:14px;padding:12px 18px;border-radius:100px;border:1px solid var(--border);background:var(--surface2);color:var(--text);outline:none;flex:1;min-width:200px;transition:border-color 0.2s; }
+  .newsletter-input:focus { border-color:rgba(201,168,76,0.4); }
+  .newsletter-input::placeholder { color:var(--muted); }
+  .newsletter-btn { font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;letter-spacing:0.05em;padding:12px 24px;border-radius:100px;background:linear-gradient(135deg,var(--gold),#f0d48a);color:var(--bg);border:none;cursor:pointer;transition:transform 0.2s,box-shadow 0.2s;white-space:nowrap; }
+  .newsletter-btn:hover { transform:translateY(-1px);box-shadow:0 4px 16px rgba(201,168,76,0.3); }
+  .newsletter-note { font-size:11px;color:var(--muted);margin-top:14px; }
+
+  /* DIVIDER */
+  .divider { position:relative;z-index:1;max-width:900px;margin:0 auto 60px;padding:0 24px;display:flex;align-items:center;gap:16px; }
+  .divider-line { flex:1;height:1px;background:var(--border); }
+  .divider-text { font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);white-space:nowrap; }
+
+  /* FOOTER */
+  footer { position:relative;z-index:1;text-align:center;padding:32px 24px;border-top:1px solid var(--border);color:var(--muted);font-size:12px;letter-spacing:0.03em;line-height:1.8; }
+  footer a { color:var(--muted);text-decoration:none; }
+  footer a:hover { color:var(--text); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp { from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)} }
+  .reveal { opacity:0;transform:translateY(24px);transition:opacity 0.7s ease,transform 0.7s ease; }
+  .reveal.visible { opacity:1;transform:translateY(0); }
+
+  @media (max-width:600px) {
+    nav { padding:16px 20px; }
+    .nav-links { display:none; }
+    .hero { padding:100px 20px 60px; }
+    .newsletter-box { padding:32px 20px; }
+    .journey-steps::before { display:none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="stars" id="stars"></div>
+
+<nav>
+  <a href="index.html" class="nav-logo">Spiritual <em>Adventures</em></a>
+  <div class="nav-links">
+    <a href="#reise">Die Reise</a>
+    <a href="#module">Wissen</a>
+    <a href="#newsletter">Newsletter</a>
+    <a href="wissensdatenbank.html" class="nav-cta">Jetzt starten</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-badge">Deine spirituelle Reise beginnt hier</div>
+  <h1>Spiritual<br><em>Adventures</em></h1>
+  <p class="hero-tagline">Deine Reise beginnt hier.</p>
+  <p class="hero-sub">Wissen das dich verändert. Werkzeuge die wirken. Eine Reise die genau dort beginnt wo du gerade stehst – und dich Schritt für Schritt weiter trägt.</p>
+  <div class="hero-buttons">
+    <a href="wissensdatenbank.html" class="btn-primary">Kostenlos starten</a>
+    <a href="#reise" class="btn-secondary">Mehr erfahren</a>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    Entdecken
+  </div>
+</section>
+
+<!-- PHILOSOPHIE -->
+<section class="section reveal" id="reise">
+  <div class="section-label">Das Konzept</div>
+  <h2 class="section-title">Jede Reise beginnt<br>mit dem <em>ersten Schritt</em></h2>
+  <p class="section-text">Du musst kein Experte sein um anzufangen. Du musst nur bereit sein. Spiritual Adventures bringt dich von genau dort wo du heute stehst zu einer tieferen Version von dir – durch Wissen, Praxis und schrittweise Transformation. Kein Überfordern. Kein Dogma. Nur ein ehrlicher Weg nach innen.</p>
+</section>
+
+<!-- JOURNEY SKALA -->
+<div class="journey reveal">
+  <div class="section-label">Die Bewusstseinsreise</div>
+  <h2 class="section-title">Wo stehst <em>du gerade?</em></h2>
+  <div class="journey-steps">
+
+    <div class="journey-step">
+      <div class="step-dot" style="background:rgba(93,202,165,0.12);color:#5dcaa5">1</div>
+      <div class="step-content">
+        <div class="step-range" style="color:#5dcaa5">Wissensstufe 1–3 · Einstieg</div>
+        <div class="step-title">Der Beginn</div>
+        <div class="step-text">Du spürst dass da mehr ist. Vielleicht suchst du schon eine Weile – nach Ruhe, nach Klarheit, nach einem Werkzeug das wirklich hilft. Hier bist du richtig. Die ersten Module nehmen dich genau dort ab wo du stehst.</div>
+        <span class="step-tag" style="background:rgba(93,202,165,0.10);color:#5dcaa5">Kostenloser Zugang</span>
+      </div>
+    </div>
+
+    <div class="journey-step">
+      <div class="step-dot" style="background:rgba(127,119,221,0.12);color:#7f77dd">2</div>
+      <div class="step-content">
+        <div class="step-range" style="color:#7f77dd">Wissensstufe 4–6 · Vertiefung</div>
+        <div class="step-title">Das Erwachen</div>
+        <div class="step-text">Du hast die Grundlagen verinnerlicht und merkst wie sich etwas in dir verändert. Jetzt geht es tiefer – Bewusstseinszustände, innere Arbeit, die Verbindung zwischen Körper, Geist und Energie.</div>
+        <span class="step-tag" style="background:rgba(127,119,221,0.10);color:#7f77dd">Premium Module · bald verfügbar</span>
+      </div>
+    </div>
+
+    <div class="journey-step">
+      <div class="step-dot" style="background:rgba(201,168,76,0.12);color:#c9a84c">3</div>
+      <div class="step-content">
+        <div class="step-range" style="color:#c9a84c">Wissensstufe 7–10 · Meisterschaft</div>
+        <div class="step-title">Die Transformation</div>
+        <div class="step-text">Manifestation, Identitätsshifting, Seinszustände – das tiefste Wissen für Menschen die bereit sind sich fundamental zu verändern. Nicht für jeden. Für die die wirklich wollen.</div>
+        <span class="step-tag" style="background:rgba(201,168,76,0.10);color:#c9a84c">Advanced Programme · in Entwicklung</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="divider reveal">
+  <div class="divider-line"></div>
+  <div class="divider-text">Kostenlose Module</div>
+  <div class="divider-line"></div>
+</div>
+
+<!-- MODULE -->
+<div class="modules-section reveal" id="module">
+  <div class="section-label">Wissensdatenbank</div>
+  <h2 class="section-title">Starte mit diesen<br><em>kostenlosen</em> Modulen</h2>
+
+  <div class="modules-grid">
+
+    <a href="heilfrequenzen.html" class="module-card" style="border-color:rgba(93,202,165,0.2)">
+      <div class="module-glow" style="background:radial-gradient(circle,rgba(93,202,165,0.10),transparent 70%)"></div>
+      <div class="free-badge">✓ Kostenlos</div>
+      <div class="module-num">Modul 01</div>
+      <div class="module-name">Heilfrequenzen</div>
+      <div class="module-desc">19 Frequenzen von Delta-Wellen bis Solfeggio – wie Klang das Nervensystem und Bewusstsein beeinflusst. Mit Hörprobe.</div>
+      <span class="module-link" style="color:#5dcaa5">Öffnen <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6h7M7 3.5l2.5 2.5L7 8.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    </a>
+
+    <a href="atemtechniken.html" class="module-card" style="border-color:rgba(127,119,221,0.2)">
+      <div class="module-glow" style="background:radial-gradient(circle,rgba(127,119,221,0.10),transparent 70%)"></div>
+      <div class="free-badge">✓ Kostenlos</div>
+      <div class="module-num">Modul 02</div>
+      <div class="module-name">Atemtechniken</div>
+      <div class="module-desc">12 Breathwork-Techniken mit geführter Atemübung, Situation, Wirkung und Ablauf – interaktiv und sofort anwendbar.</div>
+      <span class="module-link" style="color:#7f77dd">Öffnen <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6h7M7 3.5l2.5 2.5L7 8.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    </a>
+
+    <a href="chakren.html" class="module-card" style="border-color:rgba(155,89,182,0.2)">
+      <div class="module-glow" style="background:radial-gradient(circle,rgba(155,89,182,0.10),transparent 70%)"></div>
+      <div class="free-badge">✓ Kostenlos</div>
+      <div class="module-num">Modul 03</div>
+      <div class="module-name">Chakren</div>
+      <div class="module-desc">Die 7 Energiezentren – Lage, Zuständigkeit, Blockierung, Aktivierung und Affirmationen für jedes Chakra.</div>
+      <span class="module-link" style="color:#9b59b6">Öffnen <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6h7M7 3.5l2.5 2.5L7 8.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    </a>
+
+    <a href="hawkins.html" class="module-card" style="border-color:rgba(201,168,76,0.2)">
+      <div class="module-glow" style="background:radial-gradient(circle,rgba(201,168,76,0.10),transparent 70%)"></div>
+      <div class="free-badge">✓ Kostenlos</div>
+      <div class="module-num">Modul 04</div>
+      <div class="module-name">Hawkins-Skala</div>
+      <div class="module-desc">Die Map of Consciousness – 17 Bewusstseinszustände von Scham bis Erleuchtung. Inkl. Selbsttest wo du gerade stehst.</div>
+      <span class="module-link" style="color:#c9a84c">Öffnen <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6h7M7 3.5l2.5 2.5L7 8.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    </a>
+
+    <div class="module-card locked">
+      <div class="lock-badge">🔒 Premium</div>
+      <div class="module-num">Modul 05</div>
+      <div class="module-name">Seinszustände</div>
+      <div class="module-desc">Was sind Bewusstseinszustände, wie erkennst du sie und wie wechselst du bewusst zwischen ihnen.</div>
+      <span class="module-link" style="color:var(--muted)">Demnächst</span>
+    </div>
+
+    <div class="module-card locked">
+      <div class="lock-badge">🔒 Premium</div>
+      <div class="module-num">Modul 06</div>
+      <div class="module-name">Manifestation</div>
+      <div class="module-desc">Manifestation jenseits von Wunschdenken – die psychologischen und spirituellen Mechanismen die wirklich funktionieren.</div>
+      <span class="module-link" style="color:var(--muted)">Demnächst</span>
+    </div>
+
+  </div>
+</div>
+
+<!-- NEWSLETTER -->
+<div class="newsletter-section reveal" id="newsletter">
+  <div class="newsletter-box">
+    <div class="newsletter-glow"></div>
+    <div class="newsletter-icon">✨</div>
+    <div class="newsletter-title">Bleib auf dem Weg</div>
+    <div class="newsletter-sub">Neue Module, Impulse und Wissen direkt in dein Postfach. Kostenlos. Kein Spam.</div>
+    <div class="newsletter-form">
+      <input class="newsletter-input" type="email" placeholder="Deine E-Mail-Adresse">
+      <button class="newsletter-btn">Eintragen</button>
+    </div>
+    <div class="newsletter-note">Jederzeit abmeldbar · Kein Spam · Kein Verkauf deiner Daten</div>
+  </div>
+</div>
+
+<footer>
+  <div style="font-family:'DM Serif Display',serif;font-size:19px;margin-bottom:8px;color:var(--text)">
+    Spiritual <em style="font-style:italic;color:var(--gold)">Adventures</em>
+  </div>
+  Deine Reise beginnt hier.<br>
+  <span style="margin-top:12px;display:block">
+    <a href="wissensdatenbank.html">Wissensdatenbank</a> &nbsp;·&nbsp;
+    <a href="#">Impressum</a> &nbsp;·&nbsp;
+    <a href="#">Datenschutz</a>
+  </span>
+  <div style="margin-top:16px;font-size:11px">Kein Ersatz für medizinische oder psychologische Beratung.</div>
+</footer>
+
+<script>
+// Sterne
+const starsEl = document.getElementById('stars');
+for (let i = 0; i < 130; i++) {
+  const s = document.createElement('div');
+  s.className = 'star';
+  const size = Math.random() * 2 + 0.5;
+  s.style.cssText = `width:${size}px;height:${size}px;top:${Math.random()*100}%;left:${Math.random()*100}%;--d:${3+Math.random()*7}s;--o:${0.08+Math.random()*0.45};animation-delay:${Math.random()*7}s`;
+  starsEl.appendChild(s);
+}
+
+// Scroll Reveal
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(r => observer.observe(r));
+
+// Newsletter
+document.querySelector('.newsletter-btn').addEventListener('click', () => {
+  const input = document.querySelector('.newsletter-input');
+  if (input.value && input.value.includes('@')) {
+    input.value = '';
+    input.placeholder = 'Danke! Du bist dabei.';
+    input.style.borderColor = 'rgba(93,202,165,0.5)';
+  } else {
+    input.style.borderColor = 'rgba(216,90,48,0.5)';
+    input.placeholder = 'Bitte gib eine gueltige E-Mail ein';
+  }
+});
+</script>
+</body>
+</html>

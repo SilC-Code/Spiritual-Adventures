@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Atemtechniken – Breathwork & Wirkung</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0c0d0f;
+    --surface: #14151a;
+    --surface2: #1c1d24;
+    --border: rgba(255,255,255,0.07);
+    --border-hover: rgba(255,255,255,0.14);
+    --text: #e8e6e0;
+    --muted: #7a7870;
+    --accent-aktivierung: #5dcaa5;
+    --accent-aktivierung-dim: rgba(93,202,165,0.1);
+    --accent-entspannung: #7f77dd;
+    --accent-entspannung-dim: rgba(127,119,221,0.1);
+    --accent-fokus: #ef9f27;
+    --accent-fokus-dim: rgba(239,159,39,0.1);
+    --accent-heilung: #d85a30;
+    --accent-heilung-dim: rgba(216,90,48,0.1);
+    --accent-schlaf: #378add;
+    --accent-schlaf-dim: rgba(55,138,221,0.1);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* === NAV === */
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 32px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 15px;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+  }
+
+  .nav-logo span { color: var(--accent-aktivierung); }
+
+  .nav-back {
+    font-size: 12px;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.2s;
+  }
+
+  .nav-back:hover { color: var(--text); }
+
+  .nav-back svg { display: block; }
+
+  /* === HEADER === */
+  header {
+    position: relative;
+    padding: 72px 0 56px;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .header-glow {
+    position: absolute;
+    top: -80px; left: 50%;
+    transform: translateX(-50%);
+    width: 600px; height: 300px;
+    background: radial-gradient(ellipse, rgba(127,119,221,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    color: var(--text);
+    position: relative;
+  }
+
+  header h1 em {
+    font-style: italic;
+    color: var(--accent-entspannung);
+  }
+
+  header p {
+    margin-top: 14px;
+    color: var(--muted);
+    font-size: 14px;
+    font-weight: 300;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    position: relative;
+  }
+
+  .header-line {
+    width: 40px; height: 1px;
+    background: var(--accent-entspannung);
+    margin: 20px auto 0;
+    opacity: 0.5;
+    position: relative;
+  }
+
+  /* === FILTERS === */
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    padding: 0 24px 40px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .filter-btn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 100px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .filter-btn:hover { border-color: var(--border-hover); color: var(--text); }
+  .filter-btn.active { color: var(--bg); font-weight: 500; }
+  .filter-btn[data-cat="alle"].active { background: var(--text); border-color: var(--text); }
+  .filter-btn[data-cat="Aktivierung"].active { background: var(--accent-aktivierung); border-color: var(--accent-aktivierung); }
+  .filter-btn[data-cat="Entspannung"].active { background: var(--accent-entspannung); border-color: var(--accent-entspannung); }
+  .filter-btn[data-cat="Fokus"].active { background: var(--accent-fokus); border-color: var(--accent-fokus); }
+  .filter-btn[data-cat="Heilung"].active { background: var(--accent-heilung); border-color: var(--accent-heilung); }
+  .filter-btn[data-cat="Schlaf"].active { background: var(--accent-schlaf); border-color: var(--accent-schlaf); }
+
+  /* === LIST === */
+  .list {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 20px 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .item {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--surface);
+    overflow: hidden;
+    transition: border-color 0.2s;
+    animation: fadeUp 0.4s ease both;
+  }
+
+  .item:hover { border-color: var(--border-hover); }
+
+  .item-header {
+    display: grid;
+    grid-template-columns: 1fr auto auto auto;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 20px;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .item-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 17px;
+    color: var(--text);
+  }
+
+  .item-tag {
+    font-size: 10px;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    font-weight: 500;
+    padding: 4px 10px;
+    border-radius: 100px;
+    white-space: nowrap;
+  }
+
+  .tag-Aktivierung { background: var(--accent-aktivierung-dim); color: var(--accent-aktivierung); }
+  .tag-Entspannung { background: var(--accent-entspannung-dim); color: var(--accent-entspannung); }
+  .tag-Fokus       { background: var(--accent-fokus-dim);       color: var(--accent-fokus); }
+  .tag-Heilung     { background: var(--accent-heilung-dim);     color: var(--accent-heilung); }
+  .tag-Schlaf      { background: var(--accent-schlaf-dim);      color: var(--accent-schlaf); }
+
+  /* Guide button */
+  .guide-btn {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+    flex-shrink: 0;
+    padding: 0;
+    position: relative;
+  }
+
+  .guide-btn:hover { border-color: var(--border-hover); color: var(--text); background: var(--surface2); }
+  .guide-btn.active { color: var(--bg); }
+  .guide-btn svg { display: block; }
+
+  .item[data-cat="Aktivierung"] .guide-btn.active { background: var(--accent-aktivierung); border-color: var(--accent-aktivierung); color: var(--bg); }
+  .item[data-cat="Entspannung"] .guide-btn.active { background: var(--accent-entspannung); border-color: var(--accent-entspannung); color: var(--bg); }
+  .item[data-cat="Fokus"]       .guide-btn.active { background: var(--accent-fokus);       border-color: var(--accent-fokus);       color: var(--bg); }
+  .item[data-cat="Heilung"]     .guide-btn.active { background: var(--accent-heilung);     border-color: var(--accent-heilung);     color: var(--bg); }
+  .item[data-cat="Schlaf"]      .guide-btn.active { background: var(--accent-schlaf);      border-color: var(--accent-schlaf);      color: var(--bg); }
+
+  .item-chevron {
+    width: 18px; height: 18px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--muted);
+    transition: transform 0.25s, color 0.2s;
+    flex-shrink: 0;
+  }
+
+  .item-chevron svg { display: block; }
+  .item.open .item-chevron { transform: rotate(180deg); color: var(--text); }
+
+  /* === BODY === */
+  .item-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  .item.open .item-body { max-height: 800px; }
+
+  .item-body-inner {
+    border-top: 1px solid var(--border);
+    padding: 20px 20px 22px;
+    background: var(--surface2);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .item[data-cat="Aktivierung"] .item-body-inner { border-left: 2px solid var(--accent-aktivierung); padding-left: 18px; }
+  .item[data-cat="Entspannung"] .item-body-inner { border-left: 2px solid var(--accent-entspannung); padding-left: 18px; }
+  .item[data-cat="Fokus"]       .item-body-inner { border-left: 2px solid var(--accent-fokus);       padding-left: 18px; }
+  .item[data-cat="Heilung"]     .item-body-inner { border-left: 2px solid var(--accent-heilung);     padding-left: 18px; }
+  .item[data-cat="Schlaf"]      .item-body-inner { border-left: 2px solid var(--accent-schlaf);      padding-left: 18px; }
+
+  .body-section { display: flex; flex-direction: column; gap: 4px; }
+
+  .body-label {
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  .body-text {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.75;
+  }
+
+  .body-text strong { color: var(--text); font-weight: 500; }
+
+  /* === GUIDE OVERLAY === */
+  .guide-overlay {
+    display: none;
+    border-top: 1px solid var(--border);
+    background: var(--bg);
+    padding: 24px 20px;
+  }
+
+  .guide-overlay.open { display: block; }
+
+  .guide-title {
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+
+  .breath-viz {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+  }
+
+  .breath-circle {
+    width: 90px; height: 90px;
+    border-radius: 50%;
+    border: 1.5px solid var(--border-hover);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px;
+    color: var(--muted);
+    transition: transform 0.1s;
+  }
+
+  .breath-circle.expanding { animation: none; }
+
+  .guide-phase {
+    text-align: center;
+    font-size: 22px;
+    font-family: 'DM Serif Display', serif;
+    color: var(--text);
+    margin-bottom: 6px;
+    min-height: 32px;
+  }
+
+  .guide-instruction {
+    text-align: center;
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 20px;
+    min-height: 20px;
+  }
+
+  .guide-progress {
+    height: 2px;
+    background: var(--border);
+    border-radius: 2px;
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+
+  .guide-progress-bar {
+    height: 100%;
+    border-radius: 2px;
+    width: 0%;
+    transition: width linear;
+  }
+
+  .guide-controls {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+  }
+
+  .guide-start-btn, .guide-stop-btn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 8px 20px;
+    border-radius: 100px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .guide-start-btn:hover, .guide-stop-btn:hover {
+    border-color: var(--border-hover);
+    color: var(--text);
+  }
+
+  .guide-rounds {
+    text-align: center;
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 12px;
+  }
+
+  /* === FOOTER === */
+  footer {
+    text-align: center;
+    padding: 32px 24px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    max-width: 760px;
+    margin: 0 auto;
+  }
+
+  @keyframes fadeUp {
+    from { opacity:0; transform:translateY(12px); }
+    to { opacity:1; transform:translateY(0); }
+  }
+
+  @media (max-width: 560px) {
+    .item-header { grid-template-columns: 1fr auto auto; gap: 10px; }
+    .item-tag { display: none; }
+    nav { padding: 14px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="wissensdatenbank.html" class="nav-logo">Heil<span>wissen</span></a>
+  <a href="wissensdatenbank.html" class="nav-back">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 2L3 7L9 12" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Zurück
+  </a>
+</nav>
+
+<header>
+  <div class="header-glow"></div>
+  <h1>Atem<em>techniken</em></h1>
+  <p>Breathwork · Wirkung · Anleitung</p>
+  <div class="header-line"></div>
+</header>
+
+<div class="filters">
+  <button class="filter-btn active" data-cat="alle">Alle</button>
+  <button class="filter-btn" data-cat="Aktivierung">Aktivierung</button>
+  <button class="filter-btn" data-cat="Entspannung">Entspannung</button>
+  <button class="filter-btn" data-cat="Fokus">Fokus</button>
+  <button class="filter-btn" data-cat="Heilung">Heilung</button>
+  <button class="filter-btn" data-cat="Schlaf">Schlaf</button>
+</div>
+
+<div class="list" id="list"></div>
+
+<footer>
+  Atemtechniken sind kein Ersatz für medizinische Behandlung.<br>
+  Bei Schwangerschaft, Herz- oder Lungenerkrankungen vorher ärztliche Rücksprache.
+</footer>
+
+<script>
+const data = [
+  {
+    name: "Box Breathing",
+    sub: "4-4-4-4 · Quadratatmung",
+    cat: "Fokus",
+    situation: "Vor Prüfungen, in stressigen Meetings, bei Panikattacken, zur mentalen Vorbereitung. Wird von Navy SEALs und Leistungssportlern eingesetzt.",
+    wirkung: "Aktiviert den Parasympathikus, senkt Cortisol, stabilisiert die Herzratenvariabilität. Bringt das autonome Nervensystem in Balance – weder übererregt noch schläfrig.",
+    ablauf: "Einatmen 4 Sek. → Halten 4 Sek. → Ausatmen 4 Sek. → Halten 4 Sek. Mindestens 4 Runden.",
+    hinweis: "Eine der am besten erforschten Techniken. Einfach zu erlernen, sofort wirksam.",
+    guide: { phases: ["Einatmen", "Halten", "Ausatmen", "Halten"], times: [4,4,4,4] }
+  },
+  {
+    name: "4-7-8 Atmung",
+    sub: "Entspannungsatmung nach Dr. Weil",
+    cat: "Entspannung",
+    situation: "Beim Einschlafen, nach einem Streit, bei Angstzuständen, wenn Gedanken nicht zur Ruhe kommen.",
+    wirkung: "Das lange Ausatmen aktiviert stark den Parasympathikus. Der CO₂-Anstieg beim Halten beruhigt das Nervensystem. Wirkt wie ein natürliches Beruhigungsmittel.",
+    ablauf: "Einatmen 4 Sek. → Halten 7 Sek. → Ausatmen 8 Sek. (durch den Mund, mit Zischen). 4 Zyklen, nicht öfter als 2× täglich am Anfang.",
+    hinweis: "Nicht geeignet bei niedrigem Blutdruck. Zu Beginn kann leichter Schwindel auftreten.",
+    guide: { phases: ["Einatmen", "Halten", "Ausatmen"], times: [4,7,8] }
+  },
+  {
+    name: "Wim-Hof-Methode",
+    sub: "Hyperventilation + Retention",
+    cat: "Aktivierung",
+    situation: "Morgens zur Aktivierung, vor sportlicher Leistung, bei chronischer Müdigkeit, zur Immunstärkung. Nicht vor dem Autofahren oder Schwimmen.",
+    wirkung: "30–40 tiefe Atemzüge erhöhen den O₂-Spiegel und senken CO₂. Die anschließende Atemretention aktiviert das Stresssystem kontrolliert. Studien zeigen: stärkere Immunantwort, erhöhte Adrenalinausschüttung, Schmerztoleranz steigt.",
+    ablauf: "30–40 kraftvolle tiefe Atemzüge → Ausatmen und Halten (so lange möglich, ca. 1–2 Min.) → tiefer Einatemzug + 15 Sek. Halten. 3–4 Runden.",
+    hinweis: "Nur liegend oder sitzend. Kein Wasser in der Nähe. Kann zu Ohnmacht führen.",
+    guide: { phases: ["Tief einatmen", "Ausatmen", "Atem anhalten"], times: [2,1,30] }
+  },
+  {
+    name: "Kohärente Atmung",
+    sub: "5-5 · Resonanzatmung",
+    cat: "Entspannung",
+    situation: "Bei chronischem Stress, Bluthochdruck, Depressionen, zur täglichen Praxis. Ideal für 10–20 Minuten am Tag.",
+    wirkung: "6 Atemzüge pro Minute synchronisiert Herzrhythmus, Blutdruck und Gehirnwellen. Maximiert die Herzratenvariabilität (HRV) – ein Schlüsselindikator für Stressresilienz und Gesundheit.",
+    ablauf: "Einatmen 5 Sek. → Ausatmen 5 Sek. Kontinuierlich für mindestens 10 Minuten. Kein Halten.",
+    hinweis: "Eine der wirkungsvollsten Langzeittechniken – regelmäßige Praxis nötig für dauerhafte Effekte.",
+    guide: { phases: ["Einatmen", "Ausatmen"], times: [5,5] }
+  },
+  {
+    name: "Holotropes Atmen",
+    sub: "Erweiterte Bewusstseinszustände",
+    cat: "Heilung",
+    situation: "Zur tiefen emotionalen Heilung, Traumaverarbeitung, spirituellen Erfahrungen. Nur in begleitetem Setting durchführen.",
+    wirkung: "Anhaltende beschleunigte Atmung führt zu Hyperventilationseffekten und veränderten Bewusstseinszuständen. Kann intensive Emotionen, körperliche Empfindungen und tiefgreifende Erkenntnisse auslösen. Entwickelt von Stanislav Grof.",
+    ablauf: "Schnelle, tiefe, verbundene Atmung über 60–120 Minuten begleitet von evokanter Musik. Immer mit geschultem Facilitator.",
+    hinweis: "Nicht geeignet bei Epilepsie, Schizophrenie, Herzkrankheiten, Schwangerschaft. Professionelle Begleitung zwingend.",
+    guide: null
+  },
+  {
+    name: "Buteyko-Methode",
+    sub: "Nasenzwerchfellatmung · CO₂-Training",
+    cat: "Heilung",
+    situation: "Bei Asthma, chronischer Hyperventilation, Schlafapnoe, Angststörungen. Langzeitpraxis über Wochen.",
+    wirkung: "Reduziert chronisch überhöhtes Atemvolumen. Erhöhter CO₂-Spiegel weitet Bronchien und Blutgefäße. Studien zeigen: weniger Asthmaanfälle, verbesserte Schlafqualität, ruhigeres Nervensystem.",
+    ablauf: "Ausschließlich durch die Nase atmen. Kleine Atempausen nach dem Ausatmen einbauen. Ziel: angenehmen leichten Lufthunger aufrechterhalten. 3× täglich 20 Minuten.",
+    hinweis: "Sollte idealerweise mit einem zertifizierten Buteyko-Therapeuten begonnen werden.",
+    guide: { phases: ["Einatmen (Nase)", "Ausatmen (Nase)", "Pause"], times: [3,3,3] }
+  },
+  {
+    name: "Nadi Shodhana",
+    sub: "Wechselatmung · Pranayama",
+    cat: "Fokus",
+    situation: "Zur Vorbereitung auf Meditation, bei mentaler Unruhe, bei Entscheidungsfindung. Morgens oder abends, 5–10 Minuten.",
+    wirkung: "Wechselseitige Stimulation der Gehirnhälften über das Nervensystem. Wissenschaftlich belegt: verbesserte kognitive Funktion, reduzierter Blutdruck, Stimmungsverbesserung. Harmonisiert Ida und Pingala Nadi (links/rechts-Energie im Yogasystem).",
+    ablauf: "Rechten Daumen auf rechtes Nasenloch. Durch links einatmen 4 Sek. → rechtes Nasenloch öffnen, links schließen, ausatmen 4 Sek. → durch rechts einatmen → links ausatmen. Wiederholen.",
+    hinweis: "Keine Mahlzeiten 2 Stunden vorher. Aufrecht sitzen.",
+    guide: { phases: ["Links einatmen", "Halten", "Rechts ausatmen", "Rechts einatmen", "Halten", "Links ausatmen"], times: [4,2,4,4,2,4] }
+  },
+  {
+    name: "Kapalabhati",
+    sub: "Feueratem · Reinigungsatmung",
+    cat: "Aktivierung",
+    situation: "Morgens zur Energieaktivierung, bei Trägheit und Antriebslosigkeit, zur Verdauungsanregung. Nicht abends.",
+    wirkung: "Kurze kraftvolle Ausatemstöße massieren Bauchorgane, regen Verdauung an, erhöhen Körpertemperatur und Energie. Reinigt die Atemwege. Aktiviert Sympathikus. Steigert Sauerstoffaufnahme kurzfristig.",
+    ablauf: "Sitzend: Kurze, kraftvolle Ausatemstöße durch die Nase (ca. 1 pro Sekunde), Einatmen passiv. 30–50 Stöße pro Runde, dann normale Atmung. 3 Runden.",
+    hinweis: "Nicht bei Bluthochdruck, Schwangerschaft, Rückenproblemen oder nach Operationen.",
+    guide: { phases: ["Ausatmen (Stoß)", "Einatmen (passiv)"], times: [1,1] }
+  },
+  {
+    name: "Physiologischer Seufzer",
+    sub: "Doppelter Einatemzug",
+    cat: "Entspannung",
+    situation: "Sofortige Stressreduktion in Sekunden – bei akutem Stress, Nervosität, vor dem Sprechen in der Öffentlichkeit, zwischen Meetings.",
+    wirkung: "Ein doppelter Einatemzug öffnet kollabierte Lungenbläschen (Alveolen) maximal. Der lange Ausatemzug aktiviert stärker den Parasympathikus als jede andere Technik in dieser kurzen Zeit. Stanford-Studie 2023 bestätigte überlegene Sofortwirkung gegenüber Meditation.",
+    ablauf: "Doppelter Einatemzug durch die Nase (kurz, dann nochmal kurz drauf) → langer, langsamer Ausatemzug durch den Mund. 1–3 Wiederholungen.",
+    hinweis: "Einfachste und schnellst wirkende Technik. Immer und überall anwendbar.",
+    guide: { phases: ["1. Einatmen", "2. Einatmen (drauf)", "Lang ausatmen"], times: [2,1,6] }
+  },
+  {
+    name: "4-6 Entspannungsatmung",
+    sub: "Verlängertes Ausatmen",
+    cat: "Schlaf",
+    situation: "Beim Einschlafen, nach dem Aufwachen in der Nacht, bei innerer Unruhe vor dem Schlafen.",
+    wirkung: "Verlängertes Ausatmen aktiviert den Vagusnerv und den Parasympathikus stärker als das Einatmen. Senkt Herzrate und Blutdruck, beruhigt das Gedankenkarussell.",
+    ablauf: "Einatmen 4 Sek. (durch die Nase) → Ausatmen 6 Sek. (durch den Mund oder Nase). Kein Halten. Kontinuierlich bis zum Einschlafen.",
+    hinweis: "Verhältnis ist das Wichtigste: Ausatmen immer länger als Einatmen.",
+    guide: { phases: ["Einatmen", "Ausatmen"], times: [4,6] }
+  },
+  {
+    name: "Tummo-Atmung",
+    sub: "Innere Feuermeditation · Tibetisch",
+    cat: "Aktivierung",
+    situation: "Zur Körpererwärmung, Energiearbeit, spiritueller Praxis. Kombiniert mit Kältetherapie (Wim-Hof basiert teilweise darauf).",
+    wirkung: "Tibetische Mönche erhöhten in Studien (Harvard, 1981) ihre Körpertemperatur um mehrere Grad. Atemretention + mentale Visualisierung aktivieren das sympathische Nervensystem und die Thermoregulation.",
+    ablauf: "Kraftvolle Atemzüge → Retention mit Bandhas (Muskelkontraktionen im Bauch und Beckenboden) → Visualisierung von Hitze im Bauchraum. Nur nach Einführung durch Lehrer.",
+    hinweis: "Traditionell nur unter Anleitung eines erfahrenen Lehrers zu erlernen.",
+    guide: null
+  },
+  {
+    name: "Ujjayi-Atmung",
+    sub: "Ozeanatmung · Yoga-Pranayama",
+    cat: "Fokus",
+    situation: "Während Yoga-Praxis, bei langen Läufen, zur Konzentrationsvertiefung, in der Meditation.",
+    wirkung: "Die Verengung des Rachens erzeugt ein ozeanartiges Geräusch und erhöht leicht den Atemwiderstand. Fördert Präsenz, Wärme im Körper und mentale Fokussierung. Verlängert die Atemzüge natürlich.",
+    ablauf: "Durch die Nase atmen, dabei Rachen leicht verengen (wie beim Beschlagen einer Brille, aber mit geschlossenem Mund). Gleichmäßig ein- und ausatmen, 4–6 Sek. je Richtung.",
+    hinweis: "Kein Kraft- oder Pressgefühl – sanfte Verengung reicht.",
+    guide: { phases: ["Einatmen (Ujjayi)", "Ausatmen (Ujjayi)"], times: [5,5] }
+  },
+];
+
+const list = document.getElementById('list');
+let activeFilter = 'alle';
+let activeGuide = null;
+
+// ── Breath Guide Engine ─────────────────────────────────────────
+function stopGuide() {
+  if (activeGuide) {
+    clearTimeout(activeGuide.timer);
+    clearInterval(activeGuide.interval);
+    activeGuide = null;
+  }
+}
+
+function startGuide(guideEl, guideData, catColor) {
+  stopGuide();
+  const phaseEl = guideEl.querySelector('.guide-phase');
+  const instrEl = guideEl.querySelector('.guide-instruction');
+  const barEl   = guideEl.querySelector('.guide-progress-bar');
+  const circleEl= guideEl.querySelector('.breath-circle');
+  const roundEl = guideEl.querySelector('.guide-rounds');
+  const { phases, times } = guideData;
+
+  barEl.style.background = catColor;
+
+  let phaseIdx = 0;
+  let round = 1;
+  const totalRounds = 4;
+
+  function runPhase() {
+    const phase = phases[phaseIdx];
+    const duration = times[phaseIdx] * 1000;
+    phaseEl.textContent = phase;
+
+    const isIn = phase.toLowerCase().includes('einat') || phase.toLowerCase().includes('inhale');
+    const isHold = phase.toLowerCase().includes('halt') || phase.toLowerCase().includes('pause');
+    const isOut = !isIn && !isHold;
+
+    instrEl.textContent = isIn ? 'Durch die Nase einatmen' : isHold ? 'Luft anhalten' : 'Langsam ausatmen';
+    const scale = isIn ? 1.4 : isHold ? 1.4 : 1.0;
+    circleEl.style.transform = `scale(${scale})`;
+    circleEl.style.borderColor = isHold ? catColor : 'rgba(255,255,255,0.14)';
+    circleEl.style.transition = `transform ${duration/1000}s ease, border-color 0.3s`;
+
+    barEl.style.transition = 'none';
+    barEl.style.width = '0%';
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        barEl.style.transition = `width ${duration/1000}s linear`;
+        barEl.style.width = '100%';
+      });
+    });
+
+    activeGuide = activeGuide || {};
+    activeGuide.timer = setTimeout(() => {
+      phaseIdx++;
+      if (phaseIdx >= phases.length) {
+        phaseIdx = 0;
+        round++;
+        if (round > totalRounds) {
+          phaseEl.textContent = 'Fertig';
+          instrEl.textContent = `${totalRounds} Runden abgeschlossen`;
+          circleEl.style.transform = 'scale(1)';
+          barEl.style.width = '100%';
+          roundEl.textContent = '';
+          stopGuide();
+          return;
+        }
+        roundEl.textContent = `Runde ${round} von ${totalRounds}`;
+      }
+      runPhase();
+    }, duration);
+  }
+
+  roundEl.textContent = `Runde ${round} von ${totalRounds}`;
+  runPhase();
+}
+
+// ── Cat color map ───────────────────────────────────────────────
+const catColors = {
+  Aktivierung: '#5dcaa5',
+  Entspannung: '#7f77dd',
+  Fokus:       '#ef9f27',
+  Heilung:     '#d85a30',
+  Schlaf:      '#378add',
+};
+
+function playIcon() {
+  return `<svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+    <path d="M3 2.5L11 6.5L3 10.5V2.5Z" fill="currentColor"/>
+  </svg>`;
+}
+
+function stopIcon() {
+  return `<svg width="11" height="11" viewBox="0 0 11 11" fill="none">
+    <rect x="1.5" y="1.5" width="8" height="8" rx="1.5" fill="currentColor"/>
+  </svg>`;
+}
+
+// ── Render ──────────────────────────────────────────────────────
+function render() {
+  list.innerHTML = '';
+  data.forEach((d, i) => {
+    if (activeFilter !== 'alle' && d.cat !== activeFilter) return;
+    const div = document.createElement('div');
+    div.className = 'item';
+    div.dataset.cat = d.cat;
+    div.style.animationDelay = (i * 0.04) + 's';
+
+    const hasGuide = !!d.guide;
+
+    div.innerHTML = `
+      <div class="item-header" role="button" aria-expanded="false" tabindex="0">
+        <div>
+          <div class="item-name">${d.name}</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:2px">${d.sub}</div>
+        </div>
+        <span class="item-tag tag-${d.cat}">${d.cat}</span>
+        ${hasGuide ? `<button class="guide-btn" aria-label="Atemübung starten" title="Geführte Übung">${playIcon()}</button>` : '<span style="width:32px"></span>'}
+        <span class="item-chevron" aria-hidden="true">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M2 4.5L7 9.5L12 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </div>
+      <div class="item-body">
+        <div class="item-body-inner">
+          <div class="body-section">
+            <div class="body-label">Wann anwenden?</div>
+            <div class="body-text">${d.situation}</div>
+          </div>
+          <div class="body-section">
+            <div class="body-label">Was passiert im Körper?</div>
+            <div class="body-text">${d.wirkung}</div>
+          </div>
+          <div class="body-section">
+            <div class="body-label">Ablauf</div>
+            <div class="body-text">${d.ablauf}</div>
+          </div>
+          <div class="body-section">
+            <div class="body-label">Hinweis</div>
+            <div class="body-text" style="color:var(--muted);font-style:italic">${d.hinweis}</div>
+          </div>
+        </div>
+        ${hasGuide ? `
+        <div class="guide-overlay" id="guide-${i}">
+          <div class="guide-title">Geführte Übung · ${d.name}</div>
+          <div class="breath-viz">
+            <div class="breath-circle" style="transition: transform 1s ease">Atme</div>
+          </div>
+          <div class="guide-phase">Bereit?</div>
+          <div class="guide-instruction">Drücke Start um zu beginnen</div>
+          <div class="guide-progress"><div class="guide-progress-bar"></div></div>
+          <div class="guide-controls">
+            <button class="guide-start-btn">Start</button>
+            <button class="guide-stop-btn">Stop</button>
+          </div>
+          <div class="guide-rounds"></div>
+        </div>` : ''}
+      </div>`;
+
+    const header = div.querySelector('.item-header');
+    const guideBtn = div.querySelector('.guide-btn');
+    const guideOverlay = div.querySelector('.guide-overlay');
+    const startBtn = div.querySelector('.guide-start-btn');
+    const stopBtn  = div.querySelector('.guide-stop-btn');
+
+    header.addEventListener('click', (e) => {
+      if (e.target.closest('.guide-btn')) return;
+      const open = div.classList.toggle('open');
+      header.setAttribute('aria-expanded', open);
+      if (!open && guideOverlay) {
+        guideOverlay.classList.remove('open');
+        if (guideBtn) { guideBtn.classList.remove('active'); guideBtn.innerHTML = playIcon(); }
+        stopGuide();
+      }
+    });
+
+    header.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); header.click(); }
+    });
+
+    if (guideBtn && guideOverlay) {
+      guideBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = guideOverlay.classList.toggle('open');
+        guideBtn.classList.toggle('active', isOpen);
+        guideBtn.innerHTML = isOpen ? stopIcon() : playIcon();
+
+        // ensure parent is open
+        if (isOpen && !div.classList.contains('open')) {
+          div.classList.add('open');
+          header.setAttribute('aria-expanded', 'true');
+        }
+
+        if (!isOpen) { stopGuide(); }
+      });
+
+      startBtn.addEventListener('click', () => {
+        startGuide(guideOverlay, d.guide, catColors[d.cat]);
+      });
+
+      stopBtn.addEventListener('click', () => {
+        stopGuide();
+        const phaseEl = guideOverlay.querySelector('.guide-phase');
+        const instrEl = guideOverlay.querySelector('.guide-instruction');
+        phaseEl.textContent = 'Bereit?';
+        instrEl.textContent = 'Drücke Start um zu beginnen';
+        guideOverlay.querySelector('.breath-circle').style.transform = 'scale(1)';
+        guideOverlay.querySelector('.guide-progress-bar').style.width = '0%';
+        guideOverlay.querySelector('.guide-rounds').textContent = '';
+      });
+    }
+
+    list.appendChild(div);
+  });
+}
+
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    stopGuide();
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    activeFilter = btn.dataset.cat;
+    render();
+  });
+});
+
+render();
+</script>
+</body>
+</html>
