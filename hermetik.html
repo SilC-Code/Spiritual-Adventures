@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Die 7 Hermetischen Gesetze – Spiritual Adventures</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0c0d0f;
+    --surface: #14151a;
+    --surface2: #1c1d24;
+    --border: rgba(255,255,255,0.07);
+    --border-hover: rgba(255,255,255,0.14);
+    --text: #e8e6e0;
+    --muted: #7a7870;
+    --accent: #c8a96e;
+    --accent-dim: rgba(200,169,110,0.10);
+    --accent-glow: rgba(200,169,110,0.14);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* === NAV === */
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 32px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 15px;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+  }
+
+  .nav-logo span { color: var(--accent); }
+
+  .nav-back {
+    font-size: 12px;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.2s;
+  }
+
+  .nav-back:hover { color: var(--text); }
+  .nav-back svg { display: block; }
+
+  /* === HEADER === */
+  header {
+    position: relative;
+    padding: 72px 0 48px;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .header-glow {
+    position: absolute;
+    top: -80px; left: 50%;
+    transform: translateX(-50%);
+    width: 700px; height: 350px;
+    background: radial-gradient(ellipse, rgba(200,169,110,0.09) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .header-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 16px;
+    position: relative;
+  }
+
+  header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    color: var(--text);
+    position: relative;
+    line-height: 1.1;
+  }
+
+  header h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  header p {
+    margin-top: 16px;
+    color: var(--muted);
+    font-size: 14px;
+    font-weight: 300;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+  }
+
+  .header-line {
+    width: 40px; height: 1px;
+    background: var(--accent);
+    margin: 20px auto 0;
+    opacity: 0.4;
+    position: relative;
+  }
+
+  /* === TABS === */
+  .tabs-wrapper {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 20px 80px;
+  }
+
+  .tab-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 32px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0;
+  }
+
+  .tab-btn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 8px 16px;
+    border: none;
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.2s;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    position: relative;
+  }
+
+  .tab-btn:hover { color: var(--text); }
+
+  .tab-btn.active {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+
+  /* === TAB CONTENT === */
+  .tab-panel {
+    display: none;
+    animation: fadeUp 0.35s ease both;
+  }
+
+  .tab-panel.active { display: block; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* === GESETZ LAYOUT === */
+  .gesetz-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  @media (max-width: 640px) {
+    .gesetz-layout { grid-template-columns: 1fr; }
+  }
+
+  .gesetz-hero {
+    grid-column: 1 / -1;
+    border: 1px solid rgba(200,169,110,0.2);
+    border-radius: 16px;
+    background: var(--surface);
+    padding: 36px 32px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .gesetz-hero-glow {
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 260px; height: 260px;
+    background: radial-gradient(circle, var(--accent-glow), transparent 70%);
+    pointer-events: none;
+  }
+
+  .gesetz-number {
+    font-family: 'DM Serif Display', serif;
+    font-size: 3.5rem;
+    color: var(--accent);
+    opacity: 0.18;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .gesetz-axiom {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(1.3rem, 3vw, 2rem);
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: 12px;
+    font-style: italic;
+    line-height: 1.3;
+  }
+
+  .gesetz-axiom span { color: var(--accent); font-style: normal; }
+
+  .gesetz-tagline {
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 300;
+    max-width: 560px;
+  }
+
+  .info-card {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--surface);
+    padding: 24px;
+  }
+
+  .info-card-label {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+
+  .info-card-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem;
+    color: var(--text);
+    margin-bottom: 10px;
+  }
+
+  .info-card-text {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .full-card {
+    grid-column: 1 / -1;
+  }
+
+  .divider-text-small {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: center;
+    margin: 28px 0 20px;
+    opacity: 0.6;
+  }
+
+  .verbindung-grid {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .verbindung-pill {
+    font-size: 12px;
+    padding: 6px 14px;
+    border-radius: 100px;
+    border: 1px solid rgba(200,169,110,0.2);
+    background: var(--accent-dim);
+    color: var(--accent);
+    letter-spacing: 0.04em;
+  }
+
+  /* === OVERVIEW === */
+  .overview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 10px;
+  }
+
+  .overview-item {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--surface);
+    padding: 20px 22px;
+    cursor: pointer;
+    transition: border-color 0.2s, transform 0.2s;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .overview-item:hover {
+    border-color: rgba(200,169,110,0.3);
+    transform: translateY(-2px);
+  }
+
+  .overview-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.6rem;
+    color: var(--accent);
+    opacity: 0.5;
+    line-height: 1;
+    flex-shrink: 0;
+    min-width: 28px;
+  }
+
+  .overview-content {}
+
+  .overview-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1rem;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .overview-sub {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .overview-arrow {
+    margin-left: auto;
+    color: var(--muted);
+    opacity: 0.4;
+    align-self: center;
+    flex-shrink: 0;
+  }
+
+  /* === QUOTE === */
+  .kybalion-quote {
+    max-width: 560px;
+    margin: 0 auto 40px;
+    text-align: center;
+    padding: 0 20px;
+  }
+
+  .kybalion-quote blockquote {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    font-style: italic;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .kybalion-quote cite {
+    display: block;
+    margin-top: 12px;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    opacity: 0.6;
+    font-style: normal;
+  }
+
+  /* === FOOTER === */
+  footer {
+    text-align: center;
+    padding: 32px 24px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 12px;
+    letter-spacing: 0.04em;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Spiritual <span>Adventures</span></a>
+  <a href="wissensdatenbank.html" class="nav-back">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 2L3 7L9 12" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Wissensdatenbank
+  </a>
+</nav>
+
+<header>
+  <div class="header-glow"></div>
+  <p class="header-eyebrow">Uraltes Wissen · Das Kybalion</p>
+  <h1>Die 7 <em>Hermetischen</em><br>Gesetze</h1>
+  <p style="margin-top:16px">Universelle Prinzipien die hinter allem stehen – von der Natur des Geistes bis zum Rhythmus aller Dinge.</p>
+  <div class="header-line"></div>
+</header>
+
+<div class="tabs-wrapper">
+
+  <!-- TAB NAV -->
+  <div class="tab-nav" id="tabNav">
+    <button class="tab-btn active" data-tab="uebersicht">Übersicht</button>
+    <button class="tab-btn" data-tab="geist">I · Geist</button>
+    <button class="tab-btn" data-tab="entsprechung">II · Entsprechung</button>
+    <button class="tab-btn" data-tab="schwingung">III · Schwingung</button>
+    <button class="tab-btn" data-tab="polaritaet">IV · Polarität</button>
+    <button class="tab-btn" data-tab="rhythmus">V · Rhythmus</button>
+    <button class="tab-btn" data-tab="ursache">VI · Ursache</button>
+    <button class="tab-btn" data-tab="geschlecht">VII · Geschlecht</button>
+  </div>
+
+  <!-- ÜBERSICHT -->
+  <div class="tab-panel active" id="tab-uebersicht">
+    <div class="kybalion-quote">
+      <blockquote>„Die Lippen der Weisheit sind verschlossen, außer für die Ohren des Verstehens."</blockquote>
+      <cite>Das Kybalion · Hermes Trismegistos</cite>
+    </div>
+    <div class="overview-grid">
+      <div class="overview-item" onclick="switchTab('geist')">
+        <div class="overview-num">I</div>
+        <div class="overview-content">
+          <div class="overview-name">Das Gesetz des Geistes</div>
+          <div class="overview-sub">Alles ist Geist – das Universum ist mental</div>
+        </div>
+        <svg class="overview-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="overview-item" onclick="switchTab('entsprechung')">
+        <div class="overview-num">II</div>
+        <div class="overview-content">
+          <div class="overview-name">Das Gesetz der Entsprechung</div>
+          <div class="overview-sub">Wie oben, so unten – wie innen, so außen</div>
+        </div>
+        <svg class="overview-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="overview-item" onclick="switchTab('schwingung')">
+        <div class="overview-num">III</div>
+        <div class="overview-content">
+          <div class="overview-name">Das Gesetz der Schwingung</div>
+          <div class="overview-sub">Alles schwingt – nichts ruht</div>
+        </div>
+        <svg class="overview-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="overview-item" onclick="switchTab('polaritaet')">
+        <div class="overview-num">IV</div>
+        <div class="overview-content">
+          <div class="overview-name">Das Gesetz der Polarität</div>
+          <div class="overview-sub">Alles hat zwei Pole – Gegensätze sind identisch</div>
+        </div>
+        <svg class="overview-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="overview-item" onclick="switchTab('rhythmus')">
+        <div class="overview-num">V</div>
+        <div class="overview-content">
+          <div class="overview-name">Das Gesetz des Rhythmus</div>
+          <div class="overview-sub">Alles fließt – Ebbe und Flut in allem</div>
+        </div>
+        <svg class="overview-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="overview-item" onclick="switchTab('ursache')">
+        <div class="overview-num">VI</div>
+        <div class="overview-content">
+          <div class="overview-name">Das Gesetz von Ursache & Wirkung</div>
+          <div class="overview-sub">Zufall existiert nicht – alles hat eine Ursache</div>
+        </div>
+        <svg class="overview-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="overview-item" onclick="switchTab('geschlecht')">
+        <div class="overview-num">VII</div>
+        <div class="overview-content">
+          <div class="overview-name">Das Gesetz des Geschlechts</div>
+          <div class="overview-sub">Maskulin und Feminin in allem – Schöpfung braucht beide</div>
+        </div>
+        <svg class="overview-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- I GEIST -->
+  <div class="tab-panel" id="tab-geist">
+    <div class="gesetz-layout">
+      <div class="gesetz-hero">
+        <div class="gesetz-hero-glow"></div>
+        <div class="gesetz-number">I</div>
+        <div class="gesetz-axiom">„Das <span>All</span> ist Geist –<br>das Universum ist mental."</div>
+        <div class="gesetz-tagline">Die fundamentalste aller hermetischen Wahrheiten: Was wir als materielle Welt wahrnehmen, ist in Wirklichkeit ein mentales Konstrukt im Geist des Absoluten.</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-label">Was es bedeutet</div>
+        <div class="info-card-title">Alles ist Bewusstsein</div>
+        <div class="info-card-text">Das Universum existiert im Geist des Absoluten – nicht als physische Materie, sondern als mentale Projektion. Materie, Energie, Zeit und Raum sind Ausprägungen dieses einen Geistes. Was wir mit den Sinnen wahrnehmen, ist die Oberfläche einer tieferen mentalen Realität.</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-label">Im Alltag</div>
+        <div class="info-card-title">Gedanken formen Realität</div>
+        <div class="info-card-text">Da alles mental ist, beeinflusst die Qualität deiner Gedanken direkt deine erlebte Realität. Angst zieht angstvolle Situationen an – nicht durch Magie, sondern weil du selektiv wahrnimmst, was deinen dominanten Gedankenmustern entspricht. Bewusstseinswandel ist daher der Ursprung äußerer Veränderung.</div>
+      </div>
+      <div class="info-card full-card">
+        <div class="info-card-label">Tiefergehend</div>
+        <div class="info-card-title">Das Absolute vs. das individuelle Bewusstsein</div>
+        <div class="info-card-text">Hermetiker unterscheiden zwischen dem „Großen Geist" (dem Absoluten, dem All) und dem individuellen Geist des Menschen. Der individuelle Geist ist ein Teil des Absoluten – wie ein Tropfen im Ozean. Das bedeutet: Du bist nicht nur ein Produkt des Universums, du bist ein Ausdruck davon. Dein Bewusstsein hat schöpferische Kraft, weil es Teil des schöpferischen Ganzen ist.</div>
+      </div>
+      <div class="divider-text-small">Verbindung zu anderen Modulen</div>
+      <div class="verbindung-grid">
+        <span class="verbindung-pill">→ Hawkins-Skala: Bewusstseinsebenen</span>
+        <span class="verbindung-pill">→ Meditation: Stille des Geistes</span>
+        <span class="verbindung-pill">→ Chakren: Kronenchakra</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- II ENTSPRECHUNG -->
+  <div class="tab-panel" id="tab-entsprechung">
+    <div class="gesetz-layout">
+      <div class="gesetz-hero">
+        <div class="gesetz-hero-glow"></div>
+        <div class="gesetz-number">II</div>
+        <div class="gesetz-axiom">„Wie <span>oben</span>, so unten –<br>wie <span>innen</span>, so außen."</div>
+        <div class="gesetz-tagline">Was in einer Ebene der Existenz gilt, gilt auf allen anderen Ebenen. Makrokosmos und Mikrokosmos spiegeln sich gegenseitig vollständig.</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-label">Was es bedeutet</div>
+        <div class="info-card-title">Spiegelgesetze der Realität</div>
+        <div class="info-card-text">Die physische, mentale und spirituelle Welt funktionieren nach denselben Gesetzen – in unterschiedlichen Maßstäben. Die Bewegung von Planeten entspricht der Bewegung von Elektronen. Der Rhythmus des Atems entspricht dem Rhythmus des Ozeans. Was im Kleinen wahr ist, ist im Großen wahr.</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-label">Im Alltag</div>
+        <div class="info-card-title">Dein Inneres zeigt sich außen</div>
+        <div class="info-card-text">Was du in deinem Leben außen wahrnimmst – in Beziehungen, Arbeit, Gesundheit – ist ein Spiegel deines inneren Zustands. Nicht als Strafe, sondern als Feedback. Wenn du dieselben Muster immer wieder erlebst, lohnt sich die Frage: Was in mir erzeugt das?</div>
+      </div>
+      <div class="info-card full-card">
+        <div class="info-card-label">Tiefergehend</div>
+        <div class="info-card-title">Drei Ebenen der Entsprechung</div>
+        <div class="info-card-text">Hermetiker arbeiten mit drei Hauptebenen: Der physischen Welt (Körper, Materie, Handlungen), der mentalen Welt (Gedanken, Überzeugungen, Vorstellungen) und der spirituellen Welt (Absichten, Bewusstsein, Seele). Das Gesetz der Entsprechung sagt: Verändere die tiefste Ebene, und die oberflächlicheren ändern sich automatisch mit. Wer seine Überzeugungen transformiert, transformiert sein Leben.</div>
+      </div>
+      <div class="divider-text-small">Verbindung zu anderen Modulen</div>
+      <div class="verbindung-grid">
+        <span class="verbindung-pill">→ Chakren: Energieebenen</span>
+        <span class="verbindung-pill">→ Hawkins-Skala: Innen & Außen</span>
+        <span class="verbindung-pill">→ Heilfrequenzen: Resonanz</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- III SCHWINGUNG -->
+  <div class="tab-panel" id="tab-schwingung">
+    <div class="gesetz-layout">
+      <div class="gesetz-hero">
+        <div class="gesetz-hero-glow"></div>
+        <div class="gesetz-number">III</div>
+        <div class="gesetz-axiom">„Alles <span>schwingt</span> –<br>nichts ruht."</div>
+        <div class="gesetz-tagline">Jede Form von Materie, Energie und Bewusstsein schwingt mit einer bestimmten Frequenz. Unterschiede zwischen Dingen sind Unterschiede in der Schwingungsrate.</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-label">Was es bedeutet</div>
+        <div class="info-card-title">Frequenz ist alles</div>
+        <div class="info-card-text">Stein schwingt langsamer als Wasser, Wasser langsamer als Luft, Luft langsamer als Licht – und Gedanken schwingen schneller als Licht. Was wir als feste Materie erleben, ist in Wahrheit extrem langsam schwingender Geist. Bewusstseinszustände wie Freude oder Trauer sind messbar unterschiedliche Schwingungsfrequenzen.</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-label">Im Alltag</div>
+        <div class="info-card-title">Deine Frequenz erhöhen</div>
+        <div class="info-card-text">Emotionen wie Dankbarkeit, Liebe und Freude erzeugen höhere Schwingungen. Angst, Scham und Wut sind niedrigere. Das ist keine Wertung – aber wer bewusst an seiner Frequenz arbeitet, verändert auch, was er anzieht und wie sein Körper reagiert. Musik, Atem, Meditation und Natur sind direkte Werkzeuge dafür.</div>
+      </div>
+      <div class="info-card full-card">
+        <div class="info-card-label">Tiefergehend</div>
+        <div class="info-card-title">Transmutation der Schwingung</div>
+        <div class="info-card-text">Hermetiker sprechen von der Kunst, die eigene Schwingung bewusst zu verändern – sie nennen es mentale Transmutation. Das ist keine esoterische Metapher, sondern eine praktische Übung: Durch gezielte Gedanken, Visualisierungen und Körperarbeit kann man den eigenen Schwingungszustand tatsächlich verschieben. Die Verbindung zur modernen Wissenschaft ist die Neuroplastizität – das Gehirn verändert sich durch bewusste mentale Praxis.</div>
+      </div>
+      <div class="divider-text-small">Verbindung zu anderen Modulen</div>
+      <div class="verbindung-grid">
+        <span class="verbindung-pill">→ Heilfrequenzen: 432 Hz, 528 Hz</span>
+        <span class="verbindung-pill">→ Hawkins-Skala: Schwingungsebenen</span>
+        <span class="verbindung-pill">→ Atemtechniken: Frequenz des Körpers</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- IV POLARITÄT -->
+  <div class="tab-panel" id="tab-polaritaet">
+    <div class="gesetz-layout">
+      <div class="gesetz-hero">
+        <div class="gesetz-hero-glow"></div>
+        <div class="gesetz-number">IV</div>
+        <div class="gesetz-axiom">„Alles hat zwei <span>Pole</span> –<br>Gegensätze sind ihrer Natur nach identisch."</div>
+        <div class="gesetz-tagline">Heiß und kalt sind derselbe Zustand in unterschiedlichem Grad. Liebe und Hass, Licht und Dunkel, Mut und Feigheit – sie liegen auf derselben Skala.</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-label">Was es bedeutet</div>
+        <div class="info-card-title">Gegensätze sind Spektren</div>
+        <div class="info-card-text">Es gibt keinen absoluten Gegensatz – nur Grade. Zwischen warm und kalt gibt es unendlich viele Zwischenstufen. Das Gleiche gilt für mentale Zustände: Angst und Mut liegen auf derselben Achse. Hass ist komprimierte Liebe. Wer das versteht, erkennt, dass jeder Zustand transformierbar ist – ohne ihn zu bekämpfen.</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-label">Im Alltag</div>
+        <div class="info-card-title">Polarisierung auflösen</div>
+        <div class="info-card-text">Wenn du etwas in dir stark ablehnst – eine Emotion, eine Eigenschaft, ein Verhalten – ist das ein Zeichen, dass du am anderen Pol desselben Spektrums festhältst. Das Gesetz der Polarität lädt ein: Statt zu bekämpfen, verschiebe dich bewusst auf dem Spektrum. Nicht durch Verdrängung, sondern durch Integration.</div>
+      </div>
+      <div class="info-card full-card">
+        <div class="info-card-label">Tiefergehend</div>
+        <div class="info-card-title">Die Kunst der Polarisierung</div>
+        <div class="info-card-text">Hermetiker nutzen das Gesetz der Polarität aktiv: Indem man sich auf den gewünschten Pol eines Zustands konzentriert – und den Geist dort verankert – kann man den anderen Pol schwächen. Das ist kein positives Denken im oberflächlichen Sinn. Es ist gezielte mentale Arbeit: Wer Mut kultiviert, arbeitet mit derselben Energie wie die Angst – nur in die andere Richtung.</div>
+      </div>
+      <div class="divider-text-small">Verbindung zu anderen Modulen</div>
+      <div class="verbindung-grid">
+        <span class="verbindung-pill">→ Hawkins-Skala: Mut vs. Angst</span>
+        <span class="verbindung-pill">→ Chakren: Balance der Zentren</span>
+        <span class="verbindung-pill">→ Meditation: Innere Mitte</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- V RHYTHMUS -->
+  <div class="tab-panel" id="tab-rhythmus">
+    <div class="gesetz-layout">
+      <div class="gesetz-hero">
+        <div class="gesetz-hero-glow"></div>
+        <div class="gesetz-number">V</div>
+        <div class="gesetz-axiom">„Alles fließt – <span>Ebbe</span> und <span>Flut</span>,<br>in allem und jedem."</div>
+        <div class="gesetz-tagline">Jedes Pendel schwingt in beide Richtungen. Perioden des Aufstiegs folgen Perioden des Rückzugs – in Natur, Gesellschaft und im persönlichen Leben.</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-label">Was es bedeutet</div>
+        <div class="info-card-title">Zyklen sind universell</div>
+        <div class="info-card-text">Die Jahreszeiten, Gezeiten, Mondphasen, Wirtschaftszyklen, Schlaf-Wach-Rhythmen – alles schwingt in wiederkehrenden Mustern. Kein Zustand hält ewig an: Weder ein Tief noch ein Hoch. Das Gesetz des Rhythmus sagt nicht, dass du ohnmächtig bist – sondern dass du den Zyklus kennen und mit ihm arbeiten kannst.</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-label">Im Alltag</div>
+        <div class="info-card-title">Im Tief nicht kämpfen</div>
+        <div class="info-card-text">Wer in einem Tief steckt und es mit aller Kraft bekämpft, verstärkt oft den Gegendruck. Das Gesetz des Rhythmus empfiehlt stattdessen: Erkenne den Zyklus. Nutze die Ruhephase bewusst. Sammle Energie für den nächsten Aufschwung. „Das wird sich ändern" ist kein Trost – es ist eine Naturwahrheit.</div>
+      </div>
+      <div class="info-card full-card">
+        <div class="info-card-label">Tiefergehend</div>
+        <div class="info-card-title">Das Pendel neutralisieren</div>
+        <div class="info-card-text">Hermetiker sprechen von der Fähigkeit, sich dem Pendelausschlag zu entziehen – nicht durch Kontrolle, sondern durch Bewusstsein. Wer erkennt, dass er gerade im Rückschwung ist, identifiziert sich weniger mit dem Tief. Er beobachtet es, ohne davon mitgerissen zu werden. Das ist eine der fortgeschrittensten Anwendungen hermetischen Wissens und berührt direkt meditative und stoische Praxis.</div>
+      </div>
+      <div class="divider-text-small">Verbindung zu anderen Modulen</div>
+      <div class="verbindung-grid">
+        <span class="verbindung-pill">→ Atemtechniken: Atemrhythmus</span>
+        <span class="verbindung-pill">→ Meditation: Beobachterperspektive</span>
+        <span class="verbindung-pill">→ Hawkins-Skala: Akzeptanz</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- VI URSACHE -->
+  <div class="tab-panel" id="tab-ursache">
+    <div class="gesetz-layout">
+      <div class="gesetz-hero">
+        <div class="gesetz-hero-glow"></div>
+        <div class="gesetz-number">VI</div>
+        <div class="gesetz-axiom">„Jede <span>Ursache</span> hat eine Wirkung –<br>Zufall ist nur ein unerkanntes Gesetz."</div>
+        <div class="gesetz-tagline">Nichts geschieht zufällig. Jede Wirkung hat eine Ursache. Jede Ursache wird zur Wirkung. Die Kette ist unendlich – aber nicht unkontrollierbar.</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-label">Was es bedeutet</div>
+        <div class="info-card-title">Kausalität auf allen Ebenen</div>
+        <div class="info-card-text">Was wir als Zufall erleben, ist lediglich eine Ursache, deren Herkunft wir nicht sehen. Das gilt für äußere Ereignisse genauso wie für innere Zustände. Deine heutigen Gedanken sind die Ursachen morgiger Erfahrungen. Deine gestrigen Überzeugungen sind die Ursache heutiger Reaktionen.</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-label">Im Alltag</div>
+        <div class="info-card-title">Vom Reagieren zum Handeln</div>
+        <div class="info-card-text">Die meisten Menschen sind unbewusste Wirkungen von Ursachen, die andere gesetzt haben – Medien, Erziehung, soziale Konditionierung. Wer das Gesetz von Ursache und Wirkung versteht, wird selbst zur Ursache. Er fragt nicht „Was passiert mir?" sondern „Was setze ich in Gang?" Das ist der Kern persönlicher Verantwortung.</div>
+      </div>
+      <div class="info-card full-card">
+        <div class="info-card-label">Tiefergehend</div>
+        <div class="info-card-title">Ebenen der Kausalität</div>
+        <div class="info-card-text">Hermetiker unterscheiden zwischen Menschen, die auf niedrigen Ebenen der Kausalität operieren (als Wirkungen äußerer Ursachen) und solchen, die auf höheren Ebenen agieren (als bewusste Ursachen). Das Ziel ist nicht, alle Ursachen zu kontrollieren – das ist unmöglich. Das Ziel ist, die eigene innere Welt so zu gestalten, dass die ausgesendeten Ursachen mit dem übereinstimmen, was man erschaffen möchte.</div>
+      </div>
+      <div class="divider-text-small">Verbindung zu anderen Modulen</div>
+      <div class="verbindung-grid">
+        <span class="verbindung-pill">→ Hawkins-Skala: Verantwortung</span>
+        <span class="verbindung-pill">→ Chakren: Solarplexus · Willenskraft</span>
+        <span class="verbindung-pill">→ Meditation: Beobachten ohne Reagieren</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- VII GESCHLECHT -->
+  <div class="tab-panel" id="tab-geschlecht">
+    <div class="gesetz-layout">
+      <div class="gesetz-hero">
+        <div class="gesetz-hero-glow"></div>
+        <div class="gesetz-number">VII</div>
+        <div class="gesetz-axiom">„<span>Geschlecht</span> ist in allem –<br>alles hat sein Maskulines und Feminines."</div>
+        <div class="gesetz-tagline">Schöpfung entsteht aus dem Zusammenwirken zweier Prinzipien – nicht als Biologie, sondern als universelle kreative Dynamik in allem was existiert.</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-label">Was es bedeutet</div>
+        <div class="info-card-title">Zwei schöpferische Prinzipien</div>
+        <div class="info-card-text">Das maskuline Prinzip ist aktiv, initiierend, strukturgebend. Das feminine Prinzip ist empfangend, nährend, gebärend. Beide existieren in jedem Menschen, in jeder Idee, in jedem Prozess. Schöpfung – ob ein Kind, ein Kunstwerk, ein Unternehmen oder ein Gedanke – entsteht immer aus dem Zusammenwirken beider.</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-label">Im Alltag</div>
+        <div class="info-card-title">Innere Balance der Prinzipien</div>
+        <div class="info-card-text">Wer nur maskulin agiert – immer treibt, plant, kontrolliert – erschöpft sich und verhindert organisches Wachstum. Wer nur feminin ist – wartet, empfängt, lässt fließen – kommt nie in Handlung. Die Kunst liegt in der bewussten Aktivierung beider Qualitäten zur richtigen Zeit. Im Spirituellen: Ruhe (feminin) und Absicht (maskulin) zusammen erzeugen Manifestation.</div>
+      </div>
+      <div class="info-card full-card">
+        <div class="info-card-label">Tiefergehend</div>
+        <div class="info-card-title">Mentale Schöpfung durch beide Prinzipien</div>
+        <div class="info-card-text">In der hermetischen Praxis wird das maskuline Prinzip dem Willen und der Absicht zugeordnet, das feminine dem Unterbewusstsein und der Intuition. Eine Idee entsteht durch den maskulinen Impuls – das bewusste Wollen. Sie manifestiert sich durch das feminine Prinzip – das Unterbewusstsein, das die Idee nährt und in die Realität trägt. Wer versteht, wie er sein Unterbewusstsein bespielen kann, versteht einen der wichtigsten Schöpfungsmechanismen.</div>
+      </div>
+      <div class="divider-text-small">Verbindung zu anderen Modulen</div>
+      <div class="verbindung-grid">
+        <span class="verbindung-pill">→ Chakren: Sakralchakra · Kreativität</span>
+        <span class="verbindung-pill">→ Meditation: Empfangen im Stillen</span>
+        <span class="verbindung-pill">→ Atemtechniken: Aktivierung & Ruhe</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  Spiritual Adventures · Die 7 Hermetischen Gesetze · Kein Ersatz für persönliche Praxis.
+</footer>
+
+<script>
+  function switchTab(id) {
+    document.querySelectorAll('.tab-btn').forEach(b => {
+      b.classList.toggle('active', b.dataset.tab === id);
+    });
+    document.querySelectorAll('.tab-panel').forEach(p => {
+      p.classList.toggle('active', p.id === 'tab-' + id);
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => switchTab(btn.dataset.tab));
+  });
+</script>
+
+</body>
+</html>
