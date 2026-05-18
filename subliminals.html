@@ -365,9 +365,24 @@
   .acc-body {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.3s ease;
+    transition: max-height 0.4s ease;
   }
-  .acc-item.open .acc-body { max-height: 500px; }
+  .acc-item.open .acc-body {
+    max-height: 600px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(201,168,76,0.3) transparent;
+  }
+  .acc-item.open .acc-body::-webkit-scrollbar {
+    width: 4px;
+  }
+  .acc-item.open .acc-body::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .acc-item.open .acc-body::-webkit-scrollbar-thumb {
+    background: rgba(201,168,76,0.3);
+    border-radius: 2px;
+  }
 
   .acc-content {
     padding: 12px 14px 14px;
