@@ -147,53 +147,6 @@
     z-index: 2;
   }
 
-  /* PREMIUM OVERLAY */
-  .premium-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(12,13,15,0.55);
-    backdrop-filter: blur(3px);
-    -webkit-backdrop-filter: blur(3px);
-    z-index: 10;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    border-radius: 16px;
-  }
-  .premium-lock {
-    font-size: 28px;
-    opacity: 0.7;
-  }
-  .premium-label {
-    font-family: 'DM Serif Display', serif;
-    font-size: 1.1rem;
-    color: var(--text);
-  }
-  .premium-price {
-    font-size: 13px;
-    color: var(--muted);
-  }
-  .premium-btn {
-    margin-top: 4px;
-    padding: 10px 24px;
-    border-radius: 100px;
-    border: 1px solid var(--gold);
-    background: transparent;
-    color: var(--gold);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 12px;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-  .premium-btn:hover {
-    background: var(--gold);
-    color: var(--bg);
-  }
-
   /* AUDIO PLAYER AREA */
   .audio-area {
     padding: 24px 20px 16px;
@@ -599,8 +552,7 @@ const subs = [
     chakra: 'Sakralchakra',
     methode: 'Masked',
     dauer: '30 Min',
-    kostenlos: false,
-    preis: '7,00 €',
+    kostenlos: true,
     audioSrc: '',
     beschreibung: 'Löst Glaubenssätze rund um Mangel, Geldscham und Unwürdigkeit auf. Dieses Subliminal programmiert dein Unterbewusstsein auf eine natürliche Offenheit gegenüber Wohlstand und Fülle — in allen Lebensbereichen.',
     frequenzInfo: '417 Hz unterstützt tiefe Transformationsprozesse und löst blockierende Muster auf energetischer Ebene. Ideal als Frequenzträger für Glaubenssatzarbeit rund um Veränderung und Neuausrichtung.',
@@ -608,10 +560,33 @@ const subs = [
       'Ich bin offen für Fülle in allen Formen.',
       'Geld fließt leicht und natürlich in mein Leben.',
       'Ich verdiene Wohlstand.',
-      'Ich release alle Glaubenssätze um Mangel.',
-      'Das Universum unterstützt mich.',
+      'Ich verdiene Erfolg.',
+      'Ich verdiene Überfluss.',
       'Reichtum ist mein natürlicher Zustand.',
-      'Ich empfange mit Dankbarkeit und Leichtigkeit.'
+      'Ich löse alle Glaubenssätze um Mangel auf.',
+      'Ich löse alle Glaubenssätze um Geldscham auf.',
+      'Ich löse alle Glaubenssätze um Unwürdigkeit auf.',
+      'Das Universum unterstützt mich.',
+      'Das Universum liebt es mir Gutes zu geben.',
+      'Ich empfange mit Dankbarkeit und Leichtigkeit.',
+      'Ich bin ein natürlicher Magnet für Wohlstand.',
+      'Fülle ist überall um mich herum.',
+      'Ich sehe Möglichkeiten wo andere Hindernisse sehen.',
+      'Mein Geist ist ausgerichtet auf Wachstum und Erfolg.',
+      'Ich handle mutig und vertraue dem Prozess.',
+      'Jede Handlung die ich setze bringt mich näher zur Fülle.',
+      'Ich bin dankbar für alles was ich bereits habe.',
+      'Dankbarkeit öffnet die Tore zur Fülle.',
+      'Ich gebe großzügig und empfange reichlich.',
+      'Geld ist Energie — und ich bin im Einklang mit ihr.',
+      'Mein Wert ist unabhängig von meinem Kontostand.',
+      'Ich vertraue mir selbst als Schöpfer meines Lebens.',
+      'Ich erschaffe Wohlstand durch meine Gaben.',
+      'Erfolg fließt leicht zu mir — ich halte ihn nicht auf.',
+      'Ich bin bereit für ein Leben in Fülle.',
+      'Ich bin bereit für finanzielle Freiheit.',
+      'Fülle ist mein Geburtsrecht.',
+      'Ich bin frei.'
     ],
     anwendung: 'Stelle dir beim Hören konkret vor wie sich dein Leben mit echtem Wohlstand anfühlt — nicht nur finanziell. Wie wohnst du, wie lebst du, wie fühlst du dich? Je lebhafter das Bild desto stärker die Wirkung. Täglich mindestens 21 Tage.',
   },
@@ -626,8 +601,7 @@ const subs = [
     chakra: 'Herzchakra',
     methode: 'Masked',
     dauer: '30 Min',
-    kostenlos: false,
-    preis: '7,00 €',
+    kostenlos: true,
     audioSrc: '',
     beschreibung: 'Programmmiert das Unterbewusstsein auf natürliche Tiefenentspannung und regenerativen Schlaf. Löst gedankliche Schleifen, nächtliche Anspannung und Einschlafprobleme auf sanfte, nachhaltige Weise.',
     frequenzInfo: '639 Hz harmonisiert das Nervensystem, fördert Verbindung und innere Harmonie. Die Frequenz beruhigt das limbische System — das Angstzentrum des Gehirns — und schafft ideale Bedingungen für tiefen Schlaf.',
@@ -653,8 +627,7 @@ const subs = [
     chakra: 'Stirnchakra',
     methode: 'Masked',
     dauer: '30 Min',
-    kostenlos: false,
-    preis: '7,00 €',
+    kostenlos: true,
     audioSrc: '',
     beschreibung: 'Schärft Konzentration, löst mentalen Nebel auf und stärkt die Fähigkeit für tiefe, ungestörte Aufmerksamkeit. Ideal für alle die viel leisten und gleichzeitig klar im Kopf bleiben wollen.',
     frequenzInfo: '741 Hz schärft Intuition und mentale Klarheit, reinigt den Geist von negativen Gedankenmustern und stärkt das Stirnchakra — das Zentrum für Wahrnehmung, Fokus und inneres Wissen.',
@@ -721,19 +694,10 @@ function buildCard(sub, i) {
     </div>`;
   }
 
-  const premiumOverlay = !sub.kostenlos ? `
-    <div class="premium-overlay">
-      <div class="premium-lock">🔒</div>
-      <div class="premium-label">Premium Subliminal</div>
-      <div class="premium-price">${sub.preis} · Einmalig · Dauerhafter Zugang</div>
-      <button class="premium-btn" onclick="alert('Shop wird bald verfügbar — bleib gespannt!')">Jetzt freischalten</button>
-    </div>` : '';
-
   const freeBadge = sub.kostenlos ? `<div class="badge-free">Kostenlos</div>` : '';
 
   card.innerHTML = `
     ${freeBadge}
-    ${premiumOverlay}
     ${playerHTML}
     <div class="scard-body">
       <div class="scard-top">
