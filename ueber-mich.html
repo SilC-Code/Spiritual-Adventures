@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BY40HZSETJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-BY40HZSETJ');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Über mich – Christian Matuszek · Spiritual Adventures</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0c0d0f;
+    --surface: #14151a;
+    --surface2: #1c1d24;
+    --border: rgba(255,255,255,0.07);
+    --text: #e8e6e0;
+    --muted: #7a7870;
+    --gold: #c9a84c;
+    --gold-dim: rgba(201,168,76,0.12);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    font-size: 15px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 32px;
+    border-bottom: 1px solid var(--border);
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(12,13,15,0.92);
+    backdrop-filter: blur(12px);
+  }
+  .nav-logo { font-family:'DM Serif Display',serif;font-size:15px;color:var(--muted);text-decoration:none; }
+  .nav-logo span { color: var(--gold); }
+  .nav-back { font-size:12px;color:var(--muted);text-decoration:none;letter-spacing:0.05em;text-transform:uppercase;display:flex;align-items:center;gap:6px;transition:color 0.2s; }
+  .nav-back:hover { color: var(--text); }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    padding: 80px 24px 64px;
+    max-width: 1000px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+  .hero-glow {
+    position: absolute;
+    top: -100px; left: 50%; transform: translateX(-50%);
+    width: 700px; height: 400px;
+    background: radial-gradient(ellipse, rgba(201,168,76,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  /* PHOTO */
+  .photo-wrap {
+    position: relative;
+  }
+  .photo-frame {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid rgba(201,168,76,0.2);
+    aspect-ratio: 3/4;
+    background: var(--surface);
+  }
+  .photo-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+  }
+  .photo-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    color: var(--muted);
+    font-size: 13px;
+  }
+  .photo-placeholder-icon { font-size: 48px; opacity: 0.3; }
+  .photo-badge {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    background: rgba(12,13,15,0.85);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(201,168,76,0.25);
+    border-radius: 100px;
+    padding: 6px 14px;
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 0.06em;
+  }
+  .photo-corner {
+    position: absolute;
+    top: -12px; right: -12px;
+    width: 80px; height: 80px;
+    border-top: 1px solid rgba(201,168,76,0.3);
+    border-right: 1px solid rgba(201,168,76,0.3);
+    border-radius: 0 12px 0 0;
+    pointer-events: none;
+  }
+  .photo-corner-bl {
+    position: absolute;
+    bottom: -12px; left: -12px;
+    width: 80px; height: 80px;
+    border-bottom: 1px solid rgba(201,168,76,0.3);
+    border-left: 1px solid rgba(201,168,76,0.3);
+    border-radius: 0 0 0 12px;
+    pointer-events: none;
+  }
+
+  /* HERO TEXT */
+  .hero-text { position: relative; }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--gold-dim);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 100px;
+    padding: 5px 14px;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+  }
+  .hero-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 400;
+    line-height: 1.05;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  .hero-name em { font-style: italic; color: var(--gold); }
+  .hero-subtitle {
+    font-size: 13px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+  .hero-intro {
+    font-size: 15px;
+    color: var(--text);
+    line-height: 1.8;
+    font-weight: 300;
+    margin-bottom: 28px;
+    border-left: 2px solid rgba(201,168,76,0.4);
+    padding-left: 16px;
+  }
+  .hero-stats {
+    display: flex;
+    gap: 24px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+  }
+  .hero-stat { display: flex; flex-direction: column; gap: 2px; }
+  .hero-stat-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.8rem;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .hero-stat-label { font-size: 11px; color: var(--muted); letter-spacing: 0.05em; text-transform: uppercase; }
+
+  /* STORY SECTION */
+  .story {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+  }
+  .story-block {
+    margin-bottom: 48px;
+    opacity: 0;
+    transform: translateY(24px);
+    animation: fadeUp 0.6s ease forwards;
+  }
+  .story-block:nth-child(1) { animation-delay: 0.1s; }
+  .story-block:nth-child(2) { animation-delay: 0.2s; }
+  .story-block:nth-child(3) { animation-delay: 0.3s; }
+  .story-block:nth-child(4) { animation-delay: 0.4s; }
+
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .story-label {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .story-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(201,168,76,0.2);
+  }
+  .story-text {
+    font-size: 15px;
+    color: var(--text);
+    line-height: 1.9;
+    font-weight: 300;
+  }
+  .story-text strong { color: var(--gold); font-weight: 500; }
+
+  /* DARK CHAPTER */
+  .dark-chapter {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 32px;
+    margin-bottom: 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .dark-chapter::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(201,168,76,0.4), transparent);
+  }
+  .dark-items {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 16px;
+  }
+  .dark-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .dark-item-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: rgba(201,168,76,0.4);
+    flex-shrink: 0;
+    margin-top: 8px;
+  }
+
+  /* TURN BLOCK */
+  .turn-block {
+    background: linear-gradient(135deg, rgba(201,168,76,0.08), transparent);
+    border: 1px solid rgba(201,168,76,0.25);
+    border-radius: 20px;
+    padding: 32px;
+    margin-bottom: 48px;
+    text-align: center;
+  }
+  .turn-icon { font-size: 36px; margin-bottom: 16px; }
+  .turn-quote {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.4rem;
+    font-style: italic;
+    color: var(--text);
+    line-height: 1.4;
+    margin-bottom: 12px;
+  }
+  .turn-quote em { color: var(--gold); }
+  .turn-sub { font-size: 13px; color: var(--muted); }
+
+  /* CTA */
+  .cta-block {
+    text-align: center;
+    padding: 48px 24px;
+    border-top: 1px solid var(--border);
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .cta-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.8rem;
+    color: var(--text);
+    margin-bottom: 12px;
+  }
+  .cta-title em { font-style: italic; color: var(--gold); }
+  .cta-sub { font-size: 14px; color: var(--muted); margin-bottom: 28px; }
+  .cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    border-radius: 100px;
+    background: linear-gradient(135deg, var(--gold), #f0d48a);
+    color: var(--bg);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .cta-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(201,168,76,0.35);
+  }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 32px 24px;
+    color: var(--muted);
+    font-size: 12px;
+    border-top: 1px solid var(--border);
+  }
+
+  @media (max-width: 680px) {
+    .hero { grid-template-columns: 1fr; gap: 40px; }
+    .photo-frame { aspect-ratio: 4/3; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Spiritual <span>Adventures</span></a>
+  <a href="index.html" class="nav-back">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 3L5 7l4 4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Zurück
+  </a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-glow"></div>
+
+  <div class="photo-wrap">
+    <div class="photo-frame">
+      <!-- FOTO HIER EINFÜGEN: <img src="dein-foto.jpg" alt="Christian Matuszek"> -->
+      <div class="photo-placeholder">
+        <div class="photo-placeholder-icon">📷</div>
+        <div>Foto folgt</div>
+      </div>
+    </div>
+    <div class="photo-badge">✦ Christian Matuszek · Berlin</div>
+    <div class="photo-corner"></div>
+    <div class="photo-corner-bl"></div>
+  </div>
+
+  <div class="hero-text">
+    <div class="hero-tag">✦ Über mich</div>
+    <div class="hero-name">Ich bin<br><em>Christian.</em></div>
+    <div class="hero-subtitle">47 Jahre · Berlin · Spiritual Adventures</div>
+    <div class="hero-intro">
+      Wenn ich auf mein gesamtes Leben zurückblicke, sehe ich viele Schmerzen — seelisch wie körperlich. Verbunden mit einem niedrigen bis gar keinen eigenen Selbstwert.
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <span class="hero-stat-num">47</span>
+        <span class="hero-stat-label">Jahre</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-num">3</span>
+        <span class="hero-stat-label">Bandscheiben OPs</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-num">∞</span>
+        <span class="hero-stat-label">Neustarts</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STORY -->
+<div class="story">
+
+  <div class="story-block">
+    <div class="story-label">Der Anfang</div>
+    <div class="dark-chapter">
+      <div class="story-text">
+        Ich habe nie irgendwo richtig reingepasst und habe immer mein eigenes Ding gemacht. <strong>Immer der Schlechteste in der Schule</strong> — und gerade so den Abschluss hinbekommen.
+      </div>
+      <div class="dark-items">
+        <div class="dark-item"><div class="dark-item-dot"></div>Lange Arbeitslosigkeit und Ziellosigkeit prägten mein Leben</div>
+        <div class="dark-item"><div class="dark-item-dot"></div>Ich musste viele unangenehme Probleme lösen und mich ständig neu erfinden</div>
+        <div class="dark-item"><div class="dark-item-dot"></div>3 Bandscheiben OPs — körperliche Fitness ging gegen null</div>
+        <div class="dark-item"><div class="dark-item-dot"></div>Kein Antrieb und überhaupt keine Lust aus meiner Komfortzone herauszutreten</div>
+        <div class="dark-item"><div class="dark-item-dot"></div>So viele schlimme Ängste die mein Leben kontrollierten</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-block">
+    <div class="story-label">Die Wende</div>
+    <div class="turn-block">
+      <div class="turn-icon">🌅</div>
+      <div class="turn-quote">
+        „Inzwischen liegt das alles hinter mir.<br>
+        Der Weg hierher war nicht immer <em>einfach</em> —<br>
+        aber ich würde um keinen Preis der Welt<br>
+        etwas daran ändern."
+      </div>
+      <div class="turn-sub">Meine Erfahrungen haben mich zu dem gemacht was ich heute bin.</div>
+    </div>
+  </div>
+
+  <div class="story-block">
+    <div class="story-label">Was mich stark gemacht hat</div>
+    <div class="story-text">
+      Ich habe aus meinen Fehlern und Erfahrungen gelernt. <strong>Das alles hat mich so stark und unzerstörbar werden lassen.</strong> Nicht trotz der schweren Zeit — sondern genau wegen ihr.
+      <br><br>
+      Ich habe nie aufgehört mein eigenes Ding zu machen. Und genau das hat mir gezeigt: Wer authentisch bleibt und sich immer wieder neu erfindet, findet irgendwann seinen Weg.
+    </div>
+  </div>
+
+  <div class="story-block">
+    <div class="story-label">Warum Spiritual Adventures</div>
+    <div class="story-text">
+      Nun bin ich bereit — mein Wissen, meine Erfahrungen und meine Talente mit dir zu teilen. <strong>Damit du das für dich auch erreichen kannst.</strong>
+      <br><br>
+      Spiritual Adventures ist nicht irgendeine Website. Es ist das was ich mir selbst gewünscht hätte als ich am tiefsten Punkt war. Ein Ort mit echten Werkzeugen, echten Frequenzen — und einer ehrlichen Geschichte dahinter.
+    </div>
+  </div>
+
+</div>
+
+<!-- CTA -->
+<div class="cta-block">
+  <div class="cta-title">Bereit für deine<br><em>eigene</em> Reise?</div>
+  <div class="cta-sub">Starte mit den kostenlosen Modulen — kein Account, kein Aufwand.</div>
+  <a href="wissensdatenbank.html" class="cta-btn">
+    ✦ Jetzt starten
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </a>
+</div>
+
+<footer>
+  Spiritual Adventures · Christian Matuszek · Berlin
+</footer>
+
+</body>
+</html>
