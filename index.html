@@ -391,23 +391,10 @@
 <div class="newsletter-section reveal" id="newsletter">
   <div class="newsletter-box">
     <div class="newsletter-glow"></div>
-    <div class="newsletter-icon">✨</div>
-    <div class="newsletter-title">Dein Geschenk wartet</div>
-    <div class="newsletter-sub">Trag dich ein und erhalte sofort kostenlos:<br><strong style="color:var(--gold)">"5 Minuten die alles verändern"</strong> – 5 Werkzeuge die du noch heute anwenden kannst.</div>
-
-    <form action="https://hotmail.us6.list-manage.com/subscribe/post?u=a19bc4aad51d825969543aec5&amp;id=ec4204faa2&amp;f_id=00f5c2e1f0" method="post" target="_blank" class="mc-form">
-      <div class="mc-fields">
-        <input type="text" name="FNAME" placeholder="Dein Vorname" class="newsletter-input">
-        <input type="email" name="EMAIL" placeholder="Deine E-Mail Adresse" required class="newsletter-input">
-      </div>
-      <!-- Mailchimp bot protection -->
-      <div style="position:absolute;left:-5000px" aria-hidden="true">
-        <input type="text" name="b_a19bc4aad51d825969543aec5_ec4204faa2" tabindex="-1" value="">
-      </div>
-      <button type="submit" class="newsletter-btn">Jetzt kostenlos erhalten</button>
-    </form>
-
-    <div class="newsletter-note">Kein Spam · Jederzeit abmeldbar · Deine Daten sind sicher</div>
+    <div class="newsletter-icon">🛠️</div>
+    <div class="newsletter-title">Newsletter — <em style="font-style:italic;color:var(--gold)">Coming Soon</em></div>
+    <div class="newsletter-sub">Ich arbeite gerade daran dir etwas Besonderes zu schicken.<br>Bald kannst du dich hier eintragen und als Erstes von neuen Inhalten, exklusiven Subliminals und mehr erfahren.</div>
+    <div class="newsletter-note" style="margin-top:0">Schau bald wieder vorbei ✨</div>
   </div>
 </div>
 
@@ -441,18 +428,6 @@ const observer = new IntersectionObserver(entries => {
 }, { threshold: 0.1 });
 document.querySelectorAll('.reveal').forEach(r => observer.observe(r));
 
-// Newsletter
-document.querySelector('.newsletter-btn').addEventListener('click', () => {
-  const input = document.querySelector('.newsletter-input');
-  if (input.value && input.value.includes('@')) {
-    input.value = '';
-    input.placeholder = 'Danke! Du bist dabei.';
-    input.style.borderColor = 'rgba(93,202,165,0.5)';
-  } else {
-    input.style.borderColor = 'rgba(216,90,48,0.5)';
-    input.placeholder = 'Bitte gib eine gueltige E-Mail ein';
-  }
-});
 </script>
 </body>
 </html>
