@@ -79,6 +79,101 @@
   header p { margin-top:14px;color:var(--muted);font-size:14px;font-weight:300;letter-spacing:0.04em;text-transform:uppercase;position:relative; }
   .header-line { width:40px;height:1px;background:var(--gold);margin:20px auto 0;opacity:0.5; }
 
+  /* POWERUP BOX */
+  .powerup-box {
+    position: relative;
+    max-width: 960px;
+    margin: 0 auto 48px;
+    padding: 0 24px;
+  }
+  .powerup-glow {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.15), transparent 70%);
+    pointer-events: none;
+    border-radius: 20px;
+  }
+  .powerup-inner {
+    position: relative;
+    border: 1px solid rgba(201,168,76,0.4);
+    border-radius: 20px;
+    background: linear-gradient(135deg, rgba(201,168,76,0.08) 0%, rgba(12,13,15,0.95) 60%);
+    padding: 28px 32px;
+    display: flex;
+    align-items: center;
+    gap: 28px;
+  }
+  .powerup-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-shrink: 0;
+  }
+  .powerup-icon {
+    font-size: 32px;
+    filter: drop-shadow(0 0 12px rgba(201,168,76,0.6));
+    animation: pulse-gold 2s ease-in-out infinite;
+  }
+  @keyframes pulse-gold {
+    0%, 100% { filter: drop-shadow(0 0 8px rgba(201,168,76,0.4)); }
+    50% { filter: drop-shadow(0 0 20px rgba(201,168,76,0.8)); }
+  }
+  .powerup-percent { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+  .powerup-percent.dim .powerup-num { color: var(--muted); }
+  .powerup-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.6rem;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .powerup-label { font-size: 10px; color: var(--muted); letter-spacing: 0.05em; text-transform: uppercase; }
+  .powerup-arrow { font-size: 18px; color: rgba(201,168,76,0.4); }
+  .powerup-divider {
+    width: 1px;
+    height: 80px;
+    background: rgba(201,168,76,0.2);
+    flex-shrink: 0;
+  }
+  .powerup-right { flex: 1; }
+  .powerup-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.15rem;
+    color: var(--text);
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+  .powerup-text {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 16px;
+  }
+  .powerup-text strong { color: var(--text); }
+  .powerup-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: 100px;
+    background: linear-gradient(135deg, var(--gold), #f0d48a);
+    color: var(--bg);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .powerup-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(201,168,76,0.35);
+  }
+  @media (max-width: 600px) {
+    .powerup-inner { flex-direction: column; padding: 24px 20px; }
+    .powerup-divider { width: 100%; height: 1px; }
+    .powerup-left { justify-content: center; }
+  }
+
   /* SECTION */
   .section {
     max-width: 960px;
@@ -293,6 +388,35 @@
   <p>Subliminals · Meditationen · Persönliche Videos</p>
   <div class="header-line"></div>
 </header>
+
+<!-- POWERUP BOX -->
+<div class="powerup-box">
+  <div class="powerup-glow"></div>
+  <div class="powerup-inner">
+    <div class="powerup-left">
+      <div class="powerup-icon">⚡</div>
+      <div class="powerup-percent">
+        <span class="powerup-num">100%</span>
+        <span class="powerup-label">Wirkung</span>
+      </div>
+      <div class="powerup-arrow">→</div>
+      <div class="powerup-percent dim">
+        <span class="powerup-num">~30%</span>
+        <span class="powerup-label">ohne Wissen</span>
+      </div>
+    </div>
+    <div class="powerup-divider"></div>
+    <div class="powerup-right">
+      <div class="powerup-title">Dein Subliminal kann mehr — wenn du es lässt.</div>
+      <div class="powerup-text">Subliminals wirken auf das Unterbewusstsein. Aber wenn dein bewusstes Verständnis fehlt, arbeiten beide Ebenen gegeneinander — und du schöpfst nur einen Bruchteil der Wirkung aus.<br><br>
+      Wer versteht <strong>wie Bewusstsein, Frequenz und Glaubenssätze zusammenhängen</strong>, verstärkt die Transformation um ein Vielfaches.</div>
+      <a href="wissensdatenbank.html" class="powerup-btn">
+        ✦ Jetzt Grundlagen entdecken
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </div>
+</div>
 
 <!-- EXKLUSIVE SUBLIMINALS -->
 <div class="section">
