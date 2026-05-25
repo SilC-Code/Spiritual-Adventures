@@ -79,6 +79,90 @@
   header p { margin-top:14px;color:var(--muted);font-size:14px;font-weight:300;letter-spacing:0.04em;text-transform:uppercase;position:relative; }
   .header-line { width:40px;height:1px;background:var(--gold);margin:20px auto 0;opacity:0.5; }
 
+  /* WELCOME VIDEO */
+  .welcome-video-wrap {
+    max-width: 960px;
+    margin: 0 auto 48px;
+    padding: 0 24px;
+  }
+  .welcome-video-inner {
+    border: 1px solid rgba(201,168,76,0.25);
+    border-radius: 20px;
+    background: var(--surface);
+    padding: 32px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    align-items: center;
+  }
+  .welcome-tag {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+  .welcome-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.6rem;
+    color: var(--text);
+    line-height: 1.2;
+    margin-bottom: 14px;
+  }
+  .welcome-title em { font-style: italic; color: var(--gold); }
+  .welcome-text {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+  .welcome-player {
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .welcome-player-placeholder {
+    aspect-ratio: 16/9;
+    background: var(--surface2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .welcome-player-placeholder:hover { background: #22232c; }
+  .welcome-play-btn {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    background: rgba(201,168,76,0.15);
+    border: 1px solid rgba(201,168,76,0.35);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    color: var(--gold);
+    transition: all 0.2s;
+  }
+  .welcome-player-placeholder:hover .welcome-play-btn {
+    background: rgba(201,168,76,0.25);
+    transform: scale(1.05);
+  }
+  .welcome-player-text {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+  .welcome-player-label {
+    padding: 10px 14px;
+    font-size: 11px;
+    color: var(--muted);
+    text-align: center;
+    border-top: 1px solid var(--border);
+    background: var(--surface);
+  }
+  @media (max-width: 640px) {
+    .welcome-video-inner { grid-template-columns: 1fr; }
+  }
+
   /* POWERUP BOX */
   .powerup-box {
     position: relative;
@@ -388,6 +472,26 @@
   <p>Subliminals · Meditationen · Persönliche Videos</p>
   <div class="header-line"></div>
 </header>
+
+<!-- PERSÖNLICHE BEGRÜSSUNG -->
+<div class="welcome-video-wrap">
+  <div class="welcome-video-inner">
+    <div class="welcome-video-left">
+      <div class="welcome-tag">✦ Von Christian</div>
+      <div class="welcome-title">Bevor du startest —<br><em>schau dir das kurz an.</em></div>
+      <div class="welcome-text">Warum dieser Bereich existiert, wie du das Beste daraus machst — und warum es einen Unterschied macht ob du einfach nur konsumierst oder wirklich verstehst was hier passiert.</div>
+    </div>
+    <div class="welcome-video-right">
+      <div class="welcome-player">
+        <div class="welcome-player-placeholder">
+          <div class="welcome-play-btn">▶</div>
+          <div class="welcome-player-text">Video folgt in Kürze</div>
+        </div>
+        <div class="welcome-player-label">Christians persönliche Einführung</div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- POWERUP BOX -->
 <div class="powerup-box">
