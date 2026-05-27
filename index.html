@@ -466,6 +466,11 @@
             <input type="hidden" name="locale" value="de">
             <input type="hidden" name="html_type" value="simple">
           </form>
+          <div id="sib-success" style="display:none;text-align:center;padding:24px 0;">
+            <div style="font-size:28px;margin-bottom:12px;">🎁</div>
+            <div style="font-family:'DM Serif Display',serif;font-size:1.3rem;color:var(--text);margin-bottom:10px;">Fast geschafft!</div>
+            <div style="font-size:14px;color:var(--muted);line-height:1.7;">Schau in dein Postfach und bestätige deine Anmeldung.<br>Dein Starter Guide wartet auf dich.</div>
+          </div>
         </div>
       </div>
     </div>
@@ -496,7 +501,26 @@ for (let i = 0; i < 130; i++) {
   starsEl.appendChild(s);
 }
 
-// Scroll Reveal
+// Newsletter Form
+const sibForm = document.getElementById('sib-form');
+if (sibForm) {
+  sibForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const email = document.getElementById('EMAIL').value;
+    if (!email) return;
+    const formData = new FormData(sibForm);
+    fetch(sibForm.action, { method: 'POST', body: formData, mode: 'no-cors' })
+      .then(() => {
+        sibForm.style.display = 'none';
+        document.getElementById('sib-success').style.display = 'block';
+      })
+      .catch(() => {
+        sibForm.style.display = 'none';
+        document.getElementById('sib-success').style.display = 'block';
+      });
+  });
+}
+
 const observer = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
 }, { threshold: 0.1 });
