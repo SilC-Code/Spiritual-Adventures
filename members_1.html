@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BY40HZSETJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-BY40HZSETJ');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exklusiv-Bereich – Spiritual Adventures</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0c0d0f;
+    --surface: #14151a;
+    --surface2: #1c1d24;
+    --border: rgba(255,255,255,0.07);
+    --border-hover: rgba(255,255,255,0.14);
+    --text: #e8e6e0;
+    --muted: #7a7870;
+    --gold: #c9a84c;
+    --gold-dim: rgba(201,168,76,0.12);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* NAV */
+  nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 32px;
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo { font-family:'DM Serif Display',serif;font-size:15px;color:var(--muted);text-decoration:none; }
+  .nav-logo span { color: var(--gold); }
+  .nav-back { font-size:12px;color:var(--muted);text-decoration:none;letter-spacing:0.05em;text-transform:uppercase;display:flex;align-items:center;gap:6px;transition:color 0.2s; }
+  .nav-back:hover { color: var(--text); }
+
+  /* HEADER */
+  header {
+    position: relative;
+    padding: 72px 0 56px;
+    text-align: center;
+    overflow: hidden;
+  }
+  .header-glow {
+    position: absolute; top: -80px; left: 50%; transform: translateX(-50%);
+    width: 600px; height: 300px;
+    background: radial-gradient(ellipse, rgba(201,168,76,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .exclusive-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(201,168,76,0.10);
+    border: 1px solid rgba(201,168,76,0.25);
+    border-radius: 100px;
+    padding: 5px 14px;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+    position: relative;
+  }
+  header h1 { font-family:'DM Serif Display',serif;font-size:clamp(2.2rem,5vw,3.8rem);font-weight:400;letter-spacing:-0.01em;color:var(--text);position:relative; }
+  header h1 em { font-style:italic;color:var(--gold); }
+  header p { margin-top:14px;color:var(--muted);font-size:14px;font-weight:300;letter-spacing:0.04em;text-transform:uppercase;position:relative; }
+  .header-line { width:40px;height:1px;background:var(--gold);margin:20px auto 0;opacity:0.5; }
+
+  /* WELCOME VIDEO */
+  .welcome-video-wrap {
+    max-width: 960px;
+    margin: 0 auto 48px;
+    padding: 0 24px;
+  }
+  .welcome-video-inner {
+    border: 1px solid rgba(201,168,76,0.25);
+    border-radius: 20px;
+    background: var(--surface);
+    padding: 32px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    align-items: center;
+  }
+  .welcome-tag {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+  .welcome-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.6rem;
+    color: var(--text);
+    line-height: 1.2;
+    margin-bottom: 14px;
+  }
+  .welcome-title em { font-style: italic; color: var(--gold); }
+  .welcome-text {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+  .welcome-player {
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .welcome-player-placeholder {
+    aspect-ratio: 16/9;
+    background: var(--surface2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .welcome-player-placeholder:hover { background: #22232c; }
+  .welcome-play-btn {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    background: rgba(201,168,76,0.15);
+    border: 1px solid rgba(201,168,76,0.35);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    color: var(--gold);
+    transition: all 0.2s;
+  }
+  .welcome-player-placeholder:hover .welcome-play-btn {
+    background: rgba(201,168,76,0.25);
+    transform: scale(1.05);
+  }
+  .welcome-player-text {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+  .welcome-player-label {
+    padding: 10px 14px;
+    font-size: 11px;
+    color: var(--muted);
+    text-align: center;
+    border-top: 1px solid var(--border);
+    background: var(--surface);
+  }
+  @media (max-width: 640px) {
+    .welcome-video-inner { grid-template-columns: 1fr; }
+  }
+
+  /* POWERUP BOX */
+  .powerup-box {
+    position: relative;
+    max-width: 960px;
+    margin: 0 auto 48px;
+    padding: 0 24px;
+  }
+  .powerup-glow {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.15), transparent 70%);
+    pointer-events: none;
+    border-radius: 20px;
+  }
+  .powerup-inner {
+    position: relative;
+    border: 1px solid rgba(201,168,76,0.4);
+    border-radius: 20px;
+    background: linear-gradient(135deg, rgba(201,168,76,0.08) 0%, rgba(12,13,15,0.95) 60%);
+    padding: 28px 32px;
+    display: flex;
+    align-items: center;
+    gap: 28px;
+  }
+  .powerup-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-shrink: 0;
+  }
+  .powerup-icon {
+    font-size: 32px;
+    filter: drop-shadow(0 0 12px rgba(201,168,76,0.6));
+    animation: pulse-gold 2s ease-in-out infinite;
+  }
+  @keyframes pulse-gold {
+    0%, 100% { filter: drop-shadow(0 0 8px rgba(201,168,76,0.4)); }
+    50% { filter: drop-shadow(0 0 20px rgba(201,168,76,0.8)); }
+  }
+  .powerup-percent { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+  .powerup-percent.dim .powerup-num { color: var(--muted); }
+  .powerup-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.6rem;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .powerup-label { font-size: 10px; color: var(--muted); letter-spacing: 0.05em; text-transform: uppercase; }
+  .powerup-arrow { font-size: 18px; color: rgba(201,168,76,0.4); }
+  .powerup-divider {
+    width: 1px;
+    height: 80px;
+    background: rgba(201,168,76,0.2);
+    flex-shrink: 0;
+  }
+  .powerup-right { flex: 1; }
+  .powerup-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.15rem;
+    color: var(--text);
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+  .powerup-text {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 16px;
+  }
+  .powerup-text strong { color: var(--text); }
+  .powerup-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: 100px;
+    background: linear-gradient(135deg, var(--gold), #f0d48a);
+    color: var(--bg);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .powerup-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(201,168,76,0.35);
+  }
+  @media (max-width: 600px) {
+    .powerup-inner { flex-direction: column; padding: 24px 20px; }
+    .powerup-divider { width: 100%; height: 1px; }
+    .powerup-left { justify-content: center; }
+  }
+
+  /* SECTION */
+  .section {
+    max-width: 960px;
+    margin: 0 auto 64px;
+    padding: 0 24px;
+  }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-icon {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    background: var(--gold-dim);
+    border: 1px solid rgba(201,168,76,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--text);
+  }
+  .section-subtitle {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+    margin-top: 2px;
+  }
+
+  /* CONTENT CARDS */
+  .content-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+  }
+  .content-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: border-color 0.2s, transform 0.2s;
+    cursor: pointer;
+  }
+  .content-card:hover {
+    border-color: rgba(201,168,76,0.3);
+    transform: translateY(-2px);
+  }
+  .content-card.coming-soon {
+    opacity: 0.5;
+    cursor: default;
+  }
+  .content-card.coming-soon:hover {
+    transform: none;
+    border-color: var(--border);
+  }
+
+  /* VIDEO EMBED */
+  .video-wrap {
+    position: relative;
+    padding-top: 56.25%;
+    background: var(--surface2);
+  }
+  .video-wrap iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%; height: 100%;
+    border: none;
+  }
+  .video-placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: var(--muted);
+    font-size: 13px;
+  }
+  .video-placeholder-icon { font-size: 28px; opacity: 0.4; }
+
+  /* CARD BODY */
+  .card-body {
+    padding: 16px 18px 18px;
+  }
+  .card-tag {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+  .card-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.05rem;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+  .card-desc {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .card-meta {
+    display: flex;
+    gap: 12px;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+  }
+  .meta-item {
+    font-size: 11px;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  /* COMING SOON BADGE */
+  .badge-soon {
+    display: inline-block;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 3px 10px;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 8px;
+  }
+
+  /* ACCORDION */
+  .acc-wrap { margin-top: 12px; }
+  .acc-trigger {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 8px 0;
+    cursor: pointer;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border-top: 1px solid var(--border);
+    user-select: none;
+  }
+  .acc-trigger:hover { color: var(--text); }
+  .acc-arrow { transition: transform 0.25s; font-size: 10px; }
+  .acc-open .acc-arrow { transform: rotate(180deg); }
+  .acc-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+  }
+  .acc-open .acc-body {
+    max-height: 600px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(201,168,76,0.3) transparent;
+  }
+  .acc-open .acc-body::-webkit-scrollbar { width: 4px; }
+  .acc-open .acc-body::-webkit-scrollbar-track { background: transparent; }
+  .acc-open .acc-body::-webkit-scrollbar-thumb { background: rgba(201,168,76,0.3); border-radius: 2px; }
+  .acc-content {
+    padding: 10px 0 12px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .acc-content ul { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+  .acc-content ul li::before { content: '·  '; color: var(--gold); }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 40px 24px;
+    color: var(--muted);
+    font-size: 12px;
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .section { animation: fadeUp 0.5s ease both; }
+  .section:nth-child(2) { animation-delay: 0.1s; }
+  .section:nth-child(3) { animation-delay: 0.2s; }
+  .section:nth-child(4) { animation-delay: 0.3s; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Spiritual <span>Adventures</span></a>
+  <a href="wissensdatenbank.html" class="nav-back">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 3L5 7l4 4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Zurück
+  </a>
+</nav>
+
+<header>
+  <div class="header-glow"></div>
+  <div class="exclusive-badge">✦ Nur hier verfügbar</div>
+  <h1>Dein <em>Exklusiv</em>-Bereich</h1>
+  <p>Subliminals · Meditationen · Persönliche Videos</p>
+  <div class="header-line"></div>
+</header>
+
+<!-- PERSÖNLICHE BEGRÜSSUNG -->
+<div class="welcome-video-wrap">
+  <div class="welcome-video-inner">
+    <div class="welcome-video-left">
+      <div class="welcome-tag">✦ Von Christian</div>
+      <div class="welcome-title">Bevor du startest —<br><em>schau dir das kurz an.</em></div>
+      <div class="welcome-text">Warum dieser Bereich existiert, wie du das Beste daraus machst — und warum es einen Unterschied macht ob du einfach nur konsumierst oder wirklich verstehst was hier passiert.</div>
+    </div>
+    <div class="welcome-video-right">
+      <div class="welcome-player">
+        <div style="aspect-ratio:16/9;overflow:hidden;border-radius:14px 14px 0 0;">
+          <iframe width="100%" height="100%"
+            src="https://www.youtube.com/embed/mO1vsc4w5Xs?rel=0&modestbranding=1"
+            title="Christians persönliche Einführung"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen style="border:none;display:block;">
+          </iframe>
+        </div>
+        <div class="welcome-player-label">Christians persönliche Einführung</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- POWERUP BOX -->
+<div class="powerup-box">
+  <div class="powerup-glow"></div>
+  <div class="powerup-inner">
+    <div class="powerup-left">
+      <div class="powerup-icon">⚡</div>
+      <div class="powerup-percent">
+        <span class="powerup-num">100%</span>
+        <span class="powerup-label">Wirkung</span>
+      </div>
+      <div class="powerup-arrow">→</div>
+      <div class="powerup-percent dim">
+        <span class="powerup-num">~30%</span>
+        <span class="powerup-label">ohne Wissen</span>
+      </div>
+    </div>
+    <div class="powerup-divider"></div>
+    <div class="powerup-right">
+      <div class="powerup-title">Dein Subliminal kann mehr — wenn du es lässt.</div>
+      <div class="powerup-text">Subliminals wirken auf das Unterbewusstsein. Aber wenn dein bewusstes Verständnis fehlt, arbeiten beide Ebenen gegeneinander — und du schöpfst nur einen Bruchteil der Wirkung aus.<br><br>
+      Wer versteht <strong>wie Bewusstsein, Frequenz und Glaubenssätze zusammenhängen</strong>, verstärkt die Transformation um ein Vielfaches.</div>
+      <a href="wissensdatenbank.html" class="powerup-btn">
+        ✦ Jetzt Grundlagen entdecken
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- EXKLUSIVE SUBLIMINALS -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon">🎧</div>
+    <div>
+      <div class="section-title">Exklusive Subliminals</div>
+      <div class="section-subtitle">Nicht gelistet · Nur hier abrufbar</div>
+    </div>
+  </div>
+  <div class="content-grid" id="sub-grid">
+
+    <!-- Money Mindset Sub -->
+    <div class="content-card">
+      <div class="video-wrap">
+        <iframe
+          src="https://www.youtube.com/embed/hcCr9YOhraE?rel=0&modestbranding=1"
+          title="528 Hz Money Mindset Subliminal"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen>
+        </iframe>
+      </div>
+      <div class="card-body">
+        <div class="card-tag">528 Hz · Exklusiv</div>
+        <div class="card-title">Money Mindset</div>
+        <div class="card-desc">Tiefe Umprogrammierung auf finanzielle Fülle — löst Geldscham, Mangeldenken und Unwürdigkeit auf der Zellebene auf.</div>
+        <div class="card-meta">
+          <div class="meta-item">⏱ 30 Min</div>
+          <div class="meta-item">🧠 Masked</div>
+          <div class="meta-item">💚 528 Hz</div>
+          <div class="meta-item">📅 21 Tage</div>
+        </div>
+        <div class="acc-wrap">
+          <div class="acc-trigger" onclick="toggleAcc(this)">
+            <span>Affirmationen ansehen</span>
+            <span class="acc-arrow">▾</span>
+          </div>
+          <div class="acc-body">
+            <div class="acc-content">
+              <ul>
+                <li>Ich bin ein Magnet für finanzielle Fülle.</li>
+                <li>Geld liebt mich und ich liebe Geld.</li>
+                <li>Ich verdiene es reich zu sein.</li>
+                <li>Ich verdiene es finanziell frei zu sein.</li>
+                <li>Ich verdiene es im Überfluss zu leben.</li>
+                <li>Reichtum ist mein natürliches Geburtsrecht.</li>
+                <li>Ich löse alle Glaubenssätze um Geldscham auf.</li>
+                <li>Ich löse alle Glaubenssätze um finanzielle Angst auf.</li>
+                <li>Ich löse alle Glaubenssätze um Unwürdigkeit auf.</li>
+                <li>Geld fließt leicht, reichlich und beständig zu mir.</li>
+                <li>Ich empfange große Geldsummen mit Leichtigkeit.</li>
+                <li>Mein Einkommen wächst jeden Monat.</li>
+                <li>Ich erschaffe multiple Einkommensquellen.</li>
+                <li>Ich denke wie ein Millionär.</li>
+                <li>Ich handle wie ein Millionär.</li>
+                <li>Ich fühle mich wie ein Millionär.</li>
+                <li>Reiche Menschen sind großzügig — und ich bin reich.</li>
+                <li>Je mehr ich gebe desto mehr empfange ich.</li>
+                <li>Geld ist Energie — und ich bin in perfekter Harmonie mit ihr.</li>
+                <li>Mein Unterbewusstsein ist programmiert auf Wohlstand.</li>
+                <li>Ich erkenne finanzielle Möglichkeiten sofort.</li>
+                <li>Ich handle mutig wenn sich Chancen zeigen.</li>
+                <li>Erfolg und Geld folgen mir überall hin.</li>
+                <li>Ich bin dankbar für jeden Euro der zu mir fließt.</li>
+                <li>Dankbarkeit multipliziert meinen Wohlstand.</li>
+                <li>Ich investiere klug und mein Geld arbeitet für mich.</li>
+                <li>Finanzielle Freiheit ist meine Realität.</li>
+                <li>Ich lebe das Leben das ich verdiene — in Fülle.</li>
+                <li>Wohlstand ist mein natürlicher Zustand.</li>
+                <li>Ich bin frei.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Verbindung zum Körper Sub -->
+    <div class="content-card">
+      <div class="video-wrap">
+        <iframe
+          src="https://www.youtube.com/embed/sHvt04V03V8?rel=0&modestbranding=1"
+          title="528 Hz Verbindung zum Körper Subliminal"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen>
+        </iframe>
+      </div>
+      <div class="card-body">
+        <div class="card-tag">528 Hz · Exklusiv</div>
+        <div class="card-title">Verbindung zum Körper</div>
+        <div class="card-desc">Löst Scham, Schuld und Kontrollmuster rund um Körper, Essen und Bewegung auf — und führt dich zurück zu echtem Vertrauen in dich selbst.</div>
+        <div class="card-meta">
+          <div class="meta-item">⏱ 30 Min</div>
+          <div class="meta-item">🧠 Masked</div>
+          <div class="meta-item">💚 528 Hz</div>
+          <div class="meta-item">📅 21 Tage</div>
+        </div>
+        <div class="acc-wrap">
+          <div class="acc-trigger" onclick="toggleAcc(this)">
+            <span>Affirmationen ansehen</span>
+            <span class="acc-arrow">▾</span>
+          </div>
+          <div class="acc-body">
+            <div class="acc-content">
+              <ul>
+                <li>Ich bin verbunden mit meinem Körper.</li>
+                <li>Ich höre auf die Signale meines Körpers.</li>
+                <li>Mein Körper ist mein Zuhause — ich behandle ihn mit Liebe.</li>
+                <li>Ich vertraue der Weisheit meines Körpers.</li>
+                <li>Ich löse alle Glaubenssätze um Scham rund um meinen Körper auf.</li>
+                <li>Ich löse alle Glaubenssätze um Schuld rund ums Essen auf.</li>
+                <li>Ich löse alle Glaubenssätze um Bestrafung durch Sport auf.</li>
+                <li>Mein Körper verdient Fürsorge und Aufmerksamkeit.</li>
+                <li>Ich esse was mir wirklich gut tut — intuitiv und natürlich.</li>
+                <li>Ich erkenne Hunger und Sättigung klar und deutlich.</li>
+                <li>Ich esse mit Genuss und ohne schlechtes Gewissen.</li>
+                <li>Mein Körper weiß was er braucht — ich vertraue ihm.</li>
+                <li>Bewegung fühlt sich gut an — ich bewege mich mit Freude.</li>
+                <li>Ich bewege mich weil ich meinen Körper liebe — nicht weil ich ihn bestrafen will.</li>
+                <li>Mein Körper wird täglich stärker und vitaler.</li>
+                <li>Ich behandle meinen Körper mit derselben Sanftheit die ich einem Kind geben würde.</li>
+                <li>Ich bin dankbar für alles was mein Körper für mich tut.</li>
+                <li>Mein Körper trägt mich — jeden Tag aufs Neue.</li>
+                <li>Ich sehe meinen Körper mit liebevollen Augen.</li>
+                <li>Ich bin im Frieden mit meinem Spiegelbild.</li>
+                <li>Mein natürliches Gewicht stellt sich von selbst ein wenn ich im Einklang lebe.</li>
+                <li>Gesunde Ernährung fühlt sich leicht und natürlich an.</li>
+                <li>Ich wähle Lebensmittel die mir Energie und Lebensfreude geben.</li>
+                <li>Mein Körper regeneriert sich tief und vollständig.</li>
+                <li>Ich schlafe gut und wache erholt auf.</li>
+                <li>Ich lebe im Rhythmus meines Körpers.</li>
+                <li>Körper, Geist und Seele sind in Harmonie.</li>
+                <li>Ich bin vollständig — genau so wie ich bin.</li>
+                <li>Verbindung zu meinem Körper ist Verbindung zu mir selbst.</li>
+                <li>Ich bin zuhause in mir.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lernblockaden lösen Sub -->
+    <div class="content-card">
+      <div class="video-wrap">
+        <iframe
+          src="https://www.youtube.com/embed/yyAlF2P77Vg?rel=0&modestbranding=1"
+          title="Lernblockaden lösen 396 Hz Solfeggio + 528 Hz Klangteppich"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen>
+        </iframe>
+      </div>
+      <div class="card-body">
+        <div class="card-tag">396 Hz + 528 Hz · Exklusiv</div>
+        <div class="card-title">Lernblockaden lösen</div>
+        <div class="card-desc">Löst tiefe Lerntraumata, alte Schulwunden und Glaubenssätze um Versagen und "nicht gut genug sein" auf — und öffnet den Weg für natürliche Neugier und Lernfreude.</div>
+
+        <!-- Warn-Hinweis -->
+        <div style="margin:14px 0;padding:14px 16px;background:rgba(224,60,60,0.08);border:1px solid rgba(224,60,60,0.25);border-radius:10px;font-size:12.5px;line-height:1.7;color:#c47a7a;">
+          <strong style="color:#e05555;display:block;margin-bottom:4px;">⚠ Hinweis vor der Anwendung</strong>
+          Dieses Subliminal arbeitet auf tiefer Traumaebene rund ums Lernen — es ist kein Sub für allgemeine Lernoptimierung. Wenn du starke emotionale Reaktionen bemerkst, mache eine Pause und vertraue deinem Gefühl. Als Alternative empfehle ich das <strong style="color:#c47a7a;">741 Hz Fokus & Klarheit</strong> Sub.
+        </div>
+
+        <div class="card-meta">
+          <div class="meta-item">⏱ 30 Min</div>
+          <div class="meta-item">🧠 Masked</div>
+          <div class="meta-item">🎵 396 + 528 Hz</div>
+          <div class="meta-item">📅 21 Tage</div>
+        </div>
+        <div class="acc-wrap">
+          <div class="acc-trigger" onclick="toggleAcc(this)">
+            <span>Affirmationen ansehen</span>
+            <span class="acc-arrow">▾</span>
+          </div>
+          <div class="acc-body">
+            <div class="acc-content">
+              <ul>
+                <li>Ich bin sicher — Lernen kann mir nichts mehr anhaben.</li>
+                <li>Ich bin nicht mehr das Kind in der Schule.</li>
+                <li>Ich bin erwachsen, frei und selbstbestimmt.</li>
+                <li>Ich löse alle alten Wunden rund ums Lernen auf.</li>
+                <li>Ich löse alle Glaubenssätze um Überforderung auf.</li>
+                <li>Ich löse alle Glaubenssätze um Versagen auf.</li>
+                <li>Ich löse alle Glaubenssätze um "nicht gut genug sein" auf.</li>
+                <li>Mein Verstand darf sich entspannen — ich bin sicher.</li>
+                <li>Neues Wissen fließt leicht und natürlich zu mir.</li>
+                <li>Ich lerne in meinem eigenen Tempo — und das ist gut so.</li>
+                <li>Ich bin intelligent auf meine ganz eigene Art.</li>
+                <li>Meine Art zu denken ist wertvoll und einzigartig.</li>
+                <li>Ich war nie dumm — ich war anders.</li>
+                <li>Komplexe Dinge werden in mir klar und verständlich.</li>
+                <li>Ich bleibe ruhig wenn ich etwas nicht sofort verstehe.</li>
+                <li>Nicht verstehen ist der Anfang des Verstehens.</li>
+                <li>Ich bin neugierig auf neues Wissen.</li>
+                <li>Lernen ist heute ein Abenteuer — keine Bedrohung.</li>
+                <li>Ich gebe mir die Zeit die ich brauche.</li>
+                <li>Ich verurteile mich nicht wenn etwas schwer fällt.</li>
+                <li>Ich behandle mich mit der Geduld die ich als Kind verdient hätte.</li>
+                <li>Ich wachse mit jeder neuen Information.</li>
+                <li>Mein Gehirn ist plastisch — es verändert sich jeden Tag.</li>
+                <li>Ich erinnere mich leicht an das was ich lerne.</li>
+                <li>Ich verstehe Zusammenhänge tief und intuitiv.</li>
+                <li>Jedes neue Wissen macht mich freier und stärker.</li>
+                <li>Ich bin stolz auf jeden kleinen Fortschritt.</li>
+                <li>Ich lerne nicht für andere — ich lerne für mich.</li>
+                <li>Wissensdurst ist mein natürlicher Zustand.</li>
+                <li>Ich bin frei.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- EXKLUSIVE MEDITATIONEN -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon">🧘</div>
+    <div>
+      <div class="section-title">Exklusive Meditationen</div>
+      <div class="section-subtitle">Geführte Sessions · Nur hier</div>
+    </div>
+  </div>
+  <div class="content-grid">
+
+    <div class="content-card coming-soon">
+      <div class="video-wrap">
+        <div class="video-placeholder">
+          <div class="video-placeholder-icon">🔒</div>
+          <div>Kommt bald</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-tag">Geführte Meditation · Exklusiv</div>
+        <div class="card-title">Exklusive Meditation</div>
+        <div class="card-desc">Geführte Meditationen die es nur hier gibt — tiefer, persönlicher, exklusiver.</div>
+        <div class="badge-soon">Bald verfügbar</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- PERSÖNLICHE VIDEOS -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon">🎥</div>
+    <div>
+      <div class="section-title">Persönliche Videos</div>
+      <div class="section-subtitle">Von Christian · Direkt & authentisch</div>
+    </div>
+  </div>
+  <div class="content-grid">
+
+    <div class="content-card coming-soon">
+      <div class="video-wrap">
+        <div class="video-placeholder">
+          <div class="video-placeholder-icon">🔒</div>
+          <div>Kommt bald</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-tag">Persönlich · Exklusiv</div>
+        <div class="card-title">Persönliches Video</div>
+        <div class="card-desc">Direkte Einblicke, persönliche Erfahrungen und Inhalte die ich nirgendwo anders teile.</div>
+        <div class="badge-soon">Bald verfügbar</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  Spiritual Adventures · Exklusiv-Bereich · Alle Inhalte nur hier verfügbar.
+</footer>
+
+<script>
+  function toggleAcc(trigger) {
+    const item = trigger.parentElement;
+    item.classList.toggle('acc-open');
+  }
+</script>
+
+</body>
+</html>
