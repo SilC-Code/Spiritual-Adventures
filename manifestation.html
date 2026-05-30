@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BY40HZSETJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-BY40HZSETJ');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manifestationstechniken – Spiritual Adventures</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0c0d0f;
+    --surface: #14151a;
+    --surface2: #1c1d24;
+    --border: rgba(255,255,255,0.07);
+    --border-hover: rgba(255,255,255,0.14);
+    --text: #e8e6e0;
+    --muted: #7a7870;
+    --gold: #c9a84c;
+    --manifest: #50b478;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* === NAV === */
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 32px;
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 15px;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+  }
+  .nav-logo span { color: var(--manifest); }
+  .nav-back {
+    font-size: 12px;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.2s;
+  }
+  .nav-back:hover { color: var(--text); }
+
+  /* === HERO === */
+  .hero {
+    position: relative;
+    padding: 90px 24px 70px;
+    text-align: center;
+    overflow: hidden;
+  }
+  .hero-glow {
+    position: absolute;
+    top: -80px; left: 50%;
+    transform: translateX(-50%);
+    width: 600px; height: 400px;
+    background: radial-gradient(ellipse, rgba(80,180,120,0.10) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 20px;
+    position: relative;
+  }
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.6rem, 6vw, 4.8rem);
+    font-weight: 400;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    position: relative;
+    margin-bottom: 24px;
+  }
+  .hero h1 em {
+    color: var(--manifest);
+    font-style: italic;
+  }
+  .hero-sub {
+    font-size: 15px;
+    color: var(--muted);
+    font-weight: 300;
+    max-width: 500px;
+    margin: 0 auto 48px;
+    position: relative;
+  }
+  .modul-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid rgba(80,180,120,0.25);
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--manifest);
+    margin-bottom: 28px;
+    position: relative;
+  }
+
+  /* === CONTENT === */
+  .content {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 24px 100px;
+  }
+
+  /* === TECHNIQUE CARD === */
+  .technique {
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    background: var(--surface);
+    overflow: hidden;
+    margin-bottom: 24px;
+    transition: border-color 0.25s;
+  }
+  .technique.active {
+    border-color: rgba(80,180,120,0.3);
+  }
+  .technique.locked {
+    border-color: rgba(255,255,255,0.05);
+    opacity: 0.65;
+  }
+
+  .technique-header {
+    padding: 32px 36px 28px;
+    position: relative;
+  }
+  .technique-num {
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--manifest);
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+  .technique.locked .technique-num {
+    color: var(--muted);
+  }
+  .technique-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2rem;
+    font-weight: 400;
+    color: var(--text);
+    line-height: 1.15;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .lock-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+    padding: 4px 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+    vertical-align: middle;
+  }
+  .technique-tagline {
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 300;
+    max-width: 560px;
+  }
+
+  .technique-divider {
+    height: 1px;
+    background: var(--border);
+    margin: 0 36px;
+  }
+
+  .technique-body {
+    padding: 32px 36px 36px;
+  }
+
+  /* === 369 SPECIFIC === */
+  .intro-text {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.75;
+    margin-bottom: 32px;
+  }
+  .intro-text strong {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  .numbers-row {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 36px;
+  }
+  .number-block {
+    flex: 1;
+    border: 1px solid rgba(80,180,120,0.15);
+    border-radius: 14px;
+    padding: 20px 16px;
+    text-align: center;
+    background: rgba(80,180,120,0.04);
+    position: relative;
+    overflow: hidden;
+  }
+  .number-block::before {
+    content: '';
+    position: absolute;
+    top: -20px; left: 50%; transform: translateX(-50%);
+    width: 60px; height: 60px;
+    background: radial-gradient(circle, rgba(80,180,120,0.12), transparent 70%);
+    pointer-events: none;
+  }
+  .number-big {
+    font-family: 'DM Serif Display', serif;
+    font-size: 3rem;
+    color: var(--manifest);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .number-label {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+  }
+  .number-time {
+    font-size: 11px;
+    color: var(--manifest);
+    opacity: 0.7;
+    margin-top: 4px;
+    letter-spacing: 0.04em;
+  }
+
+  .steps-title {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 18px;
+    font-weight: 500;
+  }
+
+  .steps {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 32px;
+  }
+  .step {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .step-dot {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    border: 1px solid rgba(80,180,120,0.3);
+    background: rgba(80,180,120,0.07);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px;
+    color: var(--manifest);
+    font-weight: 500;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .step-text {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.65;
+    padding-top: 4px;
+  }
+  .step-text strong {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  .example-box {
+    border: 1px solid rgba(80,180,120,0.15);
+    border-radius: 14px;
+    padding: 22px 24px;
+    background: rgba(80,180,120,0.04);
+    margin-bottom: 32px;
+  }
+  .example-label {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--manifest);
+    margin-bottom: 10px;
+    opacity: 0.8;
+  }
+  .example-text {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.15rem;
+    color: var(--text);
+    font-style: italic;
+    line-height: 1.5;
+  }
+
+  .tip-box {
+    border: 1px solid rgba(201,168,76,0.15);
+    border-radius: 14px;
+    padding: 20px 24px;
+    background: rgba(201,168,76,0.04);
+    margin-bottom: 32px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .tip-icon {
+    font-size: 18px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .tip-content {}
+  .tip-title {
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 6px;
+    font-weight: 500;
+  }
+  .tip-text {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+  .tip-text strong { color: var(--text); font-weight: 500; }
+
+  .duration-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .duration-pill {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-size: 12px;
+    color: var(--muted);
+    background: var(--surface2);
+  }
+  .duration-pill span {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  /* === LOCKED PLACEHOLDER === */
+  .locked-body {
+    padding: 32px 36px 36px;
+    text-align: center;
+  }
+  .locked-icon {
+    font-size: 36px;
+    margin-bottom: 16px;
+    opacity: 0.4;
+  }
+  .locked-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.2rem;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  .locked-text {
+    font-size: 13px;
+    color: var(--muted);
+    opacity: 0.7;
+    max-width: 380px;
+    margin: 0 auto 24px;
+    line-height: 1.7;
+  }
+  .locked-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border: 1px dashed rgba(255,255,255,0.12);
+    border-radius: 8px;
+    padding: 6px 14px;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .teaser-chips {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+  }
+  .teaser-chip {
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 20px;
+    padding: 5px 12px;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+
+  /* === FOOTER === */
+  footer {
+    text-align: center;
+    padding: 32px 24px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 12px;
+    letter-spacing: 0.04em;
+  }
+
+  @keyframes fadeUp {
+    from { opacity:0; transform:translateY(16px); }
+    to { opacity:1; transform:translateY(0); }
+  }
+  .technique { animation: fadeUp 0.5s ease both; }
+  .technique:nth-child(2) { animation-delay: 0.1s; }
+  .technique:nth-child(3) { animation-delay: 0.2s; }
+
+  @media (max-width: 600px) {
+    nav { padding: 16px 20px; }
+    .hero { padding: 70px 20px 60px; }
+    .content { padding: 0 16px 80px; }
+    .technique-header, .technique-body, .locked-body { padding: 24px 22px; }
+    .technique-divider { margin: 0 22px; }
+    .numbers-row { flex-direction: column; gap: 10px; }
+    .number-big { font-size: 2.4rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Spiritual <span>Adventures</span></a>
+  <a href="wissensdatenbank.html" class="nav-back">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 2L3 7L9 12" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Wissensdatenbank
+  </a>
+</nav>
+
+<div class="hero">
+  <div class="hero-glow"></div>
+  <p class="hero-eyebrow">Modul 6</p>
+  <div class="modul-badge">
+    <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="2.5" fill="#50b478"/><circle cx="6" cy="6" r="5" stroke="#50b478" stroke-width="0.8" stroke-dasharray="2 2" opacity="0.5"/></svg>
+    Manifestationstechniken
+  </div>
+  <h1>Realität <em>bewusst</em> gestalten</h1>
+  <p class="hero-sub">Konkrete Werkzeuge und Praktiken – keine Theorie, sondern Techniken die du heute noch anwenden kannst.</p>
+</div>
+
+<div class="content">
+
+  <!-- TECHNIK 1: 369-Methode -->
+  <div class="technique active">
+    <div class="technique-header">
+      <div class="technique-num">Technik 01</div>
+      <div class="technique-title">Die 369-Methode</div>
+      <div class="technique-tagline">Nikola Teslas Schlüssel zur Manifestation – täglich 10 Minuten, 33 oder 45 Tage.</div>
+    </div>
+    <div class="technique-divider"></div>
+    <div class="technique-body">
+
+      <p class="intro-text">
+        Nikola Tesla soll einmal gesagt haben: <strong>„Wenn du die Größe des Universums kennst, denke in 3, 6 und 9."</strong> Die 369-Methode basiert auf dieser Idee – und kombiniert drei der mächtigsten psychologischen Werkzeuge: <strong>tägliche Wiederholung</strong>, <strong>emotionale Aktivierung</strong> und <strong>fokussierte Intention</strong>. Das Ziel ist nicht Magie, sondern das Umprogrammieren des Unterbewusstseins durch konsequente, strukturierte Praxis.
+      </p>
+
+      <div class="numbers-row">
+        <div class="number-block">
+          <div class="number-big">3</div>
+          <div class="number-label">Mal morgens</div>
+          <div class="number-time">Nach dem Aufwachen</div>
+        </div>
+        <div class="number-block">
+          <div class="number-big">6</div>
+          <div class="number-label">Mal mittags</div>
+          <div class="number-time">Zur Tagesmitte</div>
+        </div>
+        <div class="number-block">
+          <div class="number-big">9</div>
+          <div class="number-label">Mal abends</div>
+          <div class="number-time">Vor dem Schlafen</div>
+        </div>
+      </div>
+
+      <div class="steps-title">So funktioniert es</div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-dot">1</div>
+          <div class="step-text"><strong>Formuliere deine Affirmation.</strong> Schreibe einen Satz in der Vergangenheitsform als wäre dein Ziel bereits eingetreten. Nicht „Ich will Geld" – sondern <em>„Ich bin so dankbar und glücklich, dass Wohlstand fließend in mein Leben kommt."</em> Das Gehirn unterscheidet nicht zwischen Erinnerung und gelebter Erfahrung – wenn du es oft genug wiederholst und fühlst.</div>
+        </div>
+        <div class="step">
+          <div class="step-dot">2</div>
+          <div class="step-text"><strong>Schreibe – nicht tippe.</strong> Handschrift aktiviert andere Hirnregionen als Tippen. Du verbindest motorische Aktion mit Intention. Nimm ein Notizbuch das du nur für diese Praxis verwendest.</div>
+        </div>
+        <div class="step">
+          <div class="step-dot">3</div>
+          <div class="step-text"><strong>Fühle während du schreibst.</strong> Das ist der entscheidende Unterschied zwischen mechanischem Abschreiben und echter Manifestationsarbeit. Ruf das Gefühl auf – wie würdest du dich fühlen wenn es bereits wahr wäre? Dankbarkeit, Freude, Erleichterung, Aufregung.</div>
+        </div>
+        <div class="step">
+          <div class="step-dot">4</div>
+          <div class="step-text"><strong>Durchhalte 33 oder 45 Tage.</strong> 33 Tage ist der häufig empfohlene Rhythmus. Viele berichten nach 21–28 Tagen erste spürbare Verschiebungen – intern wie extern. Unterbrich nie ohne Neustart.</div>
+        </div>
+      </div>
+
+      <div class="example-box">
+        <div class="example-label">Beispiel-Affirmation</div>
+        <div class="example-text">„Ich bin so unglaublich dankbar, dass ich in einem Leben voller Gesundheit, Fülle und tiefer Verbindung lebe – und dieses Gefühl wächst jeden Tag."</div>
+      </div>
+
+      <div class="tip-box">
+        <div class="tip-icon">✦</div>
+        <div class="tip-content">
+          <div class="tip-title">Der häufigste Fehler</div>
+          <div class="tip-text">Die 369-Methode scheitert fast immer an einem einzigen Punkt: <strong>mechanisches Schreiben ohne Gefühl.</strong> Wer die Sätze wie eine Pflicht runterschreibt, trainiert das Gehirn auf Routine – nicht auf Veränderung. Die Emotion ist der Träger, nicht die Worte. Nimm dir lieber 2 Minuten weniger Zeit und investiere diese 2 Minuten vollständig in das Fühlen.</div>
+        </div>
+      </div>
+
+      <div class="steps-title">Zeitaufwand</div>
+      <div class="duration-row">
+        <div class="duration-pill">Täglich <span>ca. 10–15 Min</span></div>
+        <div class="duration-pill">Morgens <span>3× ~ 2 Min</span></div>
+        <div class="duration-pill">Mittags <span>6× ~ 3 Min</span></div>
+        <div class="duration-pill">Abends <span>9× ~ 5 Min</span></div>
+        <div class="duration-pill">Dauer <span>33 oder 45 Tage</span></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TECHNIK 2: PLACEHOLDER -->
+  <div class="technique locked">
+    <div class="technique-header">
+      <div class="technique-num">Technik 02</div>
+      <div class="technique-title">
+        Scripting
+        <span class="lock-badge">
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><rect x="2" y="4.5" width="6" height="4.5" rx="1" stroke="currentColor" stroke-width="1"/><path d="M3.5 4.5V3a1.5 1.5 0 1 1 3 0v1.5" stroke="currentColor" stroke-width="1" stroke-linecap="round"/></svg>
+          Bald verfügbar
+        </span>
+      </div>
+      <div class="technique-tagline">Schreibe dein zukünftiges Leben – als wäre es bereits heute deine Realität.</div>
+    </div>
+    <div class="technique-divider"></div>
+    <div class="locked-body">
+      <div class="locked-icon">✍️</div>
+      <div class="locked-title">Kommt bald</div>
+      <div class="locked-text">Scripting geht tiefer als Affirmationen. Du schreibst einen ganzen Tag aus deinem Wunschleben – in der Vergangenheitsform, mit allen Details, Gefühlen und Sinneseindrücken. Eine der intensivsten Schreibpraktiken die es gibt.</div>
+      <div class="teaser-chips">
+        <div class="teaser-chip">Tagebuch-Format</div>
+        <div class="teaser-chip">Alle Sinne einbinden</div>
+        <div class="teaser-chip">Subconscious Reprogramming</div>
+      </div>
+      <div class="locked-tag">
+        <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="currentColor" stroke-width="1"/><path d="M5 3v2.5L6.5 7" stroke="currentColor" stroke-width="1" stroke-linecap="round"/></svg>
+        In Vorbereitung
+      </div>
+    </div>
+  </div>
+
+  <!-- TECHNIK 3: PLACEHOLDER -->
+  <div class="technique locked">
+    <div class="technique-header">
+      <div class="technique-num">Technik 03</div>
+      <div class="technique-title">
+        Quantum Jumping
+        <span class="lock-badge">
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><rect x="2" y="4.5" width="6" height="4.5" rx="1" stroke="currentColor" stroke-width="1"/><path d="M3.5 4.5V3a1.5 1.5 0 1 1 3 0v1.5" stroke="currentColor" stroke-width="1" stroke-linecap="round"/></svg>
+          Bald verfügbar
+        </span>
+      </div>
+      <div class="technique-tagline">Verbinde dich mit der Version von dir, die bereits dort ist wo du hinwillst.</div>
+    </div>
+    <div class="technique-divider"></div>
+    <div class="locked-body">
+      <div class="locked-icon">⚡</div>
+      <div class="locked-title">Kommt bald</div>
+      <div class="locked-text">Quantum Jumping nach Burt Goldman nutzt den Alphazustand um Kontakt zu alternativen Versionen deiner selbst aufzunehmen – Versionen die bereits die Fähigkeiten, die Perspektive oder den Zustand besitzen den du dir wünschst.</div>
+      <div class="teaser-chips">
+        <div class="teaser-chip">Alpha-Zustand</div>
+        <div class="teaser-chip">Visualisierung</div>
+        <div class="teaser-chip">Burt Goldman Methode</div>
+        <div class="teaser-chip">Parallele Realitäten</div>
+      </div>
+      <div class="locked-tag">
+        <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="currentColor" stroke-width="1"/><path d="M5 3v2.5L6.5 7" stroke="currentColor" stroke-width="1" stroke-linecap="round"/></svg>
+        In Vorbereitung
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  Spiritual Adventures · Kein Ersatz für medizinische oder psychologische Beratung.<br>
+  <span style="margin-top:10px;display:block;font-size:11px">
+    <a href="index.html" style="color:var(--muted);text-decoration:none;">Startseite</a> &nbsp;·&nbsp;
+    <a href="wissensdatenbank.html" style="color:var(--muted);text-decoration:none;">Wissensdatenbank</a> &nbsp;·&nbsp;
+    <a href="#" style="color:var(--muted);text-decoration:none;">Impressum</a> &nbsp;·&nbsp;
+    <a href="datenschutz.html" style="color:var(--muted);text-decoration:none;">Datenschutz</a>
+  </span>
+</footer>
+
+</body>
+</html>
