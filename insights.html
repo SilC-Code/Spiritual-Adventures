@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BY40HZSETJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-BY40HZSETJ');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Insights – Videos von mir · Spiritual Adventures</title>
+<meta name="description" content="Direkte Einblicke, persönliche Erfahrungen und ehrliche Gedanken von Christian – ungefiltert und authentisch.">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0c0d0f;
+    --surface: #14151a;
+    --surface2: #1c1d24;
+    --border: rgba(255,255,255,0.07);
+    --text: #e8e6e0;
+    --muted: #7a7870;
+    --gold: #c9a84c;
+    --gold-dim: rgba(201,168,76,0.12);
+    --gold-border: rgba(201,168,76,0.25);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    font-size: 15px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 32px;
+    border-bottom: 1px solid var(--border);
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(12,13,15,0.92);
+    backdrop-filter: blur(12px);
+  }
+  .nav-logo { font-family:'DM Serif Display',serif;font-size:15px;color:var(--muted);text-decoration:none; }
+  .nav-logo span { color: var(--gold); }
+  .nav-back { font-size:12px;color:var(--muted);text-decoration:none;letter-spacing:0.05em;text-transform:uppercase;display:flex;align-items:center;gap:6px;transition:color 0.2s; }
+  .nav-back:hover { color: var(--text); }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    padding: 80px 24px 64px;
+    text-align: center;
+    overflow: hidden;
+  }
+  .hero-glow {
+    position: absolute;
+    top: -80px; left: 50%; transform: translateX(-50%);
+    width: 700px; height: 400px;
+    background: radial-gradient(ellipse, rgba(201,168,76,0.09) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--gold-dim);
+    border: 1px solid var(--gold-border);
+    border-radius: 100px;
+    padding: 5px 14px;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+    position: relative;
+  }
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.4rem, 6vw, 4.5rem);
+    font-weight: 400;
+    line-height: 1.05;
+    color: var(--text);
+    margin-bottom: 20px;
+    position: relative;
+  }
+  .hero h1 em { font-style: italic; color: var(--gold); }
+  .hero-sub {
+    font-size: 15px;
+    color: var(--muted);
+    font-weight: 300;
+    max-width: 520px;
+    margin: 0 auto 48px;
+    line-height: 1.8;
+    position: relative;
+  }
+  .hero-sub strong { color: var(--text); font-weight: 400; }
+
+  /* MODUL BADGE */
+  .modul-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 0;
+    position: relative;
+  }
+  .modul-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 8px 18px;
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+  .modul-badge span { color: var(--gold); font-weight: 500; }
+
+  /* INTRO STRIP */
+  .intro-strip {
+    max-width: 800px;
+    margin: 48px auto 0;
+    padding: 0 24px;
+  }
+  .intro-quote {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 16px 16px 0;
+    padding: 24px 28px;
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--text);
+    line-height: 1.8;
+    font-style: italic;
+    margin-bottom: 48px;
+  }
+  .intro-quote strong { color: var(--gold); font-style: normal; font-weight: 500; }
+
+  /* SECTION */
+  .section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+  }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 32px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-icon {
+    width: 44px; height: 44px;
+    background: var(--gold-dim);
+    border: 1px solid var(--gold-border);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.4rem;
+    color: var(--text);
+    font-weight: 400;
+  }
+  .section-subtitle {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    margin-top: 2px;
+  }
+
+  /* VIDEO GRID */
+  .video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+  }
+
+  /* VIDEO CARD */
+  .video-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: border-color 0.25s, transform 0.2s;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.5s ease forwards;
+  }
+  .video-card:nth-child(1) { animation-delay: 0.1s; }
+  .video-card:nth-child(2) { animation-delay: 0.18s; }
+  .video-card:nth-child(3) { animation-delay: 0.26s; }
+  .video-card:nth-child(4) { animation-delay: 0.34s; }
+  .video-card:nth-child(5) { animation-delay: 0.42s; }
+  .video-card:nth-child(6) { animation-delay: 0.5s; }
+
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .video-card:hover {
+    border-color: var(--gold-border);
+    transform: translateY(-3px);
+  }
+
+  .video-wrap {
+    position: relative;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    background: var(--surface2);
+  }
+  .video-wrap iframe {
+    width: 100%; height: 100%;
+    border: none;
+    display: block;
+  }
+
+  /* PLACEHOLDER */
+  .video-placeholder {
+    width: 100%; height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    color: var(--muted);
+    font-size: 13px;
+    background: var(--surface2);
+    border-bottom: 1px solid var(--border);
+    transition: background 0.2s;
+    cursor: default;
+  }
+  .placeholder-icon { font-size: 32px; opacity: 0.35; }
+  .placeholder-label {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    opacity: 0.6;
+  }
+
+  /* CARD BODY */
+  .card-body {
+    padding: 20px 22px 22px;
+  }
+  .card-tag {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+  .card-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.15rem;
+    color: var(--text);
+    font-weight: 400;
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+  .card-desc {
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 300;
+    line-height: 1.7;
+  }
+  .card-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border);
+  }
+  .meta-pill {
+    display: inline-flex; align-items: center; gap: 5px;
+    background: var(--gold-dim);
+    border-radius: 100px;
+    padding: 4px 10px;
+    font-size: 10px;
+    color: var(--gold);
+    letter-spacing: 0.06em;
+  }
+
+  /* COMING SOON CARD */
+  .video-card.coming-soon {
+    opacity: 0;
+    animation: fadeUp 0.5s ease forwards;
+    border-style: dashed;
+    border-color: rgba(255,255,255,0.05);
+  }
+  .video-card.coming-soon:hover {
+    border-color: rgba(201,168,76,0.15);
+    transform: none;
+  }
+  .badge-soon {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(201,168,76,0.06);
+    border: 1px solid rgba(201,168,76,0.15);
+    border-radius: 100px;
+    padding: 4px 12px;
+    font-size: 10px;
+    color: var(--gold);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-top: 10px;
+  }
+
+  /* ABOUT ROW */
+  .about-row {
+    max-width: 800px;
+    margin: 0 auto 64px;
+    padding: 0 24px;
+  }
+  .about-card {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 20px;
+    align-items: start;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 28px;
+  }
+  .about-avatar {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    background: var(--gold-dim);
+    border: 2px solid var(--gold-border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px;
+    flex-shrink: 0;
+  }
+  .about-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .about-name em { font-style: italic; color: var(--gold); }
+  .about-text {
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 300;
+    line-height: 1.7;
+  }
+  .about-link {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 12px;
+    color: var(--gold);
+    text-decoration: none;
+    margin-top: 10px;
+    letter-spacing: 0.04em;
+    transition: opacity 0.2s;
+  }
+  .about-link:hover { opacity: 0.7; }
+
+  /* CTA */
+  .cta-block {
+    text-align: center;
+    padding: 48px 24px 64px;
+    border-top: 1px solid var(--border);
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .cta-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.8rem;
+    color: var(--text);
+    margin-bottom: 10px;
+  }
+  .cta-title em { font-style: italic; color: var(--gold); }
+  .cta-sub { font-size: 14px; color: var(--muted); margin-bottom: 28px; }
+  .cta-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 14px 28px;
+    border-radius: 100px;
+    background: linear-gradient(135deg, var(--gold), #f0d48a);
+    color: var(--bg);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .cta-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(201,168,76,0.35);
+  }
+
+  footer {
+    text-align: center;
+    padding: 28px 24px;
+    color: var(--muted);
+    font-size: 12px;
+    border-top: 1px solid var(--border);
+  }
+
+  @media (max-width: 600px) {
+    nav { padding: 14px 18px; }
+    .video-grid { grid-template-columns: 1fr; }
+    .about-card { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Spiritual <span>Adventures</span></a>
+  <a href="wissensdatenbank.html" class="nav-back">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 3L5 7l4 4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Zurück
+  </a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-tag">✦ Modul 7</div>
+  <h1><em>Insights</em> —<br>Videos von mir</h1>
+  <p class="hero-sub">
+    Kein Skript. Keine Maske. Nur <strong>echte Gedanken, echte Erfahrungen</strong> — direkt von mir zu dir.<br>
+    Was ich gelernt habe, was mich bewegt, was funktioniert.
+  </p>
+  <div class="modul-row">
+    <div class="modul-badge">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="#c9a84c" stroke-width="1.2"/><circle cx="6" cy="6" r="2" fill="#c9a84c"/></svg>
+      <span>Modul 7</span> · Insights
+    </div>
+    <div class="modul-badge">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><rect x="2" y="2" width="8" height="8" rx="2" stroke="#7a7870" stroke-width="1.2"/><path d="M5 4.5l3 1.5-3 1.5V4.5Z" fill="#7a7870"/></svg>
+      Videos · Authentisch
+    </div>
+  </div>
+</div>
+
+<!-- INTRO QUOTE -->
+<div class="intro-strip">
+  <div class="intro-quote">
+    „Ich teile hier das, was ich mir selbst früher gewünscht hätte zu hören — <strong>ungefiltert, direkt, aus erster Hand.</strong> Keine Theorie, kein Coaching-Sprech. Nur das was wirklich passiert ist und was es mir gebracht hat."
+  </div>
+</div>
+
+<!-- ABOUT AUTHOR -->
+<div class="about-row">
+  <div class="about-card">
+    <div class="about-avatar">✦</div>
+    <div>
+      <div class="about-name">Christian <em>Matuszek</em></div>
+      <div class="about-text">47 Jahre, Berlin. 3 Bandscheiben-OPs, lange Ziellosigkeit, echte Tiefpunkte — und immer wieder zurück ins Licht. Ich erzähle was wirklich passiert ist, nicht was gut klingt.</div>
+      <a href="ueber-mich.html" class="about-link">
+        Meine Geschichte lesen
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6h7M7 3.5l2.5 2.5L7 8.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- VIDEOS SECTION -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon">🎥</div>
+    <div>
+      <div class="section-title">Videos</div>
+      <div class="section-subtitle">Von Christian · Direkt & authentisch</div>
+    </div>
+  </div>
+
+  <div class="video-grid">
+
+    <!-- VIDEO PLACEHOLDER 1 — ersetze YouTube-ID wenn bereit -->
+    <div class="video-card coming-soon">
+      <div class="video-wrap">
+        <div class="video-placeholder">
+          <div class="placeholder-icon">🎬</div>
+          <div class="placeholder-label">Kommt bald</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-tag">Insights · Persönlich</div>
+        <div class="card-title">Warum ich Spiritual Adventures gestartet habe</div>
+        <div class="card-desc">Die ehrliche Geschichte dahinter — was mich dazu gebracht hat, diesen Weg zu gehen und warum ich jetzt bereit bin es zu teilen.</div>
+        <div class="badge-soon">Bald verfügbar</div>
+      </div>
+    </div>
+
+    <!-- VIDEO PLACEHOLDER 2 -->
+    <div class="video-card coming-soon" style="animation-delay:0.18s">
+      <div class="video-wrap">
+        <div class="video-placeholder">
+          <div class="placeholder-icon">🎬</div>
+          <div class="placeholder-label">Kommt bald</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-tag">Insights · Persönlich</div>
+        <div class="card-title">Was mir wirklich geholfen hat</div>
+        <div class="card-desc">Kein Bestseller-Tipp, keine Coaching-Methode — sondern die Dinge die bei mir tatsächlich einen Unterschied gemacht haben.</div>
+        <div class="badge-soon">Bald verfügbar</div>
+      </div>
+    </div>
+
+    <!-- VIDEO PLACEHOLDER 3 -->
+    <div class="video-card coming-soon" style="animation-delay:0.26s">
+      <div class="video-wrap">
+        <div class="video-placeholder">
+          <div class="placeholder-icon">🎬</div>
+          <div class="placeholder-label">Kommt bald</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-tag">Insights · Persönlich</div>
+        <div class="card-title">Mein Tiefpunkt — und was danach kam</div>
+        <div class="card-desc">Das was ich lange nicht öffentlich gesagt habe. Und was auf der anderen Seite davon wartet wenn man trotzdem weitermacht.</div>
+        <div class="badge-soon">Bald verfügbar</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-block">
+  <div class="cta-title">Alle Module im<br><em>Überblick</em></div>
+  <div class="cta-sub">Zurück zur Wissensdatenbank — alle Themen auf einen Blick.</div>
+  <a href="wissensdatenbank.html" class="cta-btn">
+    ✦ Zur Wissensdatenbank
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </a>
+</div>
+
+<footer>
+  Spiritual Adventures · Christian Matuszek · Berlin
+</footer>
+
+</body>
+</html>
