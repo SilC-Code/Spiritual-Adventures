@@ -399,6 +399,65 @@
 
   /* ACCORDION */
   .acc-wrap { margin-top: 12px; }
+
+  /* EMOJI REACTIONS */
+  .reaction-wrap {
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border);
+  }
+  .reaction-label {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  .reaction-btns {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .reaction-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 6px 12px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: var(--muted);
+    font-family: inherit;
+    line-height: 1;
+  }
+  .reaction-btn:hover {
+    border-color: var(--gold-border);
+    background: var(--gold-dim);
+    transform: scale(1.08);
+  }
+  .reaction-btn.active {
+    border-color: var(--gold-border);
+    background: var(--gold-dim);
+    color: var(--text);
+  }
+  .reaction-btn.active .reaction-emoji {
+    animation: pop 0.25s ease;
+  }
+  .reaction-count {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--muted);
+    min-width: 12px;
+  }
+  .reaction-btn.active .reaction-count { color: var(--gold); }
+  @keyframes pop {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.4); }
+    100% { transform: scale(1); }
+  }
   .acc-trigger {
     display: flex; align-items: center; justify-content: space-between;
     padding: 8px 0;
@@ -627,7 +686,17 @@
             </div>
           </div>
         </div>
-      </div>
+
+        <div class="reaction-wrap">
+          <div class="reaction-label">Wie wirkt dieser Sub auf dich?</div>
+          <div class="reaction-btns" data-sub-id="money">
+            <button class="reaction-btn" data-emoji="🔥" onclick="handleReaction(this)"><span class="reaction-emoji">🔥</span><span class="reaction-count">0</span></button>
+            <button class="reaction-btn" data-emoji="❤️" onclick="handleReaction(this)"><span class="reaction-emoji">❤️</span><span class="reaction-count">0</span></button>
+            <button class="reaction-btn" data-emoji="✨" onclick="handleReaction(this)"><span class="reaction-emoji">✨</span><span class="reaction-count">0</span></button>
+            <button class="reaction-btn" data-emoji="💫" onclick="handleReaction(this)"><span class="reaction-emoji">💫</span><span class="reaction-count">0</span></button>
+            <button class="reaction-btn" data-emoji="🙏" onclick="handleReaction(this)"><span class="reaction-emoji">🙏</span><span class="reaction-count">0</span></button>
+          </div>
+        </div>      </div>
     </div>
 
     <!-- Verbindung zum Körper Sub -->
@@ -696,7 +765,17 @@
             </div>
           </div>
         </div>
-      </div>
+
+        <div class="reaction-wrap">
+          <div class="reaction-label">Wie wirkt dieser Sub auf dich?</div>
+          <div class="reaction-btns" data-sub-id="koerper">
+            <button class="reaction-btn" data-emoji="🔥" onclick="handleReaction(this)"><span class="reaction-emoji">🔥</span><span class="reaction-count">0</span></button>
+            <button class="reaction-btn" data-emoji="❤️" onclick="handleReaction(this)"><span class="reaction-emoji">❤️</span><span class="reaction-count">0</span></button>
+            <button class="reaction-btn" data-emoji="✨" onclick="handleReaction(this)"><span class="reaction-emoji">✨</span><span class="reaction-count">0</span></button>
+            <button class="reaction-btn" data-emoji="💫" onclick="handleReaction(this)"><span class="reaction-emoji">💫</span><span class="reaction-count">0</span></button>
+            <button class="reaction-btn" data-emoji="🙏" onclick="handleReaction(this)"><span class="reaction-emoji">🙏</span><span class="reaction-count">0</span></button>
+          </div>
+        </div>      </div>
     </div>
 
     <!-- Lernblockaden lösen Sub -->
@@ -773,7 +852,17 @@
             </div>
           </div>
         </div>
-      </div>
+
+        <div class="reaction-wrap">
+          <div class="reaction-label">Wie wirkt dieser Sub auf dich?</div>
+          <div class="reaction-btns" data-sub-id="lernblockaden">
+            <button class="reaction-btn" data-emoji="🔥" onclick="handleReaction(this)"><span class="reaction-emoji">🔥</span><span class="reaction-count">0</span></button>
+            <button class="reaction-btn" data-emoji="❤️" onclick="handleReaction(this)"><span class="reaction-emoji">❤️</span><span class="reaction-count">0</span></button>
+            <button class="reaction-btn" data-emoji="✨" onclick="handleReaction(this)"><span class="reaction-emoji">✨</span><span class="reaction-count">0</span></button>
+            <button class="reaction-btn" data-emoji="💫" onclick="handleReaction(this)"><span class="reaction-emoji">💫</span><span class="reaction-count">0</span></button>
+            <button class="reaction-btn" data-emoji="🙏" onclick="handleReaction(this)"><span class="reaction-emoji">🙏</span><span class="reaction-count">0</span></button>
+          </div>
+        </div>      </div>
     </div>
 
     <!-- Tiefe Dankbarkeit Sub -->
@@ -838,7 +927,17 @@
             </div>
           </div>
         </div>
-      </div>
+
+        <div class="reaction-wrap">
+          <div class="reaction-label">Wie wirkt dieser Sub auf dich?</div>
+          <div class="reaction-btns" data-sub-id="dankbarkeit">
+            <button class="reaction-btn" data-emoji="🔥" onclick="handleReaction(this)"><span class="reaction-emoji">🔥</span><span class="reaction-count">0</span></button>
+            <button class="reaction-btn" data-emoji="❤️" onclick="handleReaction(this)"><span class="reaction-emoji">❤️</span><span class="reaction-count">0</span></button>
+            <button class="reaction-btn" data-emoji="✨" onclick="handleReaction(this)"><span class="reaction-emoji">✨</span><span class="reaction-count">0</span></button>
+            <button class="reaction-btn" data-emoji="💫" onclick="handleReaction(this)"><span class="reaction-emoji">💫</span><span class="reaction-count">0</span></button>
+            <button class="reaction-btn" data-emoji="🙏" onclick="handleReaction(this)"><span class="reaction-emoji">🙏</span><span class="reaction-count">0</span></button>
+          </div>
+        </div>      </div>
     </div>
 
     <!-- 317 Hz Leber Regeneration Sub -->
@@ -889,7 +988,95 @@
             </div>
           </div>
         </div>
+
+        <div class="reaction-wrap">
+          <div class="reaction-label">Wie wirkt dieser Sub auf dich?</div>
+          <div class="reaction-btns" data-sub-id="leber">
+            <button class="reaction-btn" data-emoji="🔥" onclick="handleReaction(this)"><span class="reaction-emoji">🔥</span><span class="reaction-count">0</span></button>
+            <button class="reaction-btn" data-emoji="❤️" onclick="handleReaction(this)"><span class="reaction-emoji">❤️</span><span class="reaction-count">0</span></button>
+            <button class="reaction-btn" data-emoji="✨" onclick="handleReaction(this)"><span class="reaction-emoji">✨</span><span class="reaction-count">0</span></button>
+            <button class="reaction-btn" data-emoji="💫" onclick="handleReaction(this)"><span class="reaction-emoji">💫</span><span class="reaction-count">0</span></button>
+            <button class="reaction-btn" data-emoji="🙏" onclick="handleReaction(this)"><span class="reaction-emoji">🙏</span><span class="reaction-count">0</span></button>
+          </div>
+        </div>      </div>
+    </div>
+
+    <!-- Abundance Flow Sub -->
+    <div class="content-card" id="sub-abundance">
+      <div class="video-wrap">
+        <iframe
+          src="https://www.youtube.com/embed/XqzlutCTkgg?rel=0&modestbranding=1"
+          title="Abundance Flow — 888 Hz Booster + 417 Hz Subliminal"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen>
+        </iframe>
       </div>
+      <div class="card-body">
+        <div class="card-tag">888 Hz + 417 Hz · Abundance · Exklusiv</div>
+        <div class="card-title">Abundance Flow — Warum bin ich so reich gesegnet</div>
+        <div class="card-desc">Turbo-Affirmationen die dein Unterbewusstsein direkt auf Empfangen und Fülle programmieren. Mit 888 Hz Booster zur Aktivierung und 417 Hz für tiefe Blockadenlösung.</div>
+        <div class="usage-hint">
+          <div class="usage-hint-title">✦ So entfaltet dieser Sub seine volle Wirkung</div>
+          Dieser Sub hat zwei Phasen: <strong>Die ersten 2 Minuten (888 Hz Booster)</strong> aktivieren dein Unterbewusstsein intensiv — bleib präsent, atme tief. Dann kommen <strong>13 Minuten 417 Hz Sub</strong> für tiefe Programmierung auf Leichtigkeit und Empfangen. Stelle dir vor wie Fülle aus allen Richtungen zu dir fließt — als wäre es bereits deine Realität.
+        </div>
+        <div class="card-meta">
+          <div class="meta-item">⏱ 15 Min</div>
+          <div class="meta-item">🧠 Masked</div>
+          <div class="meta-item">⚡ 888 Hz Booster</div>
+          <div class="meta-item">🌊 417 Hz</div>
+        </div>
+        <div class="acc-wrap">
+          <div class="acc-trigger" onclick="toggleAcc(this)">
+            <span>Affirmationen ansehen</span>
+            <span class="acc-arrow">▾</span>
+          </div>
+          <div class="acc-body">
+            <div class="acc-content">
+              <div style="font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#c9a84c;margin-bottom:8px;font-weight:500;">⚡ Booster — 888 Hz (0:00 – 2:30)</div>
+              <ul>
+                <li>Warum bin ich so reich gesegnet?</li>
+                <li>Warum fließt Geld so leicht zu mir?</li>
+                <li>Warum empfange ich mit so einer Leichtigkeit?</li>
+                <li>Warum bin ich ein Magnet für Wohlstand?</li>
+                <li>Warum ist mein Leben so voller Fülle?</li>
+                <li>Warum kommt Geld immer zu mir zurück?</li>
+                <li>Warum bin ich so dankbar für meinen Reichtum?</li>
+                <li>Warum öffne ich mich so leicht dem Empfangen?</li>
+                <li>Warum vertraue ich dem Fluss des Geldes?</li>
+                <li>Warum werde ich jeden Tag reicher?</li>
+              </ul>
+              <div style="font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#c9a84c;margin:16px 0 8px;font-weight:500;">🌊 Subliminal — 417 Hz (2:30 – 15:00)</div>
+              <ul>
+                <li>Warum bin ich so reich gesegnet?</li>
+                <li>Warum empfange ich mit so einer Leichtigkeit?</li>
+                <li>Warum fließt Abundance so natürlich in mein Leben?</li>
+                <li>Warum bin ich so würdig Reichtum zu empfangen?</li>
+                <li>Warum vertraue ich dem Universum so tief?</li>
+                <li>Warum ist finanzieller Überfluss mein natürlicher Zustand?</li>
+                <li>Warum ziehe ich Wohlstand mühelos an?</li>
+                <li>Warum bin ich so offen für unerwartete Geldquellen?</li>
+                <li>Warum fühlt sich Reichtum für mich so normal an?</li>
+                <li>Warum wächst mein Wohlstand täglich?</li>
+                <li>Warum lebe ich in so einem tiefen Gefühl der Fülle?</li>
+                <li>Warum bin ich so dankbar für alles was zu mir fließt?</li>
+                <li>Warum empfange ich Geld aus allen Richtungen?</li>
+                <li>Warum ist mein Unterbewusstsein so offen für Fülle?</li>
+                <li>Warum verändert sich mein Leben gerade so positiv?</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="reaction-wrap">
+          <div class="reaction-label">Wie wirkt dieser Sub auf dich?</div>
+          <div class="reaction-btns" data-sub-id="abundance">
+            <button class="reaction-btn" data-emoji="🔥" onclick="handleReaction(this)"><span class="reaction-emoji">🔥</span><span class="reaction-count">0</span></button>
+            <button class="reaction-btn" data-emoji="❤️" onclick="handleReaction(this)"><span class="reaction-emoji">❤️</span><span class="reaction-count">0</span></button>
+            <button class="reaction-btn" data-emoji="✨" onclick="handleReaction(this)"><span class="reaction-emoji">✨</span><span class="reaction-count">0</span></button>
+            <button class="reaction-btn" data-emoji="💫" onclick="handleReaction(this)"><span class="reaction-emoji">💫</span><span class="reaction-count">0</span></button>
+            <button class="reaction-btn" data-emoji="🙏" onclick="handleReaction(this)"><span class="reaction-emoji">🙏</span><span class="reaction-count">0</span></button>
+          </div>
+        </div>      </div>
     </div>
 
   </div>
@@ -929,20 +1116,25 @@
   <div class="section-header">
     <div class="section-icon">🎥</div>
     <div>
-      <div class="section-title">Insights – Videos von mir</div>
-      <div class="section-subtitle">Von Christian · Direkt & authentisch · Modul 7</div>
+      <div class="section-title">Persönliche Videos</div>
+      <div class="section-subtitle">Von Christian · Direkt & authentisch</div>
     </div>
   </div>
   <div class="content-grid">
 
-    <div class="content-card" style="border-color:rgba(201,168,76,0.2);display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:32px 28px;gap:14px;min-height:160px;">
-      <div style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#c9a84c;font-weight:500;">Modul 7 · Insights</div>
-      <div style="font-family:'DM Serif Display',serif;font-size:1.2rem;color:#e8e6e0;font-weight:400;line-height:1.3;">Persönliche Videos von mir —<br><em style="color:#c9a84c;">ungefiltert & direkt</em></div>
-      <div style="font-size:13px;color:#7a7870;font-weight:300;line-height:1.7;">Echte Einblicke, ehrliche Erfahrungen und das was ich mir selbst früher gewünscht hätte zu hören. Kein Skript, keine Maske.</div>
-      <a href="insights.html" style="display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#c9a84c,#f0d48a);color:#0c0d0f;padding:10px 20px;border-radius:100px;font-size:12px;font-weight:500;letter-spacing:0.05em;text-transform:uppercase;text-decoration:none;transition:transform 0.2s,box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 6px 20px rgba(201,168,76,0.35)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
-        ✦ Zu den Videos
-        <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
+    <div class="content-card coming-soon">
+      <div class="video-wrap">
+        <div class="video-placeholder">
+          <div class="video-placeholder-icon">🔒</div>
+          <div>Kommt bald</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-tag">Persönlich · Exklusiv</div>
+        <div class="card-title">Persönliches Video</div>
+        <div class="card-desc">Direkte Einblicke, persönliche Erfahrungen und Inhalte die ich nirgendwo anders teile.</div>
+        <div class="badge-soon">Bald verfügbar</div>
+      </div>
     </div>
 
   </div>
@@ -957,6 +1149,68 @@
     const item = trigger.parentElement;
     item.classList.toggle('acc-open');
   }
+
+  // EMOJI REACTION SYSTEM
+  const STORAGE_KEY = 'sa_reactions';
+
+  function loadReactions() {
+    try {
+      return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+    } catch(e) { return {}; }
+  }
+
+  function saveReactions(data) {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); } catch(e) {}
+  }
+
+  function initReactions() {
+    const data = loadReactions();
+    document.querySelectorAll('.reaction-btns').forEach(wrap => {
+      const subId = wrap.dataset.subId;
+      const subData = data[subId] || {};
+      const userChoice = subData.userChoice || null;
+      wrap.querySelectorAll('.reaction-btn').forEach(btn => {
+        const emoji = btn.dataset.emoji;
+        const count = (subData.counts && subData.counts[emoji]) || 0;
+        btn.querySelector('.reaction-count').textContent = count;
+        if (emoji === userChoice) btn.classList.add('active');
+      });
+    });
+  }
+
+  function handleReaction(btn) {
+    const wrap = btn.closest('.reaction-btns');
+    const subId = wrap.dataset.subId;
+    const emoji = btn.dataset.emoji;
+    const data = loadReactions();
+    if (!data[subId]) data[subId] = { counts: {}, userChoice: null };
+    const sub = data[subId];
+    const prev = sub.userChoice;
+
+    if (prev === emoji) {
+      // Undo
+      sub.counts[emoji] = Math.max(0, (sub.counts[emoji] || 0) - 1);
+      sub.userChoice = null;
+    } else {
+      // Remove previous vote
+      if (prev) sub.counts[prev] = Math.max(0, (sub.counts[prev] || 0) - 1);
+      // Add new vote
+      sub.counts[emoji] = (sub.counts[emoji] || 0) + 1;
+      sub.userChoice = emoji;
+    }
+
+    saveReactions(data);
+
+    // Update UI
+    wrap.querySelectorAll('.reaction-btn').forEach(b => {
+      const e = b.dataset.emoji;
+      const c = (sub.counts[e]) || 0;
+      b.querySelector('.reaction-count').textContent = c;
+      b.classList.toggle('active', e === sub.userChoice);
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', initReactions);
 </script>
 
 </body>
