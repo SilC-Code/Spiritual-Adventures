@@ -102,11 +102,10 @@
   }
   .photo-placeholder-icon { font-size: 48px; opacity: 0.3; }
   .photo-badge {
-    position: absolute;
-    bottom: 16px;
-    left: 16px;
-    background: rgba(12,13,15,0.85);
-    backdrop-filter: blur(8px);
+    display: inline-flex;
+    align-items: center;
+    margin-top: 12px;
+    background: var(--surface);
     border: 1px solid rgba(201,168,76,0.25);
     border-radius: 100px;
     padding: 6px 14px;
@@ -340,7 +339,6 @@
   @media (max-width: 680px) {
     .hero { grid-template-columns: 1fr; gap: 40px; }
     .photo-frame { aspect-ratio: 4/3; }
-    .photo-frame img { object-position: center 15%; }
   }
 </style>
 </head>
